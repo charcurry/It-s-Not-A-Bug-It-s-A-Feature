@@ -12,7 +12,11 @@ public class UX_ButtonCallbacks : MonoBehaviour
     public GameObject IngameOverlay;
     public GameObject PausedOverlay;
 
-
+    //Interaction UI
+    //Notification handler
+    //Sound settings
+    //Objective UI
+    //Narrator UI
 
     public enum EUICurrentState
     {
