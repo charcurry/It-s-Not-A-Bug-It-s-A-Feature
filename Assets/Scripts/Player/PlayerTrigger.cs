@@ -9,19 +9,18 @@ public class PlayerTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 7)
-            triggerObjects++;
+        triggerObjects++;
 
-        if(triggerObjects > 0)
+        if (triggerObjects > 0)
             isObjectHere = true; 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 7)
-            triggerObjects--;
+        triggerObjects--;
 
         if (triggerObjects < 1)
             isObjectHere = false;
     }
+
 }
