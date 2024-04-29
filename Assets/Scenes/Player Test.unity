@@ -1245,6 +1245,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 800196837}
+    - target: {fileID: 9216491185211917588, guid: c9bd44d8df70d3241ad57d02532c0052, type: 3}
+      propertyPath: mouseSensitivity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
