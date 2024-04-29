@@ -5,16 +5,15 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [Header("Properties")]
-    public float mouseSensitivity = 500f;
+    [SerializeField] private float mouseSensitivity = 1f;
 
-    [Header("References")]
-    public Transform playerBody;
-
+    private Transform playerTransform;
     [HideInInspector] public float xRotation = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerTransform = transform.parent.GetComponent<Transform>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -28,6 +27,6 @@ public class CameraController : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, transform.rotation.eulerAngles.z);
-        playerBody.Rotate(Vector3.up * mouseX);
+        playerTransform.Rotate(Vector3.up * mouseX);
     }
 }

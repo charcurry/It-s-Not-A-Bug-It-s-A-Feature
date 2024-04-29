@@ -5,17 +5,11 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [Header("Parent Properties")]
-    public float interactionCooldown = 0;
-    public bool oneTimeInteraction = false;
+    [SerializeField] private float interactionCooldown = 0;
+    [SerializeField] private bool oneTimeInteraction = false;
 
     private float cooldownTimeStamp = 0;
     private bool hasBeenInteractedWith = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public virtual void interaction()
     {
