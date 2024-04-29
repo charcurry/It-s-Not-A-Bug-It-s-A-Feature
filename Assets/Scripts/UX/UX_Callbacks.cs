@@ -63,18 +63,17 @@ public class UX_Callbacks : MonoBehaviour
         {
             case EWindowMode.WND_MODE_FULLSCREEN:
                 {
-                  //  Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                  //  Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
+                    Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
                     break;
                 }
             case EWindowMode.WND_MODE_EXCLUSIVE_FULLSCREEN:
                 {
-                    //Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                    Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
                     break;
                 }
             case EWindowMode.WND_MODE_WINDOWED:
                 {
-                    //Screen.fullScreenMode = FullScreenMode.Windowed;
+                    Screen.fullScreenMode = FullScreenMode.Windowed;
                     break;
                 }
             default:
