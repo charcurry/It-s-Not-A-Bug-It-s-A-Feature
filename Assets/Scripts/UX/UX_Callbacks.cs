@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UX_ButtonCallbacks : MonoBehaviour
+public class UX_Callbacks : MonoBehaviour
 {
     // Start is called before the first frame update
   
@@ -17,7 +18,15 @@ public class UX_ButtonCallbacks : MonoBehaviour
     //Sound settings
     //Objective UI
     //Narrator UI
+    //Add crosshairs
 
+    public enum EWindowMode : Int32
+    {
+        WND_MODE_FULLSCREEN = 0,
+        WND_MODE_EXCLUSIVE_FULLSCREEN,
+        WND_MODE_WINDOWED,
+        WND_MODE_MAX,
+    }
     public enum EUICurrentState
     {
         UI_STATE_MENU = 0,
@@ -48,6 +57,31 @@ public class UX_ButtonCallbacks : MonoBehaviour
         PausedOverlay.SetActive(UIState == EUICurrentState.UI_STATE_PAUSED);
     }
 
+    public void OnWindowModeChange(Int32 WindowMode)
+    {
+        switch ((EWindowMode)WindowMode)
+        {
+            case EWindowMode.WND_MODE_FULLSCREEN:
+                {
+                  //  Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                  //  Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
+                    break;
+                }
+            case EWindowMode.WND_MODE_EXCLUSIVE_FULLSCREEN:
+                {
+                    //Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                    break;
+                }
+            case EWindowMode.WND_MODE_WINDOWED:
+                {
+                    //Screen.fullScreenMode = FullScreenMode.Windowed;
+                    break;
+                }
+            default:
+                break;
+        }
+  
+    }
     public void OnUXCallback(EUXCallbacksNoParameter eCallback)
     {
         switch (eCallback)
