@@ -7,50 +7,49 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    GameObject pCamera;
-    Rigidbody rb;
-    Camera pCameraComponent;
-    PlayerTrigger groundTrigger;
-    PlayerTrigger headTrigger;
+    private GameObject pCamera;
+    private Rigidbody rb;
+    private Camera pCameraComponent;
+    private PlayerTrigger groundTrigger;
+    private PlayerTrigger headTrigger;
 
-    float accelerationBaseValue;
-    float maxSpeedBaseValue;
-    float moveLeftRight;
-    float moveForwardBackward;
-    float jumpTimeStamp;
+    private float accelerationBaseValue;
+    private float maxSpeedBaseValue;
+    private float moveLeftRight;
+    private float moveForwardBackward;
+    private float jumpTimeStamp;
 
-    bool isGrounded;
-    bool isUnderObject;
-    bool isCrouching;
-    bool upPressed;
-    bool downPressed;
-    bool rightPressed;
-    bool leftPressed;
-    bool sprintPressed;
-    bool jumpPressed;
-    bool interactPressed;
-    bool crouchPressed;
+    private bool isGrounded;
+    private bool isUnderObject;
+    private bool isCrouching;
+    private bool upPressed;
+    private bool downPressed;
+    private bool rightPressed;
+    private bool leftPressed;
+    private bool sprintPressed;
+    private bool jumpPressed;
+    private bool interactPressed;
+    private bool crouchPressed;
 
-    double speedXZ;
-
-    //RaycastHit hit;
+    private double speedXZ;
 
     [Header("Properties")]
-    public float acceleration;
-    public float maxSpeed;
-    public float decelerationMultiplier;
-    public float jumpStrength;
-    public float extraGravity;
-    public float sprintMultiplier;
-    public float crouchMultiplier;
-    public float playerHeight;
-    public float cameraHeight;
-    public float playerCrouchHeight;
-    public float cameraCrouchHeight;
-    public float headTriggerOffset;
-    public float interactDistance;
-    public bool dynamicFOV;
-    public bool renderPlayerMesh;
+    [SerializeField] private float acceleration;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float decelerationMultiplier;
+    [SerializeField] private float jumpStrength;
+    [SerializeField] private float extraGravity;
+    [SerializeField] private float sprintMultiplier;
+    [SerializeField] private float crouchMultiplier;
+    [SerializeField] private float playerHeight;
+    [SerializeField] private float cameraHeight;
+    [SerializeField] private float playerCrouchHeight;
+    [SerializeField] private float cameraCrouchHeight;
+    [SerializeField] private float headTriggerOffset;
+    [SerializeField] private float interactDistance;
+    [SerializeField] private float dynamicFOVRateOfChange;
+    [SerializeField] private bool dynamicFOV;
+    [SerializeField] private bool renderPlayerMesh;
 
     [HideInInspector] public bool canControl = true;
     [HideInInspector] public bool disableRegularForce = false;
@@ -139,7 +138,7 @@ public class PlayerController : MonoBehaviour
         rb.AddRelativeForce(new Vector3(0, -extraGravity * Time.deltaTime, 0));
 
         // Shoots a raycast out in the direction the player is looking
-        if (Physics.Raycast(pCamera.transform.position, pCamera.transform.forward, out RaycastHit hit, interactDistance))
+        if (Physics.Raycast(pCamera.transform.position, pCamera.transform.forward, out RaycastHit hit, interactDistance, ~(1 << 6)))
         {
             // Checks if the raycast hits an object with the Interactable parent script
             if (hit.collider.GetComponent<Interactable>())
@@ -147,6 +146,9 @@ public class PlayerController : MonoBehaviour
                 if (interactPressed)
                     hit.collider.GetComponent<Interactable>().interaction();
             }
+
+            if (interactPressed)
+                Debug.Log(hit.transform.name);
         }
 
         interactPressed = false;
@@ -156,7 +158,7 @@ public class PlayerController : MonoBehaviour
         maxSpeed = maxSpeedBaseValue;
 
         // If sprint is input, up both accelertion and speed
-        if (sprintPressed && !crouchPressed && (upPressed || leftPressed || rightPressed))
+        if (sprintPressed && !isCrouching && (upPressed || leftPressed || rightPressed))
         {
             sprintPressed = false;
             maxSpeed = maxSpeed * sprintMultiplier;
@@ -241,7 +243,7 @@ public class PlayerController : MonoBehaviour
 
         // Changes fov based on speed
         if (dynamicFOV)
-            pCameraComponent.fieldOfView = Mathf.Lerp(pCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * 2);
+            pCameraComponent.fieldOfView = Mathf.Lerp(pCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
     
     }
 
