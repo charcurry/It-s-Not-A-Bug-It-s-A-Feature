@@ -14448,6 +14448,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 267120334}
+    - target: {fileID: 9216491185211917588, guid: c9bd44d8df70d3241ad57d02532c0052, type: 3}
+      propertyPath: mouseSensitivity
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24564,6 +24568,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2620022175750337308, guid: ec909a89b7d25e04a937232b2e6d2115, type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2713879140799530372, guid: ec909a89b7d25e04a937232b2e6d2115, type: 3}
       propertyPath: m_Name
       value: Box
@@ -27620,9 +27628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d63ca4ed2cd252408d2157b6c31f395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12.8
+  speed: 2.3
   conveyorSpeed: 1
-  direction: {x: 1, y: 0, z: 0}
   onBelt: []
 --- !u!43 &1457803290
 Mesh:
@@ -30874,7 +30881,7 @@ Transform:
   m_GameObject: {fileID: 1652154223}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000005604078, y: -0.00000005604078, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -101.03042, y: -40.860565, z: 7.599869}
+  m_LocalPosition: {x: -101.03042, y: -52.93, z: 7.599869}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

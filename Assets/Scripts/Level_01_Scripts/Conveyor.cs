@@ -8,9 +8,6 @@ public class ConveyorBelt : MonoBehaviour
     [SerializeField]
     private float speed, conveyorSpeed;
 
-    //what direction you want the belt to go
-    [SerializeField]
-    private Vector3 direction;
 
     //list of objects on conveyor belt
     [SerializeField]
@@ -33,10 +30,15 @@ public class ConveyorBelt : MonoBehaviour
     //physics for objects on belt
     void FixedUpdate()
     {
-        for (int i = 0; i <= onBelt.Count - 1; i++)
+        foreach (GameObject obj in onBelt)
         {
-            onBelt[i].GetComponent<Rigidbody>().AddForce(speed * direction);
-            onBelt[i].GetComponent<Rigidbody>().freezeRotation = true;
+            Rigidbody rb = obj.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                Vector3 movement = speed * transform.right * Time.fixedDeltaTime;
+                rb.MovePosition(rb.position + movement);
+                rb.freezeRotation = true;
+            }
         }
     }
 
