@@ -261,6 +261,7 @@ MonoBehaviour:
   cameraCrouchHeight: 1
   headTriggerOffset: -0.055
   interactDistance: 3
+  dynamicFOVRateOfChange: 10
   dynamicFOV: 1
   renderPlayerMesh: 1
   canControl: 1
@@ -489,8 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7ca717bf3c1fc4da4241fdc9675507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 500
-  playerBody: {fileID: 5258422746441097205}
+  mouseSensitivity: 1
   xRotation: 0
 --- !u!1 &6223404485754681033
 GameObject:
@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 7795151634874694508}
   - component: {fileID: 8040473926196451029}
   - component: {fileID: 512410141632831579}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1889,7 +1889,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 761
+  m_VersionIndex: 764
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
