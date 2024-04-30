@@ -6,10 +6,12 @@ public class Interactable : MonoBehaviour
 {
     [Header("Parent Properties")]
     [SerializeField] private float interactionCooldown = 0;
+    public bool pickupable = false;
     [SerializeField] private bool oneTimeInteraction = false;
 
     private float cooldownTimeStamp = 0;
     private bool hasBeenInteractedWith = false;
+
 
     public virtual void interaction()
     {

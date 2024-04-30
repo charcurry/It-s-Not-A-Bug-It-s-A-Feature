@@ -21,7 +21,9 @@ public class ExampleInteractableObject : Interactable
         if (!canInteract())
             return;
 
-        transform.Rotate(new Vector3(0, 15, 0));
         // Code....
+
+        // Example:
+        // transform.Rotate(new Vector3(0, 15, 0));
     }
 }
