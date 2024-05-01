@@ -30,14 +30,25 @@ public class ConveyorBelt : MonoBehaviour
     //physics for objects on belt
     void FixedUpdate()
     {
-        foreach (GameObject obj in onBelt)
+        foreach (GameObject obj in onBelt.ToArray())
         {
-            Rigidbody rb = obj.GetComponent<Rigidbody>();
-            if (rb != null)
+            if (obj != null)
             {
-                Vector3 movement = speed * transform.right * Time.fixedDeltaTime;
-                rb.MovePosition(rb.position + movement);
-                rb.freezeRotation = true;
+                Rigidbody rb = obj.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    Vector3 movement = speed * transform.right * Time.fixedDeltaTime;
+                    rb.MovePosition(rb.position + movement);
+                    rb.freezeRotation = true;
+                }
+                else
+                {
+                    Debug.LogWarning("Rigidbody component missing on object: " + obj.name);
+                }
+            }
+            else
+            {
+                onBelt.Remove(obj);
             }
         }
     }
