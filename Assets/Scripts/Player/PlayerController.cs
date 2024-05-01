@@ -7,50 +7,66 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    GameObject pCamera;
-    Rigidbody rb;
-    Camera pCameraComponent;
-    PlayerTrigger groundTrigger;
-    PlayerTrigger headTrigger;
+    private GameObject pCamera;
+    private Rigidbody rb;
+    private Camera pCameraComponent;
+    private PlayerTrigger groundTrigger;
+    private PlayerTrigger headTrigger;
+    private Rigidbody heldObject;
+    private GameObject heldObjectPoint;
 
-    float accelerationBaseValue;
-    float maxSpeedBaseValue;
-    float moveLeftRight;
-    float moveForwardBackward;
-    float jumpTimeStamp;
+    private float accelerationBaseValue;
+    private float maxSpeedBaseValue;
+    private float moveLeftRight;
+    private float moveForwardBackward;
+    private float jumpTimeStamp;
+    private float heldObjectDistanceCurrent;
 
-    bool isGrounded;
-    bool isUnderObject;
-    bool isCrouching;
-    bool upPressed;
-    bool downPressed;
-    bool rightPressed;
-    bool leftPressed;
-    bool sprintPressed;
-    bool jumpPressed;
-    bool interactPressed;
-    bool crouchPressed;
+    private bool isGrounded;
+    private bool isUnderObject;
+    private bool isCrouching;
+    private bool upPressed;
+    private bool downPressed;
+    private bool rightPressed;
+    private bool leftPressed;
+    private bool sprintPressed;
+    private bool jumpPressed;
+    private bool interactPressed;
+    private bool interactHeld;
+    private bool crouchPressed;
 
-    double speedXZ;
+    private double speedXZ;
 
-    //RaycastHit hit;
+    [Header("Movement Properties")]
+    [SerializeField] private float acceleration;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float decelerationMultiplier;
+    [SerializeField] private float jumpStrength;
+    [SerializeField] private float extraGravity;
+    [SerializeField] private float sprintMultiplier;
+    [SerializeField] private float crouchMultiplier;
 
-    [Header("Properties")]
-    public float acceleration;
-    public float maxSpeed;
-    public float decelerationMultiplier;
-    public float jumpStrength;
-    public float extraGravity;
-    public float sprintMultiplier;
-    public float crouchMultiplier;
-    public float playerHeight;
-    public float cameraHeight;
-    public float playerCrouchHeight;
-    public float cameraCrouchHeight;
-    public float headTriggerOffset;
-    public float interactDistance;
-    public bool dynamicFOV;
-    public bool renderPlayerMesh;
+    [Header("Size Properties")]
+    [SerializeField] private float playerHeight;
+    [SerializeField] private float cameraHeight;
+    [SerializeField] private float playerCrouchHeight;
+    [SerializeField] private float cameraCrouchHeight;
+    [SerializeField] private float headTriggerOffset;
+
+    [Header("Interaction Properties")]
+    [SerializeField] private float interactDistance;
+    [SerializeField] private float heldObjectDistanceDefault;
+    [SerializeField] private float heldObjectDistanceMin;
+    [SerializeField] private float heldObjectDistanceMax;
+    [SerializeField] private float scollSensitivity;
+    [SerializeField] private float heldObjectDampenFactor;
+    [SerializeField] private float heldObjectPull;
+
+    [Header("Miscellaneous Properties")]
+    [SerializeField] private float dynamicFOVRateOfChange;
+    [SerializeField] private bool dynamicFOV;
+    [SerializeField] private bool renderPlayerMesh;
+    [SerializeField] private bool renderHeldObjectPoint;
 
     [HideInInspector] public bool canControl = true;
     [HideInInspector] public bool disableRegularForce = false;
@@ -68,11 +84,13 @@ public class PlayerController : MonoBehaviour
         pCameraComponent = pCamera.GetComponent<Camera>();
         groundTrigger = transform.GetChild(1).GetComponent<PlayerTrigger>();
         headTrigger = transform.GetChild(2).GetComponent<PlayerTrigger>();
+        heldObjectPoint = transform.GetChild(3).gameObject;
 
         headTrigger.transform.localPosition = new Vector3(0, (playerHeight - 1) + headTriggerOffset, 0);
 
         accelerationBaseValue = acceleration;
         maxSpeedBaseValue = maxSpeed;
+        heldObjectDistanceCurrent = heldObjectDistanceDefault;
 
         pCamera.transform.position = new Vector3(pCamera.transform.position.x, (transform.position.y - 1) + cameraHeight, pCamera.transform.position.z);
         transform.GetComponent<CapsuleCollider>().height = playerHeight;
@@ -85,12 +103,16 @@ public class PlayerController : MonoBehaviour
         sprintPressed = false;
         jumpPressed = false;
         interactPressed = false;
+        interactHeld = false;
         crouchPressed = false;
 
         jumpTimeStamp = -0.2f;
 
         if (!renderPlayerMesh)
             transform.GetComponent<MeshRenderer>().forceRenderingOff = true;
+
+        if (!renderHeldObjectPoint)
+            heldObjectPoint.transform.GetComponent<MeshRenderer>().forceRenderingOff = true;
     }
 
 
@@ -120,12 +142,19 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
                 interactPressed = true;
 
+            if (Input.GetKey(KeyCode.E))
+                interactHeld = true;
+
             if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C))
                 crouchPressed = true;
+
+            // Takes scroll wheel input and uses it to move held objects closer or further depending on the direction you scroll the wheel
+            heldObjectDistanceCurrent = Mathf.Clamp(heldObjectDistanceCurrent + Input.mouseScrollDelta.y * scollSensitivity, heldObjectDistanceMin, heldObjectDistanceMax);
         }
+
+        heldObjectPoint.transform.position = pCamera.transform.position + (pCamera.transform.forward * heldObjectDistanceCurrent);
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         // Calls on GroundTrigger to find out whether or not the player is grounded
@@ -139,24 +168,48 @@ public class PlayerController : MonoBehaviour
         rb.AddRelativeForce(new Vector3(0, -extraGravity * Time.deltaTime, 0));
 
         // Shoots a raycast out in the direction the player is looking
-        if (Physics.Raycast(pCamera.transform.position, pCamera.transform.forward, out RaycastHit hit, interactDistance))
+        if (Physics.Raycast(pCamera.transform.position, pCamera.transform.forward, out RaycastHit hit, interactDistance, ~(1 << 6)))
         {
             // Checks if the raycast hits an object with the Interactable parent script
             if (hit.collider.GetComponent<Interactable>())
             {
                 if (interactPressed)
+                {
                     hit.collider.GetComponent<Interactable>().interaction();
+
+                    if (hit.collider.GetComponent<Interactable>().pickupable)
+                        heldObject = hit.collider.GetComponent<Rigidbody>();
+                }
             }
         }
 
+        // If an object has been interacted with and the interact button is held, the object with be sucked towards a point in front of the player
+        if (interactHeld && heldObject != null)
+        {
+            heldObject.useGravity = false;
+            heldObject.velocity = new Vector3(heldObject.velocity.x * heldObjectDampenFactor, heldObject.velocity.y * heldObjectDampenFactor, heldObject.velocity.z * heldObjectDampenFactor);
+            heldObject.angularVelocity = new Vector3(heldObject.angularVelocity.x * 0.9f, heldObject.angularVelocity.y * 0.9f, heldObject.angularVelocity.z * 0.9f);
+            // Direction * deltatime * (further from destination = exponentially higher number)
+            heldObject.AddForce((heldObjectPoint.transform.position - heldObject.transform.position).normalized * Time.deltaTime * 1000 * Mathf.Clamp(Mathf.Pow(Vector3.Distance(heldObjectPoint.transform.position, heldObject.transform.position), heldObjectPull), Mathf.Pow(0.1f, heldObjectPull), 10000));
+        }
+        else
+        {
+            if (heldObject != null)
+                heldObject.useGravity = true;
+
+            heldObjectDistanceCurrent = heldObjectDistanceDefault;
+            heldObject = null;
+        }
+
         interactPressed = false;
+        interactHeld = false;
 
         // Set acceleration and max speed back to normal after sprint and crouch
         acceleration = accelerationBaseValue;
         maxSpeed = maxSpeedBaseValue;
 
         // If sprint is input, up both accelertion and speed
-        if (sprintPressed && !crouchPressed && (upPressed || leftPressed || rightPressed))
+        if (sprintPressed && !isCrouching && (upPressed || leftPressed || rightPressed))
         {
             sprintPressed = false;
             maxSpeed = maxSpeed * sprintMultiplier;
@@ -241,7 +294,7 @@ public class PlayerController : MonoBehaviour
 
         // Changes fov based on speed
         if (dynamicFOV)
-            pCameraComponent.fieldOfView = Mathf.Lerp(pCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * 2);
+            pCameraComponent.fieldOfView = Mathf.Lerp(pCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
     
     }
 

@@ -4,14 +4,30 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Parent Properties")]
+    [SerializeField] private float interactionCooldown = 0;
+    public bool pickupable = false;
+    [SerializeField] private bool oneTimeInteraction = false;
+
+    private float cooldownTimeStamp = 0;
+    private bool hasBeenInteractedWith = false;
+
+
+    public virtual void interaction()
     {
         
     }
 
-    public virtual void interaction()
+    protected bool canInteract()
     {
+        if (cooldownTimeStamp + interactionCooldown > Time.time || hasBeenInteractedWith == true)
+            return false;
 
+        if (oneTimeInteraction == true)
+            hasBeenInteractedWith = true;
+
+        cooldownTimeStamp = Time.time;
+
+        return true;
     }
 }
