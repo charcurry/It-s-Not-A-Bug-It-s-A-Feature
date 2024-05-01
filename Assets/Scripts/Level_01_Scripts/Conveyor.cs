@@ -62,6 +62,11 @@ public class ConveyorBelt : MonoBehaviour
     //object exits conveyor belt
     private void OnCollisionExit(Collision collision)
     {
+        Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
         onBelt.Remove(collision.gameObject);
+        if (collision.gameObject.CompareTag("Box"))
+        {
+            rb.freezeRotation = false;
+        }
     }
 }
