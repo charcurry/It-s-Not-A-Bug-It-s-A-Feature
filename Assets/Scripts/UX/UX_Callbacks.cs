@@ -17,6 +17,9 @@ public class UX_Callbacks : MonoBehaviour
     public GameObject InGameOverlay;
     public GameObject Paused;
 
+    public GameObject Controls_BackToMenu;
+    public GameObject Controls_ReturnToPaused;
+
     //Interaction UI
     //Notification handler
     //Sound settings
@@ -47,6 +50,8 @@ public class UX_Callbacks : MonoBehaviour
         BUTTON_CALLBACK_CONTROLS,
         BUTTON_CALLBACK_VIDEO_SETTINGS,
         BUTTON_CALLBACK_RETURN_TO_MENU,
+        BUTTON_CALLBACK_RETURN_TO_PAUSED_STATE,
+        BUTTON_CALLBACK_PREVIOUS_SCENE,
         BUTTON_CALLBACK_MAX,
     }
 
@@ -56,6 +61,17 @@ public class UX_Callbacks : MonoBehaviour
     {
         PrevUIState = UIState;
         UIState = _UIState;
+
+        if (_UIState == EUICurrentState.UI_STATE_CONTROLS && PrevUIState == EUICurrentState.UI_STATE_PAUSED)
+        {
+            Controls_ReturnToPaused.SetActive(true);
+            Controls_BackToMenu.SetActive(false);
+        }
+        else
+        {
+            Controls_ReturnToPaused.SetActive(false);
+            Controls_BackToMenu.SetActive(true);
+        }
 
         CanvasBackground.SetActive(UIState != EUICurrentState.UI_STATE_INGAME_OVERLAY);
         MainMenu.SetActive(UIState == EUICurrentState.UI_STATE_MENU);
@@ -96,7 +112,12 @@ public class UX_Callbacks : MonoBehaviour
         {
             case EUXCallbacksNoParameter.BUTTON_CALLBACK_PLAY:
                 {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+                    if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    }
+
                     OnUIStateChange(EUICurrentState.UI_STATE_INGAME_OVERLAY);
                     break;
                 }
@@ -117,7 +138,27 @@ public class UX_Callbacks : MonoBehaviour
                 }
             case EUXCallbacksNoParameter.BUTTON_CALLBACK_RETURN_TO_MENU:
                 {
+                    SceneManager.LoadScene(0);
                     OnUIStateChange(EUICurrentState.UI_STATE_MENU);
+                    break;
+                }
+            case EUXCallbacksNoParameter.BUTTON_CALLBACK_RETURN_TO_PAUSED_STATE:
+                {
+                    OnUIStateChange(EUICurrentState.UI_STATE_PAUSED);
+                    break;
+                }
+            case EUXCallbacksNoParameter.BUTTON_CALLBACK_PREVIOUS_SCENE:
+                {
+                    if (SceneManager.GetActiveScene().buildIndex - 1 == 0)
+                    {
+                        SceneManager.LoadScene(0);
+                        OnUIStateChange(EUICurrentState.UI_STATE_MENU);
+                    }
+                    else if (SceneManager.GetActiveScene().buildIndex - 1 > 0)
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+                        OnUIStateChange(EUICurrentState.UI_STATE_INGAME_OVERLAY);
+                    }
                     break;
                 }
             default:
@@ -140,6 +181,19 @@ public class UX_Callbacks : MonoBehaviour
                 OnUIStateChange(EUICurrentState.UI_STATE_PAUSED);
             else if (UIState == EUICurrentState.UI_STATE_PAUSED)
                 OnUIStateChange(EUICurrentState.UI_STATE_INGAME_OVERLAY);
+        }
+
+        if (UIState == EUICurrentState.UI_STATE_INGAME_OVERLAY)
+        {
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else if (UIState == EUICurrentState.UI_STATE_PAUSED)
+        {
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
     }
