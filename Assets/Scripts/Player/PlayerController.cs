@@ -4,9 +4,13 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
+    private GameObject uxMainObject;
+    private Shared_UXVariables uxVariables;
+
     private GameObject pCamera;
     private Rigidbody rb;
     private Camera pCameraComponent;
@@ -75,6 +79,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        uxMainObject = GameObject.Find("UX_Main");
+        uxVariables = uxMainObject.GetComponent<Shared_UXVariables>();
+
         isGrounded = true;
         isUnderObject = false;
         isCrouching = false;
@@ -157,6 +164,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+
         // Calls on GroundTrigger to find out whether or not the player is grounded
         if (jumpTimeStamp + 0.2f < Time.time)
             isGrounded = groundTrigger.isObjectHere;
@@ -167,12 +175,16 @@ public class PlayerController : MonoBehaviour
         // Adds a constant downward force on the player
         rb.AddRelativeForce(new Vector3(0, -extraGravity * Time.deltaTime, 0));
 
+        uxVariables.bIsInteracting = false;
+
         // Shoots a raycast out in the direction the player is looking
         if (Physics.Raycast(pCamera.transform.position, pCamera.transform.forward, out RaycastHit hit, interactDistance, ~(1 << 6)))
         {
             // Checks if the raycast hits an object with the Interactable parent script
             if (hit.collider.GetComponent<Interactable>())
             {
+                uxVariables.bIsInteracting = true;
+
                 if (interactPressed)
                 {
                     hit.collider.GetComponent<Interactable>().interaction();

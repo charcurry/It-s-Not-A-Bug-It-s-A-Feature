@@ -6,6 +6,12 @@ public class Shared_UXVariables : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    public float flMouseSensitivity = 1.0f;
+    public bool bDynamicFov = false;
+
+    public bool bIsInteracting = false;
+
+
     //UI Variables
     //Global Variables
    
@@ -13,6 +19,7 @@ public class Shared_UXVariables : MonoBehaviour
     {
         
     }
+
 
     // Update is called once per frame
     void Update()
