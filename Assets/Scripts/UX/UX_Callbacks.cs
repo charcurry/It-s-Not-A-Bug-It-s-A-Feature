@@ -1,17 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UX_Callbacks : MonoBehaviour
 {
-    // Start is called before the first frame update
-  
+
+    private KeyState KeyStates;
     public GameObject CanvasBackground;
     public GameObject MainMenu;
-    public GameObject OptionsScreen;
-    public GameObject IngameOverlay;
-    public GameObject PausedOverlay;
+    public GameObject VideoSettings;
+    public GameObject Controls;
+    public GameObject InGameOverlay;
+    public GameObject Paused;
 
     //Interaction UI
     //Notification handler
@@ -19,7 +23,6 @@ public class UX_Callbacks : MonoBehaviour
     //Objective UI
     //Narrator UI
     //Add crosshairs
-
     public enum EWindowMode : Int32
     {
         WND_MODE_FULLSCREEN = 0,
@@ -30,17 +33,21 @@ public class UX_Callbacks : MonoBehaviour
     public enum EUICurrentState
     {
         UI_STATE_MENU = 0,
+        UI_STATE_MAIN_MENU,
+        UI_STATE_VIDEO_SETTINGS,
+        UI_STATE_CONTROLS,
+        UI_STATE_INGAME_OVERLAY,
         UI_STATE_PAUSED,
-        UI_STATE_OPTIONS,
-        UI_STATE_INGAME,
         UI_STATE_MAX,
     }
     public enum EUXCallbacksNoParameter
     {
-        BUTTON_CALLBACK_PLAY =0 ,
+        BUTTON_CALLBACK_PLAY = 0,
         BUTTON_CALLBACK_EXIT,
-        BUTTON_CALLBACK_OPTIONS,
+        BUTTON_CALLBACK_CONTROLS,
+        BUTTON_CALLBACK_VIDEO_SETTINGS,
         BUTTON_CALLBACK_RETURN_TO_MENU,
+        BUTTON_CALLBACK_MAX,
     }
 
     private EUICurrentState UIState = EUICurrentState.UI_STATE_MENU;
@@ -50,15 +57,17 @@ public class UX_Callbacks : MonoBehaviour
         PrevUIState = UIState;
         UIState = _UIState;
 
-        CanvasBackground.SetActive(UIState != EUICurrentState.UI_STATE_INGAME);
+        CanvasBackground.SetActive(UIState != EUICurrentState.UI_STATE_INGAME_OVERLAY);
         MainMenu.SetActive(UIState == EUICurrentState.UI_STATE_MENU);
-        OptionsScreen.SetActive(UIState == EUICurrentState.UI_STATE_OPTIONS);
-        IngameOverlay.SetActive(UIState == EUICurrentState.UI_STATE_INGAME);
-        PausedOverlay.SetActive(UIState == EUICurrentState.UI_STATE_PAUSED);
+        VideoSettings.SetActive(UIState == EUICurrentState.UI_STATE_VIDEO_SETTINGS);
+        Controls.SetActive(UIState == EUICurrentState.UI_STATE_CONTROLS);
+        InGameOverlay.SetActive(UIState == EUICurrentState.UI_STATE_INGAME_OVERLAY);
+        Paused.SetActive(UIState == EUICurrentState.UI_STATE_PAUSED);
     }
 
     public void OnWindowModeChange(Int32 WindowMode)
     {
+
         switch ((EWindowMode)WindowMode)
         {
             case EWindowMode.WND_MODE_FULLSCREEN:
@@ -81,28 +90,34 @@ public class UX_Callbacks : MonoBehaviour
         }
   
     }
-    public void OnUXCallback(EUXCallbacksNoParameter eCallback)
+    public void OnUXCallback(int eCallback)
     {
-        switch (eCallback)
+        switch ((EUXCallbacksNoParameter)eCallback)
         {
             case EUXCallbacksNoParameter.BUTTON_CALLBACK_PLAY:
                 {
-
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    OnUIStateChange(EUICurrentState.UI_STATE_INGAME_OVERLAY);
                     break;
                 }
             case EUXCallbacksNoParameter.BUTTON_CALLBACK_EXIT:
                 {
-
+                    Application.Quit();
                     break;
                 }
-            case EUXCallbacksNoParameter.BUTTON_CALLBACK_OPTIONS:
+            case EUXCallbacksNoParameter.BUTTON_CALLBACK_CONTROLS:
                 {
-
+                    OnUIStateChange(EUICurrentState.UI_STATE_CONTROLS);
+                    break;
+                }
+            case EUXCallbacksNoParameter.BUTTON_CALLBACK_VIDEO_SETTINGS:
+                {
+                    OnUIStateChange(EUICurrentState.UI_STATE_VIDEO_SETTINGS);
                     break;
                 }
             case EUXCallbacksNoParameter.BUTTON_CALLBACK_RETURN_TO_MENU:
                 {
-
+                    OnUIStateChange(EUICurrentState.UI_STATE_MENU);
                     break;
                 }
             default:
@@ -114,12 +129,18 @@ public class UX_Callbacks : MonoBehaviour
 
     void Start()
     {
+        KeyStates = GetComponent<KeyState>();
         
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        if (KeyStates.CheckKeyState(KeyCode.Escape,EKeyQueryMode.KEYQUERY_SINGLEPRESS))
+        {
+            if (UIState == EUICurrentState.UI_STATE_INGAME_OVERLAY)
+                OnUIStateChange(EUICurrentState.UI_STATE_PAUSED);
+            else if (UIState == EUICurrentState.UI_STATE_PAUSED)
+                OnUIStateChange(EUICurrentState.UI_STATE_INGAME_OVERLAY);
+        }
+
     }
 }

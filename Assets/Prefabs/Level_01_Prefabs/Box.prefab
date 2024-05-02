@@ -9,13 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4145762679821407657}
+  - component: {fileID: 4676342835910139039}
   - component: {fileID: 7832485777225079261}
   - component: {fileID: 1332603873889629600}
   - component: {fileID: 6487823121359271911}
   - component: {fileID: 2620022175750337308}
   m_Layer: 0
   m_Name: Box
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,6 +36,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4676342835910139039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2713879140799530372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ae49962fcb28041aab66286b43b306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionCooldown: 0
+  pickupable: 1
+  oneTimeInteraction: 0
 --- !u!33 &7832485777225079261
 MeshFilter:
   m_ObjectHideFlags: 0

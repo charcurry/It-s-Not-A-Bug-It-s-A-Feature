@@ -1843,8 +1843,8 @@ MonoBehaviour:
   heldObjectDistanceMin: 1
   heldObjectDistanceMax: 5
   scollSensitivity: 0.5
-  heldObjectDampenFactor: 0.8
-  heldObjectPull: 2
+  heldObjectDampenFactor: 0.7
+  heldObjectPull: 5
   dynamicFOVRateOfChange: 10
   dynamicFOV: 1
   renderPlayerMesh: 1
