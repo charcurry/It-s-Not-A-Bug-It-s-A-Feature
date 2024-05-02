@@ -5,13 +5,19 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [Header("Parent Properties")]
-    [SerializeField] private float interactionCooldown = 0;
     public bool pickupable = false;
+    [SerializeField] private float interactionCooldown = 0;
     [SerializeField] private bool oneTimeInteraction = false;
 
     private float cooldownTimeStamp = 0;
     private bool hasBeenInteractedWith = false;
 
+    [HideInInspector] public bool isPickedUp;
+
+    private void Update()
+    {
+        Debug.Log(isPickedUp);      
+    }
 
     public virtual void interaction()
     {

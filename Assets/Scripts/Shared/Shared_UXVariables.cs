@@ -7,8 +7,7 @@ public class Shared_UXVariables : MonoBehaviour
     // Start is called before the first frame update
 
     public float flMouseSensitivity = 1.0f;
-    public bool bDynamicFov = false;
-
+    public bool bDynamicFov = true;
     public bool bIsInteracting = false;
 
 

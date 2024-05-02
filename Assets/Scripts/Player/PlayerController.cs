@@ -11,9 +11,9 @@ public class PlayerController : MonoBehaviour
     private GameObject uxMainObject;
     private Shared_UXVariables uxVariables;
 
-    private GameObject pCamera;
+    private GameObject playerCamera;
     private Rigidbody rb;
-    private Camera pCameraComponent;
+    private Camera playerCameraComponent;
     private PlayerTrigger groundTrigger;
     private PlayerTrigger headTrigger;
     private Rigidbody heldObject;
@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     private bool crouchPressed;
 
     private double speedXZ;
+
+    // Debug
+    private bool doesUXVariablesExist = true;
 
     [Header("Movement Properties")]
     [SerializeField] private float acceleration;
@@ -68,7 +71,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Miscellaneous Properties")]
     [SerializeField] private float dynamicFOVRateOfChange;
-    [SerializeField] private bool dynamicFOV;
     [SerializeField] private bool renderPlayerMesh;
     [SerializeField] private bool renderHeldObjectPoint;
 
@@ -79,19 +81,26 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        uxMainObject = GameObject.Find("UX_Main");
-        uxVariables = uxMainObject.GetComponent<Shared_UXVariables>();
+        if (GameObject.Find("UX_Main") != null)
+            uxVariables = GameObject.Find("UX_Main").GetComponent<Shared_UXVariables>();
+        else
+            doesUXVariablesExist = false;
 
         isGrounded = true;
         isUnderObject = false;
         isCrouching = false;
 
         rb = GetComponent<Rigidbody>();
-        pCamera = transform.GetChild(0).gameObject;
-        pCameraComponent = pCamera.GetComponent<Camera>();
+        playerCamera = transform.GetChild(0).gameObject;
+        playerCameraComponent = playerCamera.GetComponent<Camera>();
         groundTrigger = transform.GetChild(1).GetComponent<PlayerTrigger>();
         headTrigger = transform.GetChild(2).GetComponent<PlayerTrigger>();
         heldObjectPoint = transform.GetChild(3).gameObject;
+
+        if (doesUXVariablesExist)
+            playerCamera.GetComponent<CameraController>().mouseSensitivity = uxVariables.flMouseSensitivity;
+        else
+            playerCamera.GetComponent<CameraController>().mouseSensitivity = 1;
 
         headTrigger.transform.localPosition = new Vector3(0, (playerHeight - 1) + headTriggerOffset, 0);
 
@@ -99,7 +108,7 @@ public class PlayerController : MonoBehaviour
         maxSpeedBaseValue = maxSpeed;
         heldObjectDistanceCurrent = heldObjectDistanceDefault;
 
-        pCamera.transform.position = new Vector3(pCamera.transform.position.x, (transform.position.y - 1) + cameraHeight, pCamera.transform.position.z);
+        playerCamera.transform.position = new Vector3(playerCamera.transform.position.x, (transform.position.y - 1) + cameraHeight, playerCamera.transform.position.z);
         transform.GetComponent<CapsuleCollider>().height = playerHeight;
         transform.GetComponent<CapsuleCollider>().center = new Vector3(0, (playerHeight / 2) - 1, 0);
 
@@ -159,12 +168,11 @@ public class PlayerController : MonoBehaviour
             heldObjectDistanceCurrent = Mathf.Clamp(heldObjectDistanceCurrent + Input.mouseScrollDelta.y * scollSensitivity, heldObjectDistanceMin, heldObjectDistanceMax);
         }
 
-        heldObjectPoint.transform.position = pCamera.transform.position + (pCamera.transform.forward * heldObjectDistanceCurrent);
+        heldObjectPoint.transform.position = playerCamera.transform.position + (playerCamera.transform.forward * heldObjectDistanceCurrent);
     }
 
     void FixedUpdate()
     {
-
         // Calls on GroundTrigger to find out whether or not the player is grounded
         if (jumpTimeStamp + 0.2f < Time.time)
             isGrounded = groundTrigger.isObjectHere;
@@ -175,15 +183,17 @@ public class PlayerController : MonoBehaviour
         // Adds a constant downward force on the player
         rb.AddRelativeForce(new Vector3(0, -extraGravity * Time.deltaTime, 0));
 
-        uxVariables.bIsInteracting = false;
+        if (doesUXVariablesExist)
+            uxVariables.bIsInteracting = false;
 
         // Shoots a raycast out in the direction the player is looking
-        if (Physics.Raycast(pCamera.transform.position, pCamera.transform.forward, out RaycastHit hit, interactDistance, ~(1 << 6)))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, interactDistance, ~(1 << 6)))
         {
             // Checks if the raycast hits an object with the Interactable parent script
             if (hit.collider.GetComponent<Interactable>())
             {
-                uxVariables.bIsInteracting = true;
+                if (doesUXVariablesExist)
+                    uxVariables.bIsInteracting = true;
 
                 if (interactPressed)
                 {
@@ -198,6 +208,7 @@ public class PlayerController : MonoBehaviour
         // If an object has been interacted with and the interact button is held, the object with be sucked towards a point in front of the player
         if (interactHeld && heldObject != null)
         {
+            heldObject.GetComponent<Interactable>().isPickedUp = true;
             heldObject.useGravity = false;
             float objectPointDistance = Vector3.Distance(heldObjectPoint.transform.position, heldObject.transform.position);
             heldObject.velocity *= heldObjectDampenFactor * Mathf.Clamp(objectPointDistance * 5, 0.5f, 1);
@@ -208,8 +219,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             if (heldObject != null)
+            {
                 heldObject.useGravity = true;
-
+                heldObject.GetComponent<Interactable>().isPickedUp = false;
+            }
+            
             heldObjectDistanceCurrent = heldObjectDistanceDefault;
             heldObject = null;
         }
@@ -236,7 +250,7 @@ public class PlayerController : MonoBehaviour
             crouchPressed = false;
             isCrouching = true;
             // Reduces player height, camera height, and reduces speed
-            pCamera.transform.position = new Vector3(pCamera.transform.position.x, Mathf.Lerp(pCamera.transform.position.y, (transform.position.y - 1) + cameraCrouchHeight, Time.deltaTime * 10), pCamera.transform.position.z);
+            playerCamera.transform.position = new Vector3(playerCamera.transform.position.x, Mathf.Lerp(playerCamera.transform.position.y, (transform.position.y - 1) + cameraCrouchHeight, Time.deltaTime * 10), playerCamera.transform.position.z);
             transform.GetComponent<CapsuleCollider>().height = playerCrouchHeight;
             transform.GetComponent<CapsuleCollider>().center = new Vector3(0, (playerCrouchHeight / 2) - 1, 0);
             maxSpeed = maxSpeed * crouchMultiplier;
@@ -246,7 +260,7 @@ public class PlayerController : MonoBehaviour
         {
             isCrouching = false;
             // Sets player and camera height back to the default
-            pCamera.transform.position = new Vector3(pCamera.transform.position.x, Mathf.Lerp(pCamera.transform.position.y, (transform.position.y - 1) + cameraHeight, Time.deltaTime * 10), pCamera.transform.position.z);
+            playerCamera.transform.position = new Vector3(playerCamera.transform.position.x, Mathf.Lerp(playerCamera.transform.position.y, (transform.position.y - 1) + cameraHeight, Time.deltaTime * 10), playerCamera.transform.position.z);
             transform.GetComponent<CapsuleCollider>().height = playerHeight;
             transform.GetComponent<CapsuleCollider>().center = new Vector3(0, (playerHeight / 2) - 1, 0);
         }
@@ -301,21 +315,28 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(new Vector3(0.0f, jumpStrength, 0.0f), ForceMode.Impulse);
             jumpTimeStamp = Time.time;
+            isGrounded = false;
         }
 
         jumpPressed = false;
 
         // Changes fov based on speed
-        if (dynamicFOV)
-            pCameraComponent.fieldOfView = Mathf.Lerp(pCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
-    
+        if (doesUXVariablesExist)
+        {
+            if (uxVariables.bDynamicFov)
+                playerCameraComponent.fieldOfView = Mathf.Lerp(playerCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
+
+        }
+        else
+            playerCameraComponent.fieldOfView = Mathf.Lerp(playerCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
+
     }
 
     // Takes a Y rotation and sets the player's camera to that direction
     public void RecenterCamera(float yRotation = 0)
     {
         transform.rotation = Quaternion.Euler(0, yRotation, 0);
-        pCamera.GetComponent<CameraController>().xRotation = 0;
+        playerCamera.GetComponent<CameraController>().xRotation = 0;
     }
 
     // Gives player postition
