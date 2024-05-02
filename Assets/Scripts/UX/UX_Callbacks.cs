@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UX_Callbacks : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class UX_Callbacks : MonoBehaviour
     //Objective UI
     //Narrator UI
     //Add crosshairs
-
     public enum EWindowMode : Int32
     {
         WND_MODE_FULLSCREEN = 0,
@@ -96,6 +96,7 @@ public class UX_Callbacks : MonoBehaviour
         {
             case EUXCallbacksNoParameter.BUTTON_CALLBACK_PLAY:
                 {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                     OnUIStateChange(EUICurrentState.UI_STATE_INGAME_OVERLAY);
                     break;
                 }
@@ -129,9 +130,8 @@ public class UX_Callbacks : MonoBehaviour
     void Start()
     {
         KeyStates = GetComponent<KeyState>();
+        
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (KeyStates.CheckKeyState(KeyCode.Escape,EKeyQueryMode.KEYQUERY_SINGLEPRESS))
@@ -141,5 +141,6 @@ public class UX_Callbacks : MonoBehaviour
             else if (UIState == EUICurrentState.UI_STATE_PAUSED)
                 OnUIStateChange(EUICurrentState.UI_STATE_INGAME_OVERLAY);
         }
+
     }
 }
