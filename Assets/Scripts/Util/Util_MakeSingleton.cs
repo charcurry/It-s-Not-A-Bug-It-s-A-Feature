@@ -14,6 +14,8 @@ public class Util_MakeSingleton : MonoBehaviour
             GameObject.DontDestroyOnLoad(gameObject);
             bInitialized = true;
         }
+        else
+            GameObject.Destroy(gameObject);
     }
 
     // Update is called once per frame
