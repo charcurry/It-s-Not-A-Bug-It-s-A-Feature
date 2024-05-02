@@ -14,11 +14,6 @@ public class Interactable : MonoBehaviour
 
     [HideInInspector] public bool isPickedUp;
 
-    private void Update()
-    {
-        Debug.Log(isPickedUp);      
-    }
-
     public virtual void interaction()
     {
         
