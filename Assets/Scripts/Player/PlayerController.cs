@@ -199,10 +199,11 @@ public class PlayerController : MonoBehaviour
         if (interactHeld && heldObject != null)
         {
             heldObject.useGravity = false;
-            heldObject.velocity = new Vector3(heldObject.velocity.x * heldObjectDampenFactor, heldObject.velocity.y * heldObjectDampenFactor, heldObject.velocity.z * heldObjectDampenFactor);
-            heldObject.angularVelocity = new Vector3(heldObject.angularVelocity.x * 0.9f, heldObject.angularVelocity.y * 0.9f, heldObject.angularVelocity.z * 0.9f);
-            // Direction * deltatime * (further from destination = exponentially higher number)
-            heldObject.AddForce((heldObjectPoint.transform.position - heldObject.transform.position).normalized * Time.deltaTime * 1000 * Mathf.Clamp(Mathf.Pow(Vector3.Distance(heldObjectPoint.transform.position, heldObject.transform.position), heldObjectPull), Mathf.Pow(0.1f, heldObjectPull), 10000));
+            float objectPointDistance = Vector3.Distance(heldObjectPoint.transform.position, heldObject.transform.position);
+            heldObject.velocity *= heldObjectDampenFactor * Mathf.Clamp(objectPointDistance * 5, 0.5f, 1);
+            heldObject.angularVelocity *= 0.9f;
+            // Direction * deltatime * distance^2 * pull
+            heldObject.AddForce((heldObjectPoint.transform.position - heldObject.transform.position).normalized * Time.deltaTime * 1000 * heldObjectPull * Mathf.Pow(objectPointDistance, 2));
         }
         else
         {
