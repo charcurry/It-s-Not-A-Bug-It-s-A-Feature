@@ -43,7 +43,7 @@ public class ConveyorBelt : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning("Rigidbody component missing on object: " + obj.name);
+                    Debug.Log("rigidbody missing on object: " + obj.name);
                 }
             }
             else
