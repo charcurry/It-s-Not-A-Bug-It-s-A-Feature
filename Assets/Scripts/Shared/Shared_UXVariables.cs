@@ -34,6 +34,5 @@ public class Shared_UXVariables : MonoBehaviour
     {
         bDynamicFov = DynamicFovToggleObject.GetComponent<UnityEngine.UI.Toggle>().isOn;
         flMouseSensitivity = SensitivitySliderObject.GetComponent<UI_Slider>().CurrentValue;
-
     }
 }
