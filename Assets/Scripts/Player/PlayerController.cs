@@ -172,11 +172,13 @@ public class PlayerController : MonoBehaviour
 
         heldObjectPoint.transform.position = playerCamera.transform.position + (playerCamera.transform.forward * heldObjectDistanceCurrent);
 
+        if (doesUXVariablesExist)
+            playerCamera.GetComponent<CameraController>().mouseSensitivity = uxVariables.flMouseSensitivity;
     }
 
     void FixedUpdate()
     {
-        // Calls on GroundTrigger to find out whether or not the player is grounded
+        // Calls on GroundTrigger to find out whether or not the player is grounded (:
         if (jumpTimeStamp + 0.2f < Time.time)
             isGrounded = groundTrigger.isObjectHere;
 
