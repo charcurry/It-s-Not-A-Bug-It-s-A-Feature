@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestJumpPad : MonoBehaviour
+public class JumpPad : MonoBehaviour
 {
     public float jumpForce = 10f;
 
