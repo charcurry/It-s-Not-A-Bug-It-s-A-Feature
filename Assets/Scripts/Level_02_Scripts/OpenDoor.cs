@@ -4,32 +4,23 @@ using UnityEngine;
 
 public class OpenDoor : MonoBehaviour
 {
-    // This script only opens the door. No need to close it once puzzle is completed
-
     public float speed = 3.0f;
     public float distance = 5.0f;
-    private bool isOpening = false;
     private float moveDistance = 0.0f;
 
-    void Update()
+    public void Open()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !isOpening) // For testing
-        {
-            isOpening = true;
-        }
+        StartCoroutine(OpenRoutine());
+    }
 
-        if (isOpening && moveDistance < distance)
+    private IEnumerator OpenRoutine()
+    {
+        while (moveDistance < distance)
         {
-            float totalTime = speed * Time.deltaTime;
-            if (moveDistance + totalTime > distance)
-                totalTime = distance - moveDistance;
-
-            transform.Translate(0, totalTime, 0);
-            moveDistance += totalTime;
-        }
-        else if (moveDistance >= distance)
-        {
-            isOpening = false;
+            float moveStep = speed * Time.deltaTime;
+            moveDistance += moveStep;
+            transform.Translate(0, moveStep, 0);
+            yield return null;
         }
     }
 }

@@ -54,7 +54,7 @@ public class ExampleCodingStyle : MonoBehaviour
     // Ex:
     float PLAYER_SPEED;
 
-    // All Methods Should follow the same guide lines as Variables but the must start with a capital letter and each method needs to be spaced one line apart
+    // All Methods Should follow the same guide lines as Variables but they must start with a capital letter and each method needs to be spaced one line apart
     // Ex:
     void GetPosition() { }
 

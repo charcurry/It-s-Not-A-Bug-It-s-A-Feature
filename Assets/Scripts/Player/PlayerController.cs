@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
 
     private double speedXZ;
 
+    private RaycastHit hit;
+
     // Debug
     private bool doesUXVariablesExist = true;
 
@@ -169,11 +171,14 @@ public class PlayerController : MonoBehaviour
         }
 
         heldObjectPoint.transform.position = playerCamera.transform.position + (playerCamera.transform.forward * heldObjectDistanceCurrent);
+
+        if (doesUXVariablesExist)
+            playerCamera.GetComponent<CameraController>().mouseSensitivity = uxVariables.flMouseSensitivity;
     }
 
     void FixedUpdate()
     {
-        // Calls on GroundTrigger to find out whether or not the player is grounded
+        // Calls on GroundTrigger to find out whether or not the player is grounded (:
         if (jumpTimeStamp + 0.2f < Time.time)
             isGrounded = groundTrigger.isObjectHere;
 
@@ -187,7 +192,7 @@ public class PlayerController : MonoBehaviour
             uxVariables.bIsInteracting = false;
 
         // Shoots a raycast out in the direction the player is looking
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, interactDistance, ~(1 << 6)))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactDistance, ~(1 << 6)))
         {
             // Checks if the raycast hits an object with the Interactable parent script
             if (hit.collider.GetComponent<Interactable>())
@@ -325,7 +330,6 @@ public class PlayerController : MonoBehaviour
         {
             if (uxVariables.bDynamicFov)
                 playerCameraComponent.fieldOfView = Mathf.Lerp(playerCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
-
         }
         else
             playerCameraComponent.fieldOfView = Mathf.Lerp(playerCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
