@@ -48,11 +48,55 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8082089979701090553, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
+    - target: {fileID: -7160914517905480055, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
+    - target: {fileID: -5577371671817698873, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
+    - target: {fileID: -2253258804525894627, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
+    - target: {fileID: -1851230531204487004, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
+    - target: {fileID: -1114370125524797140, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
+    - target: {fileID: -1071580831540545902, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
       propertyPath: m_Name
       value: Conveyor belt
       objectReference: {fileID: 0}
+    - target: {fileID: 1762340381179302861, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
     - target: {fileID: 3436358266100975381, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
+    - target: {fileID: 4287207148634975974, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
+    - target: {fileID: 4351882302662002111, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
+    - target: {fileID: 8862754087762391686, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
@@ -133,5 +177,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   conveyorSpeed: 0.2
-  direction: {x: 5, y: 0, z: 0}
   onBelt: []
