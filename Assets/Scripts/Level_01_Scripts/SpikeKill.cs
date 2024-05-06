@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpikeKill : MonoBehaviour
 {
+    Interactable interactable;
     BoxInstantiation boxInstantiation;
     GameObject boxSpawn;
     private void Start()
     {
         boxSpawn = GameObject.FindGameObjectWithTag("BoxSpawn");
         boxInstantiation = boxSpawn.GetComponent<BoxInstantiation>();
+        interactable = GameObject.FindGameObjectWithTag("Box").GetComponent<Interactable>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -20,18 +21,14 @@ public class SpikeKill : MonoBehaviour
         {
             collision.gameObject.transform.position = new Vector3(-20, 0, -45);
         }
-        if (collision.gameObject.CompareTag("Box"))
+        if(collision.gameObject.CompareTag("Box") && interactable.isPickedUp == true)
         {
-            collision.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            boxInstantiation.boxCount -= 1;
+            collision.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Box"))
+        else if (collision.gameObject.CompareTag("Box") && interactable.isPickedUp == false)
         {
-            collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            collision.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            boxInstantiation.boxCount -= 1;
         }
     }
 }
