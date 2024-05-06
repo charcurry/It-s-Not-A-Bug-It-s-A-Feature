@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
     private bool sprintPressed;
     private bool jumpPressed;
     private bool interactPressed;
-    private bool interactHeld;
     private bool crouchPressed;
+    private bool holdingObject;
 
     private double speedXZ;
 
@@ -121,8 +121,8 @@ public class PlayerController : MonoBehaviour
         sprintPressed = false;
         jumpPressed = false;
         interactPressed = false;
-        interactHeld = false;
         crouchPressed = false;
+        holdingObject = false;
 
         jumpTimeStamp = -0.2f;
 
@@ -157,11 +157,8 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
                 jumpPressed = true;
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
                 interactPressed = true;
-
-            if (Input.GetKey(KeyCode.E))
-                interactHeld = true;
 
             if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C))
                 crouchPressed = true;
@@ -191,27 +188,38 @@ public class PlayerController : MonoBehaviour
         if (doesUXVariablesExist)
             uxVariables.bIsInteracting = false;
 
-        // Shoots a raycast out in the direction the player is looking
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactDistance, ~(1 << 6)))
+        if (!holdingObject)
         {
-            // Checks if the raycast hits an object with the Interactable parent script
-            if (hit.collider.GetComponent<Interactable>())
+            // Shoots a raycast out in the direction the player is looking
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactDistance, ~(1 << 6)))
             {
-                if (doesUXVariablesExist)
-                    uxVariables.bIsInteracting = true;
-
-                if (interactPressed)
+                // Checks if the raycast hits an object with the Interactable parent script
+                if (hit.collider.GetComponent<Interactable>())
                 {
-                    hit.collider.GetComponent<Interactable>().interaction();
+                    if (doesUXVariablesExist)
+                        uxVariables.bIsInteracting = true;
 
-                    if (hit.collider.GetComponent<Interactable>().pickupable)
-                        heldObject = hit.collider.GetComponent<Rigidbody>();
+                    if (interactPressed)
+                    {
+                        hit.collider.GetComponent<Interactable>().interaction();
+
+                        if (hit.collider.GetComponent<Interactable>().pickupable)
+                        {
+                            heldObject = hit.collider.GetComponent<Rigidbody>();
+                            holdingObject = true;
+                        }
+                    }
                 }
             }
         }
+        else
+        {
+            if (interactPressed)
+                holdingObject = false;
+        }
 
         // If an object has been interacted with and the interact button is held, the object with be sucked towards a point in front of the player
-        if (interactHeld && heldObject != null)
+        if (holdingObject && heldObject != null)
         {
             heldObject.GetComponent<Interactable>().isPickedUp = true;
             heldObject.useGravity = false;
@@ -228,13 +236,13 @@ public class PlayerController : MonoBehaviour
                 heldObject.useGravity = true;
                 heldObject.GetComponent<Interactable>().isPickedUp = false;
             }
-            
+
+            holdingObject = false;
             heldObjectDistanceCurrent = heldObjectDistanceDefault;
             heldObject = null;
         }
 
         interactPressed = false;
-        interactHeld = false;
 
         // Set acceleration and max speed back to normal after sprint and crouch
         acceleration = accelerationBaseValue;
