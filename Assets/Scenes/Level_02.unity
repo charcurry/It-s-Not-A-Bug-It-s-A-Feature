@@ -14335,10 +14335,10 @@ Transform:
   - {fileID: 320212981}
   - {fileID: 793016457}
   - {fileID: 1900221816}
-  - {fileID: 446012848}
-  - {fileID: 449691614}
   - {fileID: 1999637979}
   - {fileID: 1110739437}
+  - {fileID: 446012848}
+  - {fileID: 449691614}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &759980916
@@ -41280,6 +41280,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correctSequence: 0100000002000000030000000400000005000000
   doorScript: {fileID: 1960688007}
+  lights:
+  - {fileID: 320212980}
+  - {fileID: 793016456}
+  - {fileID: 1900221815}
+  - {fileID: 1999637978}
+  - {fileID: 1110739438}
 --- !u!4 &1992616297
 Transform:
   m_ObjectHideFlags: 0
