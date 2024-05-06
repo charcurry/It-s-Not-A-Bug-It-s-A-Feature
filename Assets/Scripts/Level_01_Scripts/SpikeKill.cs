@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpikeKill : MonoBehaviour
@@ -21,8 +22,16 @@ public class SpikeKill : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Box"))
         {
-            collision.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            collision.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             boxInstantiation.boxCount -= 1;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Box"))
+        {
+            collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 }
