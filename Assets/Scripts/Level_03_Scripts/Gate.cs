@@ -10,8 +10,8 @@ public class Gate : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Key"))
         {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
+            collision.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 

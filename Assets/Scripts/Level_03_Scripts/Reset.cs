@@ -28,6 +28,7 @@ public class Reset : MonoBehaviour
                 obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 obj.transform.position = obj.GetComponent<GetPosition>().initialPosition;
                 obj.transform.rotation = obj.GetComponent<GetPosition>().initialRotation;
+                //obj.gameObject.SetActive(true);
                 newObjectsToReset.Add(obj);
             }
             else if (interactable != null && interactable.isPickedUp)
