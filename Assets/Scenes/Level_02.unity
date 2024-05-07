@@ -6918,7 +6918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &440947095
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11615,6 +11615,30 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 13450d21e170e7140873f4dca70d353d, type: 2}
+    - target: {fileID: -5030177542267695840, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -253.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -5030177542267695840, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 118.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -5030177542267695840, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.46174863
+      objectReference: {fileID: 0}
+    - target: {fileID: -5030177542267695840, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.8870109
+      objectReference: {fileID: 0}
+    - target: {fileID: -5030177542267695840, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5030177542267695840, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -125
+      objectReference: {fileID: 0}
     - target: {fileID: -4189001102723194477, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.6878383
@@ -11631,6 +11655,30 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 94fadd2a3d44a0146a3520e2e5cfd65e, type: 2}
+    - target: {fileID: -249853950229478271, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 251.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -249853950229478271, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 122.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -249853950229478271, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.46174863
+      objectReference: {fileID: 0}
+    - target: {fileID: -249853950229478271, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.8870109
+      objectReference: {fileID: 0}
+    - target: {fileID: -249853950229478271, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -249853950229478271, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 125
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5ed585211ca80194fb80489554b4c74b, type: 3}
       propertyPath: m_Name
       value: Electrical_panel
