@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class Gate : MonoBehaviour
+public class gatefake : MonoBehaviour
 {
+
     // When the key collides with the door
     void OnCollisionEnter(Collision collision)
     {
@@ -18,4 +20,6 @@ public class Gate : MonoBehaviour
             transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         }
     }
+
+
 }

@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // If an object has been interacted with and the interact button is held, the object with be sucked towards a point in front of the player
-        if (holdingObject && heldObject != null)
+        if (holdingObject && heldObject != null && heldObject.GetComponent<Interactable>().pickupable)
         {
             heldObject.GetComponent<Interactable>().isPickedUp = true;
             heldObject.useGravity = false;

@@ -19,6 +19,20 @@ public class Interactable : MonoBehaviour
         
     }
 
+    public void DeactivateObject()
+    {
+        if (gameObject.GetComponent<Rigidbody>() != null)
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+        if (gameObject.GetComponent<Collider>() != null)
+            gameObject.GetComponent<Collider>().enabled = false;
+
+        if (gameObject.GetComponent<MeshRenderer>() != null)
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+        pickupable = false;
+    }
+
     protected bool canInteract()
     {
         if (cooldownTimeStamp + interactionCooldown > Time.time || hasBeenInteractedWith == true)
