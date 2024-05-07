@@ -11,17 +11,17 @@ public class SpikeKill : MonoBehaviour
     {
         boxSpawn = GameObject.FindGameObjectWithTag("BoxSpawn");
         boxInstantiation = boxSpawn.GetComponent<BoxInstantiation>();
-        interactable = GameObject.FindGameObjectWithTag("Box").GetComponent<Interactable>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
+        interactable = collision.gameObject.GetComponent<Interactable>();
         //moves player to entrance of second room
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.transform.position = new Vector3(-20, 0, -45);
         }
-        if(collision.gameObject.CompareTag("Box") && interactable.isPickedUp == true)
+        if (collision.gameObject.CompareTag("Box") && interactable.isPickedUp == true)
         {
             collision.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         }
