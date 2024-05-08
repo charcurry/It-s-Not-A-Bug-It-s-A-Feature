@@ -35,6 +35,7 @@ public class SequenceManager : MonoBehaviour
             // Progress index and change material colors and light colors if right order
             gameObjects[currentIndex].GetComponent<Renderer>().material = greenMaterial;
             lights[currentIndex].color = Color.green;
+            SoundManager.PlaySound(SoundManager.Sound.Correct_Sound);
             currentIndex++;
             if (currentIndex == correctSequence.Length)
             {
@@ -61,6 +62,7 @@ public class SequenceManager : MonoBehaviour
         {
             light.color = Color.red;
         }
+        SoundManager.PlaySound(SoundManager.Sound.Incorrect_Sound);
         currentIndex = 0;
     }
 }

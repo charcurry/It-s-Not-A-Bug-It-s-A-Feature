@@ -22,6 +22,8 @@ public static class SoundManager
         Background_Music_1,
         Background_Music_2,
         Background_Music_3,
+        Correct_Sound,
+        Incorrect_Sound,
     }
 
     // This float is used to determine how frequently the player can play the playerMove sound.
