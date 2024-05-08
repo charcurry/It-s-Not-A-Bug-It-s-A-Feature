@@ -18,12 +18,6 @@ public class GameAssets : MonoBehaviour
         }
     }
 
-    // On Awake it initializes the sound settings.
-    public void Awake()
-    {
-        InitializeSoundSettings();
-    }
-
     // This dictionary is used to store the sound settings for each sound.
     public Dictionary<SoundManager.Sound, SoundSettings> soundSettingsDictionary = new Dictionary<SoundManager.Sound, SoundSettings>();
     // This array is used to store all the sound audio clips.
@@ -51,12 +45,14 @@ public class GameAssets : MonoBehaviour
 
     // This method is used to initialize the sound settings for each sound.
     // If nothing is stated it uses the default settings.
-    private void InitializeSoundSettings()
+    public void InitializeSoundSettings()
     {
         soundSettingsDictionary.Add(SoundManager.Sound.Pickup, new SoundSettings { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
         soundSettingsDictionary.Add(SoundManager.Sound.Checkpoint, new SoundSettings { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
         soundSettingsDictionary.Add(SoundManager.Sound.Moving_Platform, new SoundSettings { maxDistance = 25f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = true, isMoving = true, destroyAfterFinished = false });
         soundSettingsDictionary.Add(SoundManager.Sound.Player_Jump, new SoundSettings { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
+        soundSettingsDictionary.Add(SoundManager.Sound.Jump_Landing, new SoundSettings { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
+        soundSettingsDictionary.Add(SoundManager.Sound.Player_Move, new SoundSettings { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
     }
 
 }

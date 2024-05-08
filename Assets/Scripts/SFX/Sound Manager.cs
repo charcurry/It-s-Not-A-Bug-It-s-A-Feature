@@ -18,10 +18,12 @@ public static class SoundManager
         Player_Move,
         Moving_Platform,
         Player_Jump,
+        Jump_Landing,
     }
 
     // This float is used to determine how frequently the player can play the playerMove sound.
-    public static float playerMoveTimerMax = 0.15f;
+    public static readonly float defaultPlayerMoveTimerMax = 0.5f;
+    public static float playerMoveTimerMax;
 
     // This dictionary is used to store the last time a sound was played.
     private static Dictionary<Sound, float> soundTimerDictionary;

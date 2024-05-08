@@ -79,6 +79,13 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool canControl = true;
     [HideInInspector] public bool disableRegularForce = false;
 
+    // On Awake it initializes the sound settings.
+    // THIS DOES NOT HAVE TO BE IN THIS FILE, IT CAN BE IN ANYTHING THAT EXISTS IN EVERY SCENE
+    public void Awake()
+    {
+        GameAssets.i.InitializeSoundSettings();
+        SoundManager.Initialize();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -171,6 +178,12 @@ public class PlayerController : MonoBehaviour
 
         if (doesUXVariablesExist)
             playerCamera.GetComponent<CameraController>().mouseSensitivity = uxVariables.flMouseSensitivity;
+
+        // If the player is on the ground and moving, play the walking sound.
+        if (isGrounded && (upPressed || downPressed || rightPressed || leftPressed))
+        {
+            SoundManager.PlaySound(SoundManager.Sound.Player_Move, transform.position);
+        }
     }
 
     void FixedUpdate()
@@ -254,6 +267,13 @@ public class PlayerController : MonoBehaviour
             sprintPressed = false;
             maxSpeed = maxSpeed * sprintMultiplier;
             acceleration = acceleration * sprintMultiplier;
+            // If the player is sprinting, the playerMoveTimerMax is halved to make the walking sound play more frequently. (more steps = faster walking sound)
+            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax * 0.5f;
+        }
+        else
+        {
+            // If the player is not sprinting, the playerMoveTimerMax is set back to the default value.
+            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax;
         }
 
 
