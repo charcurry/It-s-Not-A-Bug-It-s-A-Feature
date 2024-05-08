@@ -276,7 +276,12 @@ public class PlayerController : MonoBehaviour
             maxSpeed = maxSpeed * sprintMultiplier;
             acceleration = acceleration * sprintMultiplier;
             // If the player is sprinting, the playerMoveTimerMax is halved to make the walking sound play more frequently. (more steps = faster walking sound)
-            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax * 0.5f;
+            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax / 2f;
+        }
+        else if (isCrouching && (upPressed || leftPressed || rightPressed || downPressed))
+        {
+            // If the player is crouching, the playerMoveTimerMax is increased to make the walking sound play less frequently. (less steps = slower walking sound)
+            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax / 0.6f;
         }
         else
         {
