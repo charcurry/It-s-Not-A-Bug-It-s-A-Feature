@@ -327,6 +327,7 @@ public class PlayerController : MonoBehaviour
         if (jumpPressed && isGrounded)
         {
             rb.AddForce(new Vector3(0.0f, jumpStrength, 0.0f), ForceMode.Impulse);
+            SoundManager.PlaySound(SoundManager.Sound.Player_Jump, transform.position);
             jumpTimeStamp = Time.time;
             isGrounded = false;
         }

@@ -56,6 +56,7 @@ public class GameAssets : MonoBehaviour
         soundSettingsDictionary.Add(SoundManager.Sound.Pickup, new SoundSettings { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
         soundSettingsDictionary.Add(SoundManager.Sound.Checkpoint, new SoundSettings { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
         soundSettingsDictionary.Add(SoundManager.Sound.Moving_Platform, new SoundSettings { maxDistance = 25f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = true, isMoving = true, destroyAfterFinished = false });
+        soundSettingsDictionary.Add(SoundManager.Sound.Player_Jump, new SoundSettings { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
     }
 
 }

@@ -16,7 +16,8 @@ public static class SoundManager
         Pickup,
         Checkpoint,
         Player_Move,
-        Moving_Platform
+        Moving_Platform,
+        Player_Jump,
     }
 
     // This float is used to determine how frequently the player can play the playerMove sound.
