@@ -249,7 +249,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // If nothing is being held/the player drops the object, decouple the heldObject from the heldPoint
+            // If nothing is being held/the player drops the object, decouple the heldObject from the heldObjectPoint
             if (heldObject != null)
             {
                 heldObject.useGravity = true;
