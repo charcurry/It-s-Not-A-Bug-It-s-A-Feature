@@ -5,10 +5,10 @@ using TMPro;
 using System;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    private GameObject uxMainObject;
     private Shared_UXVariables uxVariables;
 
     private GameObject playerCamera;
@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private PlayerTrigger headTrigger;
     private Rigidbody heldObject;
     private GameObject heldObjectPoint;
+    private Vector3 spawnPosition;
+    private Quaternion spawnRotation;
 
     private float accelerationBaseValue;
     private float maxSpeedBaseValue;
@@ -98,6 +100,9 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         isUnderObject = false;
         isCrouching = false;
+
+        spawnPosition = transform.position;
+        spawnRotation = transform.rotation;
 
         rb = GetComponent<Rigidbody>();
         playerCamera = transform.GetChild(0).gameObject;
@@ -231,7 +236,7 @@ public class PlayerController : MonoBehaviour
                 holdingObject = false;
         }
 
-        // If an object has been interacted with and the interact button is held, the object with be sucked towards a point in front of the player
+        // If an object has been interacted with and has the pickupable bool on, the object will be sucked towards a point in front of the player
         if (holdingObject && heldObject != null && heldObject.GetComponent<Interactable>().pickupable)
         {
             heldObject.GetComponent<Interactable>().isPickedUp = true;
@@ -244,6 +249,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            // If nothing is being held/the player drops the object, decouple the heldObject from the heldPoint
             if (heldObject != null)
             {
                 heldObject.useGravity = true;
@@ -365,16 +371,28 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    // Takes a Y rotation and sets the player's camera to that direction
-    public void RecenterCamera(float yRotation = 0)
+    public void Kill()
     {
-        transform.rotation = Quaternion.Euler(0, yRotation, 0);
+        // Makes the player drop what their holding, if anything
+        if (heldObject != null)
+        {
+            heldObject.useGravity = true;
+            heldObject.GetComponent<Interactable>().isPickedUp = false;
+            holdingObject = false;
+            heldObjectDistanceCurrent = heldObjectDistanceDefault;
+            heldObject = null;
+        }
+
+        // Player position gets put back to their spawn point
+        transform.position = spawnPosition;
+        transform.rotation = spawnRotation;
         playerCamera.GetComponent<CameraController>().xRotation = 0;
     }
 
-    // Gives player postition
-    public Vector3 GetPosition()
+    // Lets other scripts change the players spawn point
+    public void SetRespawn(Vector3 position, float facingDirection = 0)
     {
-        return transform.position;
+        spawnPosition = position;
+        spawnRotation = Quaternion.Euler(0, facingDirection, 0);
     }
 }
