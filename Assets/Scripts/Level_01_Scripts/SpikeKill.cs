@@ -16,11 +16,6 @@ public class SpikeKill : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         interactable = collision.gameObject.GetComponent<Interactable>();
-        //moves player to entrance of second room
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.gameObject.transform.position = new Vector3(-20, 0, -45);
-        }
         if (collision.gameObject.CompareTag("Box") && interactable.isPickedUp == true)
         {
             collision.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;

@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private bool interactPressed;
     private bool crouchPressed;
     private bool holdingObject;
+    private bool wasGroundedLastFrame;
 
     private double speedXZ;
 
@@ -98,6 +99,7 @@ public class PlayerController : MonoBehaviour
             doesUXVariablesExist = false;
 
         isGrounded = true;
+        wasGroundedLastFrame = true;
         isUnderObject = false;
         isCrouching = false;
 
@@ -274,7 +276,12 @@ public class PlayerController : MonoBehaviour
             maxSpeed = maxSpeed * sprintMultiplier;
             acceleration = acceleration * sprintMultiplier;
             // If the player is sprinting, the playerMoveTimerMax is halved to make the walking sound play more frequently. (more steps = faster walking sound)
-            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax * 0.5f;
+            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax / 2f;
+        }
+        else if (isCrouching && (upPressed || leftPressed || rightPressed || downPressed))
+        {
+            // If the player is crouching, the playerMoveTimerMax is increased to make the walking sound play less frequently. (less steps = slower walking sound)
+            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax / 0.6f;
         }
         else
         {
@@ -368,6 +375,14 @@ public class PlayerController : MonoBehaviour
         }
         else
             playerCameraComponent.fieldOfView = Mathf.Lerp(playerCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
+
+        if (!wasGroundedLastFrame && isGrounded)
+        {
+
+            SoundManager.PlaySound(SoundManager.Sound.Jump_Landing, transform.position);
+        }
+
+        wasGroundedLastFrame = isGrounded;
 
     }
 

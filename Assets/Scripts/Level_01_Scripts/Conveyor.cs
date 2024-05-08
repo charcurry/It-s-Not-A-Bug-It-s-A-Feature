@@ -10,8 +10,7 @@ public class ConveyorBelt : MonoBehaviour
 
 
     //list of objects on conveyor belt
-    [SerializeField]
-    private List<GameObject> onBelt;
+    public List<GameObject> onBelt;
 
     private Material material;
 
