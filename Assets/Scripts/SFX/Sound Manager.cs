@@ -26,6 +26,7 @@ public static class SoundManager
         Incorrect_Sound,
         Puzzle_Solved,
         Explosion,
+        Jump_Pad,
     }
 
     // This float is used to determine how frequently the player can play the playerMove sound.
