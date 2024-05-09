@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 {
     private Shared_UXVariables uxVariables;
 
+    // References
     private GameObject playerCamera;
     private Rigidbody rb;
     private Camera playerCameraComponent;
@@ -18,19 +19,25 @@ public class PlayerController : MonoBehaviour
     private PlayerTrigger headTrigger;
     private Rigidbody heldObject;
     private GameObject heldObjectPoint;
+
     private Vector3 spawnPosition;
     private Quaternion spawnRotation;
+    private Vector3 movementVector;
 
     private float accelerationBaseValue;
     private float maxSpeedBaseValue;
-    private float moveLeftRight;
-    private float moveForwardBackward;
     private float jumpTimeStamp;
     private float heldObjectDistanceCurrent;
 
     private bool isGrounded;
+    private bool wasGroundedLastFrame;
     private bool isUnderObject;
     private bool isCrouching;
+    private bool isSprinting;
+    private bool isMoving;
+    private bool isHoldingObject;
+    private bool willJump;
+
     private bool upPressed;
     private bool downPressed;
     private bool rightPressed;
@@ -39,8 +46,6 @@ public class PlayerController : MonoBehaviour
     private bool jumpPressed;
     private bool interactPressed;
     private bool crouchPressed;
-    private bool holdingObject;
-    private bool wasGroundedLastFrame;
 
     private double speedXZ;
 
@@ -50,37 +55,36 @@ public class PlayerController : MonoBehaviour
     private bool doesUXVariablesExist = true;
 
     [Header("Movement Properties")]
-    [SerializeField] private float acceleration;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float decelerationMultiplier;
-    [SerializeField] private float jumpStrength;
-    [SerializeField] private float extraGravity;
-    [SerializeField] private float sprintMultiplier;
-    [SerializeField] private float crouchMultiplier;
+    [SerializeField] private float acceleration = 30;
+    [SerializeField] private float maxSpeed = 40;
+    [SerializeField] private float decelerationMultiplier = 0.8f;
+    [SerializeField] private float jumpStrength = 13;
+    [SerializeField] public float gravityMultiplier = 3;
+    [SerializeField] private float sprintMultiplier = 2;
+    [SerializeField] private float crouchMultiplier = 0.6f;
 
     [Header("Size Properties")]
-    [SerializeField] private float playerHeight;
-    [SerializeField] private float cameraHeight;
-    [SerializeField] private float playerCrouchHeight;
-    [SerializeField] private float cameraCrouchHeight;
-    [SerializeField] private float headTriggerOffset;
+    [SerializeField] private float playerHeight = 2;
+    [SerializeField] private float cameraHeight = 1.6f;
+    [SerializeField] private float playerCrouchHeight = 1.3f;
+    [SerializeField] private float cameraCrouchHeight = 1;
+    [SerializeField] private float headTriggerOffset = -0.055f;
 
     [Header("Interaction Properties")]
-    [SerializeField] private float interactDistance;
-    [SerializeField] private float heldObjectDistanceDefault;
-    [SerializeField] private float heldObjectDistanceMin;
-    [SerializeField] private float heldObjectDistanceMax;
-    [SerializeField] private float scollSensitivity;
-    [SerializeField] private float heldObjectDampenFactor;
-    [SerializeField] private float heldObjectPull;
+    [SerializeField] private float interactDistance = 3;
+    [SerializeField] private float heldObjectDistanceDefault = 3;
+    [SerializeField] private float heldObjectDistanceMin = 1;
+    [SerializeField] private float heldObjectDistanceMax = 5;
+    [SerializeField] private float scollSensitivity = 0.5f;
+    [SerializeField] private float heldObjectDampenFactor = 0.8f;
+    [SerializeField] private float heldObjectPull = 35;
 
     [Header("Miscellaneous Properties")]
-    [SerializeField] private float dynamicFOVRateOfChange;
-    [SerializeField] private bool renderPlayerMesh;
-    [SerializeField] private bool renderHeldObjectPoint;
+    [SerializeField] private float dynamicFOVRateOfChange = 10;
+    [SerializeField] private bool renderPlayerMesh = true;
+    [SerializeField] private bool renderHeldObjectPoint = false;
 
     [HideInInspector] public bool canControl = true;
-    [HideInInspector] public bool disableRegularForce = false;
 
     // On Awake it initializes the sound settings.
     // THIS DOES NOT HAVE TO BE IN THIS FILE, IT CAN BE IN ANYTHING THAT EXISTS IN EVERY SCENE
@@ -101,7 +105,11 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         wasGroundedLastFrame = true;
         isUnderObject = false;
+        isMoving = false;
         isCrouching = false;
+        isSprinting = false;
+        isHoldingObject = false;
+        willJump = false;
 
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
@@ -128,15 +136,9 @@ public class PlayerController : MonoBehaviour
         transform.GetComponent<CapsuleCollider>().height = playerHeight;
         transform.GetComponent<CapsuleCollider>().center = new Vector3(0, (playerHeight / 2) - 1, 0);
 
-        upPressed = false;
-        downPressed = false;
-        rightPressed = false;
-        leftPressed = false;
-        sprintPressed = false;
-        jumpPressed = false;
-        interactPressed = false;
-        crouchPressed = false;
-        holdingObject = false;
+        ManageInputs(true);
+
+        heldObject = null;
 
         jumpTimeStamp = -0.2f;
 
@@ -150,65 +152,76 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Grabs player input and stores it
-        if (canControl)
-        {
-            if (Input.GetKey(KeyCode.W))
-                upPressed = true;
+        ManageInputs();
 
-            if (Input.GetKey(KeyCode.S))
-                downPressed = true;
-
-            if (Input.GetKey(KeyCode.D))
-                rightPressed = true;
-
-            if (Input.GetKey(KeyCode.A))
-                leftPressed = true;
-
-            if (Input.GetKey(KeyCode.LeftShift))
-                sprintPressed = true;
-
-            if (Input.GetKeyDown(KeyCode.Space))
-                jumpPressed = true;
-
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-                interactPressed = true;
-
-            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C))
-                crouchPressed = true;
-
-            // Takes scroll wheel input and uses it to move held objects closer or further depending on the direction you scroll the wheel
-            heldObjectDistanceCurrent = Mathf.Clamp(heldObjectDistanceCurrent + Input.mouseScrollDelta.y * scollSensitivity, heldObjectDistanceMin, heldObjectDistanceMax);
-        }
-
+        // Sets the position of the heldObjectPoint
         heldObjectPoint.transform.position = playerCamera.transform.position + (playerCamera.transform.forward * heldObjectDistanceCurrent);
 
         if (doesUXVariablesExist)
             playerCamera.GetComponent<CameraController>().mouseSensitivity = uxVariables.flMouseSensitivity;
 
-        // If the player is on the ground and moving, play the walking sound.
-        if (isGrounded && (upPressed || downPressed || rightPressed || leftPressed))
-        {
-            SoundManager.PlaySound(SoundManager.Sound.Player_Move, transform.position);
-        }
-    }
-
-    void FixedUpdate()
-    {
         // Calls on GroundTrigger to find out whether or not the player is grounded (:
         if (jumpTimeStamp + 0.2f < Time.time)
             isGrounded = groundTrigger.isObjectHere;
 
         // Calls on HeadTrigger to find out whether or not the player is under an object
         isUnderObject = headTrigger.isObjectHere;
+        
+        ObjectInteraction();
 
-        // Adds a constant downward force on the player
-        rb.AddRelativeForce(new Vector3(0, -extraGravity * Time.deltaTime, 0));
+        ChangeMovementState();
 
+        SetMovementVector();
+
+        PlaySounds();
+
+        speedXZ = Math.Sqrt(Math.Pow(rb.velocity.x, 2) + Math.Pow(rb.velocity.z, 2));
+
+        // Changes fov based on speed
+        if (doesUXVariablesExist && uxVariables.bDynamicFov || !doesUXVariablesExist)
+            playerCameraComponent.fieldOfView = Mathf.Lerp(playerCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
+
+        ManageInputs(true);
+
+        wasGroundedLastFrame = isGrounded;
+    }
+
+    void FixedUpdate()
+    {
+        // Adds additional gravity on the player
+        rb.AddRelativeForce(Physics.gravity * (gravityMultiplier - 1), ForceMode.Acceleration);
+
+        // If an object has been interacted with and has the pickupable bool on, the object will be sucked towards a point in front of the player
+        if (isHoldingObject)
+        {
+            float objectPointDistance = Vector3.Distance(heldObjectPoint.transform.position, heldObject.transform.position);
+            heldObject.velocity *= heldObjectDampenFactor * Mathf.Clamp(objectPointDistance * 5, 0.5f, 1);
+            heldObject.angularVelocity *= 0.9f;
+            // Direction * distance^2 * pull
+            heldObject.AddForce((heldObjectPoint.transform.position - heldObject.transform.position).normalized * heldObjectPull * Mathf.Pow(objectPointDistance, 2));
+        }
+
+        // If the player is on the ground and pressed jump then add force to the y for a jump
+        if (willJump)
+        {
+            rb.AddForce(Vector3.up * jumpStrength, ForceMode.Impulse);
+            willJump = false;
+        }
+
+        // Uses the add force variables to add force as well as capping the speed
+        if (speedXZ < maxSpeed)
+            rb.AddRelativeForce(movementVector);
+
+        // Increases deceleration to prevent sliding
+        rb.velocity = new Vector3(rb.velocity.x * decelerationMultiplier, rb.velocity.y, rb.velocity.z * decelerationMultiplier);
+    }
+
+    private void ObjectInteraction()
+    {
         if (doesUXVariablesExist)
             uxVariables.bIsInteracting = false;
 
-        if (!holdingObject)
+        if (!isHoldingObject)
         {
             // Shoots a raycast out in the direction the player is looking
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactDistance, ~(1 << 6)))
@@ -226,45 +239,34 @@ public class PlayerController : MonoBehaviour
                         if (hit.collider.GetComponent<Interactable>().pickupable)
                         {
                             heldObject = hit.collider.GetComponent<Rigidbody>();
-                            holdingObject = true;
+                            heldObject.GetComponent<Interactable>().isPickedUp = true;
+                            heldObject.useGravity = false;
+                            isHoldingObject = true;
                         }
                     }
                 }
             }
         }
-        else
+        else if (interactPressed)
+            isHoldingObject = false;
+        
+        // If nothing is being held/the player drops the object, decouple the heldObject from the heldObjectPoint
+        if (heldObject == null || !isHoldingObject || !heldObject.GetComponent<Interactable>().pickupable)
         {
-            if (interactPressed)
-                holdingObject = false;
-        }
-
-        // If an object has been interacted with and has the pickupable bool on, the object will be sucked towards a point in front of the player
-        if (holdingObject && heldObject != null && heldObject.GetComponent<Interactable>().pickupable)
-        {
-            heldObject.GetComponent<Interactable>().isPickedUp = true;
-            heldObject.useGravity = false;
-            float objectPointDistance = Vector3.Distance(heldObjectPoint.transform.position, heldObject.transform.position);
-            heldObject.velocity *= heldObjectDampenFactor * Mathf.Clamp(objectPointDistance * 5, 0.5f, 1);
-            heldObject.angularVelocity *= 0.9f;
-            // Direction * deltatime * distance^2 * pull
-            heldObject.AddForce((heldObjectPoint.transform.position - heldObject.transform.position).normalized * Time.deltaTime * 1000 * heldObjectPull * Mathf.Pow(objectPointDistance, 2));
-        }
-        else
-        {
-            // If nothing is being held/the player drops the object, decouple the heldObject from the heldObjectPoint
             if (heldObject != null)
             {
                 heldObject.useGravity = true;
                 heldObject.GetComponent<Interactable>().isPickedUp = false;
             }
 
-            holdingObject = false;
+            isHoldingObject = false;
             heldObjectDistanceCurrent = heldObjectDistanceDefault;
             heldObject = null;
         }
+    }
 
-        interactPressed = false;
-
+    private void ChangeMovementState()
+    {
         // Set acceleration and max speed back to normal after sprint and crouch
         acceleration = accelerationBaseValue;
         maxSpeed = maxSpeedBaseValue;
@@ -272,28 +274,16 @@ public class PlayerController : MonoBehaviour
         // If sprint is input, up both accelertion and speed
         if (sprintPressed && !isCrouching && (upPressed || leftPressed || rightPressed))
         {
-            sprintPressed = false;
+            isSprinting = true;
             maxSpeed = maxSpeed * sprintMultiplier;
             acceleration = acceleration * sprintMultiplier;
-            // If the player is sprinting, the playerMoveTimerMax is halved to make the walking sound play more frequently. (more steps = faster walking sound)
-            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax / 2f;
-        }
-        else if (isCrouching && (upPressed || leftPressed || rightPressed || downPressed))
-        {
-            // If the player is crouching, the playerMoveTimerMax is increased to make the walking sound play less frequently. (less steps = slower walking sound)
-            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax / 0.6f;
         }
         else
-        {
-            // If the player is not sprinting, the playerMoveTimerMax is set back to the default value.
-            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax;
-        }
-
+            isSprinting = false;
 
         // If crouch is input, lower the camera and shorten the collider of the player
-        if (isGrounded && crouchPressed && !jumpPressed || isUnderObject && isCrouching)
+        if (isGrounded && crouchPressed && !jumpPressed || isUnderObject && isCrouching && !isSprinting)
         {
-            crouchPressed = false;
             isCrouching = true;
             // Reduces player height, camera height, and reduces speed
             playerCamera.transform.position = new Vector3(playerCamera.transform.position.x, Mathf.Lerp(playerCamera.transform.position.y, (transform.position.y - 1) + cameraCrouchHeight, Time.deltaTime * 10), playerCamera.transform.position.z);
@@ -311,79 +301,114 @@ public class PlayerController : MonoBehaviour
             transform.GetComponent<CapsuleCollider>().center = new Vector3(0, (playerHeight / 2) - 1, 0);
         }
 
-        // Bug Fix
-        if (sprintPressed && crouchPressed)
-        {
-            sprintPressed = false;
-            crouchPressed = false;
-        }
-
-        // Resets force adding variables to zero for the next add force
-        moveForwardBackward = 0;
-        moveLeftRight = 0;
-
-        // Turns WASD input into the add force variables 
-        if (upPressed)
-        {
-            moveForwardBackward += 1;
-            upPressed = false;
-        }
-        if (downPressed)
-        {
-            moveForwardBackward -= 1;
-            downPressed = false;
-        }
-        if (rightPressed)
-        {
-            moveLeftRight += 1;
-            rightPressed = false;
-        }
-        if (leftPressed)
-        {
-            moveLeftRight -= 1;
-            leftPressed = false;
-        }
-
-        speedXZ = Math.Sqrt(Math.Pow(rb.velocity.x, 2) + Math.Pow(rb.velocity.z, 2));
-
-        if (!disableRegularForce)
-        {
-            // Uses the add force variables to add force as well as capping the speed
-            if (speedXZ < maxSpeed)
-                rb.AddRelativeForce(new Vector3(moveLeftRight, 0, moveForwardBackward).normalized * Time.deltaTime * 1000 * acceleration);
-
-            // Increases deceleration to prevent sliding
-            rb.velocity = new Vector3 (rb.velocity.x * decelerationMultiplier, rb.velocity.y, rb.velocity.z * decelerationMultiplier);
-        }
-
         // If the player is on the ground and pressed jump then add force to the y for a jump
         if (jumpPressed && isGrounded && !isCrouching)
         {
-            rb.AddForce(new Vector3(0.0f, jumpStrength, 0.0f), ForceMode.Impulse);
-            SoundManager.PlaySound(SoundManager.Sound.Player_Jump, transform.position);
+            willJump = true;
             jumpTimeStamp = Time.time;
             isGrounded = false;
         }
+    }
 
-        jumpPressed = false;
+    private void SetMovementVector()
+    {
+        // Resets force adding variables to zero for the next add force
+        float moveForwardBackward = 0;
+        float moveLeftRight = 0;
 
-        // Changes fov based on speed
-        if (doesUXVariablesExist)
-        {
-            if (uxVariables.bDynamicFov)
-                playerCameraComponent.fieldOfView = Mathf.Lerp(playerCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
-        }
+        // Turns WASD input into the add force variables 
+        if (upPressed)
+            moveForwardBackward += 1;
+
+        if (downPressed)
+            moveForwardBackward -= 1;
+
+        if (rightPressed)
+            moveLeftRight += 1;
+
+        if (leftPressed)
+            moveLeftRight -= 1;
+
+        if (moveForwardBackward != 0 || moveLeftRight != 0)
+            isMoving = true;
         else
-            playerCameraComponent.fieldOfView = Mathf.Lerp(playerCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
+            isMoving = false;
+
+        movementVector = new Vector3(moveLeftRight, 0, moveForwardBackward) * acceleration;
+    }
+
+    private void PlaySounds()
+    {
+        // If the player is on the ground and moving, play the walking sound.
+        if (isGrounded && isMoving)
+        {
+            // If the player is not sprinting, the playerMoveTimerMax is set back to the default value
+            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax;
+
+            // If the player is crouching, the playerMoveTimerMax is increased to make the walking sound play less frequently. (less steps = slower walking sound)
+            if (isCrouching)
+                SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax / 0.6f;
+
+            // If the player is sprinting, the playerMoveTimerMax is halved to make the walking sound play more frequently. (more steps = faster walking sound)
+            if (isSprinting)
+                SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax / 2f;
+
+            SoundManager.PlaySound(SoundManager.Sound.Player_Move, transform.position);
+        }
 
         if (!wasGroundedLastFrame && isGrounded)
-        {
-
             SoundManager.PlaySound(SoundManager.Sound.Jump_Landing, transform.position);
+
+        if (jumpPressed && isGrounded && !isCrouching)
+            SoundManager.PlaySound(SoundManager.Sound.Player_Jump, transform.position);
+    }
+
+    private void ManageInputs(bool resetInputs = false)
+    {
+        if (!resetInputs)
+        {
+            // Grabs player input and stores it
+            if (canControl)
+            {
+                if (Input.GetKey(KeyCode.W))
+                    upPressed = true;
+
+                if (Input.GetKey(KeyCode.S))
+                    downPressed = true;
+
+                if (Input.GetKey(KeyCode.D))
+                    rightPressed = true;
+
+                if (Input.GetKey(KeyCode.A))
+                    leftPressed = true;
+
+                if (Input.GetKey(KeyCode.LeftShift))
+                    sprintPressed = true;
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                    jumpPressed = true;
+
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                    interactPressed = true;
+
+                if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C))
+                    crouchPressed = true;
+
+                // Takes scroll wheel input and uses it to move held objects closer or further depending on the direction you scroll the wheel
+                heldObjectDistanceCurrent = Mathf.Clamp(heldObjectDistanceCurrent + Input.mouseScrollDelta.y * scollSensitivity, heldObjectDistanceMin, heldObjectDistanceMax);
+            }
         }
-
-        wasGroundedLastFrame = isGrounded;
-
+        else
+        {
+            upPressed = false;
+            downPressed = false;
+            rightPressed = false;
+            leftPressed = false;
+            sprintPressed = false;
+            jumpPressed = false;
+            interactPressed = false;
+            crouchPressed = false;
+        }
     }
 
     public void Kill()
@@ -393,7 +418,7 @@ public class PlayerController : MonoBehaviour
         {
             heldObject.useGravity = true;
             heldObject.GetComponent<Interactable>().isPickedUp = false;
-            holdingObject = false;
+            isHoldingObject = false;
             heldObjectDistanceCurrent = heldObjectDistanceDefault;
             heldObject = null;
         }
