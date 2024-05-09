@@ -38,6 +38,7 @@ public class Door : Interactable
         if (!isOpen)
         {
             isOpen = true;
+            SoundManager.PlaySound(SoundManager.Sound.Door_Open_1, transform.position);
         }
     }
 }
