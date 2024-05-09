@@ -35,11 +35,12 @@ public class SequenceManager : MonoBehaviour
             // Progress index and change material colors and light colors if right order
             gameObjects[currentIndex].GetComponent<Renderer>().material = greenMaterial;
             lights[currentIndex].color = Color.green;
-            SoundManager.PlaySound(SoundManager.Sound.Correct_Sound);
+            SoundManager.PlaySound(SoundManager.Sound.Correct_Sound, gameObjects[currentIndex].transform.position);
             currentIndex++;
             if (currentIndex == correctSequence.Length)
             {
                 puzzleCompleted = true;
+                SoundManager.PlaySound(SoundManager.Sound.Puzzle_Solved);
                 doorScript.Open();
             }
         }
