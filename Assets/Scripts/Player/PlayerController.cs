@@ -5,10 +5,10 @@ using TMPro;
 using System;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    private GameObject uxMainObject;
     private Shared_UXVariables uxVariables;
 
     private GameObject playerCamera;
@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private PlayerTrigger headTrigger;
     private Rigidbody heldObject;
     private GameObject heldObjectPoint;
+    private Vector3 spawnPosition;
+    private Quaternion spawnRotation;
 
     private float accelerationBaseValue;
     private float maxSpeedBaseValue;
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private bool interactPressed;
     private bool crouchPressed;
     private bool holdingObject;
+    private bool wasGroundedLastFrame;
 
     private double speedXZ;
 
@@ -79,6 +82,13 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool canControl = true;
     [HideInInspector] public bool disableRegularForce = false;
 
+    // On Awake it initializes the sound settings.
+    // THIS DOES NOT HAVE TO BE IN THIS FILE, IT CAN BE IN ANYTHING THAT EXISTS IN EVERY SCENE
+    public void Awake()
+    {
+        GameAssets.i.InitializeSoundSettings();
+        SoundManager.Initialize();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -89,8 +99,12 @@ public class PlayerController : MonoBehaviour
             doesUXVariablesExist = false;
 
         isGrounded = true;
+        wasGroundedLastFrame = true;
         isUnderObject = false;
         isCrouching = false;
+
+        spawnPosition = transform.position;
+        spawnRotation = transform.rotation;
 
         rb = GetComponent<Rigidbody>();
         playerCamera = transform.GetChild(0).gameObject;
@@ -171,6 +185,12 @@ public class PlayerController : MonoBehaviour
 
         if (doesUXVariablesExist)
             playerCamera.GetComponent<CameraController>().mouseSensitivity = uxVariables.flMouseSensitivity;
+
+        // If the player is on the ground and moving, play the walking sound.
+        if (isGrounded && (upPressed || downPressed || rightPressed || leftPressed))
+        {
+            SoundManager.PlaySound(SoundManager.Sound.Player_Move, transform.position);
+        }
     }
 
     void FixedUpdate()
@@ -218,7 +238,7 @@ public class PlayerController : MonoBehaviour
                 holdingObject = false;
         }
 
-        // If an object has been interacted with and the interact button is held, the object with be sucked towards a point in front of the player
+        // If an object has been interacted with and has the pickupable bool on, the object will be sucked towards a point in front of the player
         if (holdingObject && heldObject != null && heldObject.GetComponent<Interactable>().pickupable)
         {
             heldObject.GetComponent<Interactable>().isPickedUp = true;
@@ -231,6 +251,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            // If nothing is being held/the player drops the object, decouple the heldObject from the heldObjectPoint
             if (heldObject != null)
             {
                 heldObject.useGravity = true;
@@ -254,6 +275,18 @@ public class PlayerController : MonoBehaviour
             sprintPressed = false;
             maxSpeed = maxSpeed * sprintMultiplier;
             acceleration = acceleration * sprintMultiplier;
+            // If the player is sprinting, the playerMoveTimerMax is halved to make the walking sound play more frequently. (more steps = faster walking sound)
+            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax / 2f;
+        }
+        else if (isCrouching && (upPressed || leftPressed || rightPressed || downPressed))
+        {
+            // If the player is crouching, the playerMoveTimerMax is increased to make the walking sound play less frequently. (less steps = slower walking sound)
+            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax / 0.6f;
+        }
+        else
+        {
+            // If the player is not sprinting, the playerMoveTimerMax is set back to the default value.
+            SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax;
         }
 
 
@@ -327,6 +360,7 @@ public class PlayerController : MonoBehaviour
         if (jumpPressed && isGrounded)
         {
             rb.AddForce(new Vector3(0.0f, jumpStrength, 0.0f), ForceMode.Impulse);
+            SoundManager.PlaySound(SoundManager.Sound.Player_Jump, transform.position);
             jumpTimeStamp = Time.time;
             isGrounded = false;
         }
@@ -342,18 +376,38 @@ public class PlayerController : MonoBehaviour
         else
             playerCameraComponent.fieldOfView = Mathf.Lerp(playerCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
 
+        if (!wasGroundedLastFrame && isGrounded)
+        {
+
+            SoundManager.PlaySound(SoundManager.Sound.Jump_Landing, transform.position);
+        }
+
+        wasGroundedLastFrame = isGrounded;
+
     }
 
-    // Takes a Y rotation and sets the player's camera to that direction
-    public void RecenterCamera(float yRotation = 0)
+    public void Kill()
     {
-        transform.rotation = Quaternion.Euler(0, yRotation, 0);
+        // Makes the player drop what their holding, if anything
+        if (heldObject != null)
+        {
+            heldObject.useGravity = true;
+            heldObject.GetComponent<Interactable>().isPickedUp = false;
+            holdingObject = false;
+            heldObjectDistanceCurrent = heldObjectDistanceDefault;
+            heldObject = null;
+        }
+
+        // Player position gets put back to their spawn point
+        transform.position = spawnPosition;
+        transform.rotation = spawnRotation;
         playerCamera.GetComponent<CameraController>().xRotation = 0;
     }
 
-    // Gives player postition
-    public Vector3 GetPosition()
+    // Lets other scripts change the players spawn point
+    public void SetRespawn(Vector3 position, float facingDirection = 0)
     {
-        return transform.position;
+        spawnPosition = position;
+        spawnRotation = Quaternion.Euler(0, facingDirection, 0);
     }
 }

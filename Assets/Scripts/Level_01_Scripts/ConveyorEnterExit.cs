@@ -9,7 +9,7 @@ public class ConveyorEnterExit : MonoBehaviour
         //moves player to the entrance of room
         if(other.CompareTag("Player"))
         {
-            other.transform.position = new Vector3(-20, 0, -5);
+            other.transform.GetComponent<PlayerController>().Kill();
         }
     }
 }

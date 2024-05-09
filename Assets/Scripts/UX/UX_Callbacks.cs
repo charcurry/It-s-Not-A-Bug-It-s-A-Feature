@@ -1,15 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UX_Callbacks : MonoBehaviour
 {
 
     private KeyState KeyStates;
+    public GameObject TitleText;
+    public GameObject CrosshairImageGameObject;
     public GameObject CanvasBackground;
     public GameObject MainMenu;
     public GameObject VideoSettings;
@@ -19,6 +24,9 @@ public class UX_Callbacks : MonoBehaviour
 
     public GameObject Controls_BackToMenu;
     public GameObject Controls_ReturnToPaused;
+
+
+    private float flStartTime = 0.0f;
 
     //Interaction UI
     //Notification handler
@@ -73,11 +81,14 @@ public class UX_Callbacks : MonoBehaviour
             Controls_BackToMenu.SetActive(true);
         }
 
+
+        TitleText.SetActive(UIState != EUICurrentState.UI_STATE_INGAME_OVERLAY);
         CanvasBackground.SetActive(UIState != EUICurrentState.UI_STATE_INGAME_OVERLAY);
         MainMenu.SetActive(UIState == EUICurrentState.UI_STATE_MENU);
         VideoSettings.SetActive(UIState == EUICurrentState.UI_STATE_VIDEO_SETTINGS);
         Controls.SetActive(UIState == EUICurrentState.UI_STATE_CONTROLS);
         InGameOverlay.SetActive(UIState == EUICurrentState.UI_STATE_INGAME_OVERLAY);
+        CrosshairImageGameObject.SetActive(UIState == EUICurrentState.UI_STATE_INGAME_OVERLAY);
         Paused.SetActive(UIState == EUICurrentState.UI_STATE_PAUSED);
     }
 
@@ -171,10 +182,39 @@ public class UX_Callbacks : MonoBehaviour
     void Start()
     {
         KeyStates = GetComponent<KeyState>();
-        
+        flStartTime = Time.time;
     }
+
+    private bool bTitleChangeFinished = false;
     void Update()
     {
+        if (!bTitleChangeFinished) {
+            float flWaitTimer = 5.0f;
+            float flTimeDelta = Time.time - flStartTime;
+
+            if (flTimeDelta >= flWaitTimer)
+            {
+                TitleText.GetComponent<TMP_Text>().text = "ITS NOT A BUG ITS A FEATURE";
+
+                bTitleChangeFinished = true;
+            }
+            else if (flTimeDelta >= (flWaitTimer / 2.0f))
+            {
+                if (flTimeDelta <= (flWaitTimer / 1.5f))
+                {
+                    TitleText.GetComponent<TMP_Text>().text = "ITS NOT A BUG ITS A FEATURE";
+                }
+                else
+                {
+                    TitleText.GetComponent<TMP_Text>().text = "           PUZZLE FACTORY";
+                }
+            }
+
+        }
+
+
+    
+
         if (KeyStates.CheckKeyState(KeyCode.Escape,EKeyQueryMode.KEYQUERY_SINGLEPRESS))
         {
             if (UIState == EUICurrentState.UI_STATE_INGAME_OVERLAY)

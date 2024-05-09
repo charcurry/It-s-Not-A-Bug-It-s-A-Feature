@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4145762679821407657}
-  - component: {fileID: 4676342835910139039}
+  - component: {fileID: 3057988276051404087}
   - component: {fileID: 7832485777225079261}
   - component: {fileID: 1332603873889629600}
   - component: {fileID: 6487823121359271911}
@@ -36,7 +36,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4676342835910139039
+--- !u!114 &3057988276051404087
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,12 +45,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2713879140799530372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09ae49962fcb28041aab66286b43b306, type: 3}
+  m_Script: {fileID: 11500000, guid: 447d1d777f289ad4ea78186c59af2407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionCooldown: 0
   pickupable: 1
+  interactionCooldown: 0
   oneTimeInteraction: 0
+  isPickedUp: 0
 --- !u!33 &7832485777225079261
 MeshFilter:
   m_ObjectHideFlags: 0

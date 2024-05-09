@@ -269,9 +269,8 @@ MonoBehaviour:
   heldObjectDampenFactor: 0.8
   heldObjectPull: 2
   dynamicFOVRateOfChange: 10
-  dynamicFOV: 1
   renderPlayerMesh: 1
-  renderHeldObjectPoint: 1
+  renderHeldObjectPoint: 0
   canControl: 1
   disableRegularForce: 0
 --- !u!1 &3187935787201092358
@@ -581,8 +580,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7ca717bf3c1fc4da4241fdc9675507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 1
   xRotation: 0
+  mouseSensitivity: 1
 --- !u!1 &6223404485754681033
 GameObject:
   m_ObjectHideFlags: 0
