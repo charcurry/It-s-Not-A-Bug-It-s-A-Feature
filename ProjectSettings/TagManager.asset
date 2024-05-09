@@ -7,7 +7,7 @@ TagManager:
   - Key
   - Box
   - BoxSpawn
-  - Conveyor
+  - KeyCard
   layers:
   - Default
   - TransparentFX
