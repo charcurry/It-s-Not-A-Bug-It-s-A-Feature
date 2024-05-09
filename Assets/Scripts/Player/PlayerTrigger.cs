@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerTrigger : MonoBehaviour
 {
     [HideInInspector] public bool isObjectHere = false; 
-    int triggerObjects = 0;
+    private int triggerObjects = 0;
 
     private void OnTriggerEnter(Collider other)
     {

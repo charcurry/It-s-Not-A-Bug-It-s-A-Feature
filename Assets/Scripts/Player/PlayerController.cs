@@ -357,7 +357,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // If the player is on the ground and pressed jump then add force to the y for a jump
-        if (jumpPressed && isGrounded)
+        if (jumpPressed && isGrounded && !isCrouching)
         {
             rb.AddForce(new Vector3(0.0f, jumpStrength, 0.0f), ForceMode.Impulse);
             SoundManager.PlaySound(SoundManager.Sound.Player_Jump, transform.position);
