@@ -8,6 +8,7 @@ TagManager:
   - Box
   - BoxSpawn
   - KeyCard
+  - KeyCartoon
   layers:
   - Default
   - TransparentFX
