@@ -9,6 +9,9 @@ TagManager:
   - BoxSpawn
   - KeyCard
   - KeyCartoon
+  - KeyEye
+  - KeyOld
+  - KeySimple
   layers:
   - Default
   - TransparentFX
