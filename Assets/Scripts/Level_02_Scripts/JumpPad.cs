@@ -12,6 +12,7 @@ public class JumpPad : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            SoundManager.PlaySound(SoundManager.Sound.Jump_Pad, transform.position);
             Rigidbody playerRb = other.GetComponent<Rigidbody>();
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
