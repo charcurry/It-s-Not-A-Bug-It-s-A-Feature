@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 12e62d2b3208cec42a82d7542f02c6a1, type: 2}
+  - {fileID: 2100000, guid: 3d28db05df0a7c7499aca1beb88008e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,7 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 956d5303999ba79448e7f88f1998208f, type: 2}
+  - {fileID: 2100000, guid: 3d28db05df0a7c7499aca1beb88008e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -178,9 +178,9 @@ GameObject:
   - component: {fileID: 5905199355341244855}
   - component: {fileID: 6617942136192504332}
   - component: {fileID: 4007268165071059998}
-  - component: {fileID: -2571420473041773511}
+  - component: {fileID: -2512999363561972501}
   m_Layer: 0
-  m_Name: Explosive_Barrel
+  m_Name: Explosive_Barrel_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +269,7 @@ MonoBehaviour:
   interactionCooldown: 0
   oneTimeInteraction: 0
   isPickedUp: 0
---- !u!114 &-2571420473041773511
+--- !u!114 &-2512999363561972501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,6 +282,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 5928917874525638761, guid: a199f88714b71c94e82271036ab36354, type: 3}
+  explosionRadius: 5
+  maxLaunchForce: 200
 --- !u!1 &6652692404508723431
 GameObject:
   m_ObjectHideFlags: 0

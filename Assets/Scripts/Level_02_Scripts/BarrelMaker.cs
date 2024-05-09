@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarrelMaker : MonoBehaviour
+public class BarrelMaker : Interactable
 {
-    public GameObject Object;
+    public GameObject barrelObject;
+    public Transform spawnPoint;
     public float launchForce = 10f;
+    public float spawnDelay = 1.5f;
 
-    void Update()
+    private IEnumerator SpawnBarrel()
     {
-        // G key for testing
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            // Create the barrel
-            GameObject newObj = Instantiate(Object, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(spawnDelay);
 
-            // Get Rigidbody component and apply an upward force
-            Rigidbody rb = newObj.GetComponent<Rigidbody>();
+        if (spawnPoint != null)
+        {
+            GameObject barrel = Instantiate(barrelObject, spawnPoint.position, spawnPoint.rotation);
+            Rigidbody rb = barrel.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.AddForce(Vector3.up * launchForce, ForceMode.Impulse);
@@ -26,5 +26,17 @@ public class BarrelMaker : MonoBehaviour
                 Debug.LogError("no rigidbody bruh");
             }
         }
+        else
+        {
+            Debug.LogError("no spawn point");
+        }
+    }
+
+    public override void interaction()
+    {
+        if (!canInteract())
+            return;
+
+        StartCoroutine(SpawnBarrel());
     }
 }
