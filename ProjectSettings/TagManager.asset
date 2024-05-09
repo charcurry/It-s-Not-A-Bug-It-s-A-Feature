@@ -8,6 +8,7 @@ TagManager:
   - Box
   - BoxSpawn
   - Conveyor
+  - Belt
   layers:
   - Default
   - TransparentFX
