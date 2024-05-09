@@ -7,6 +7,8 @@ public class MovingPlatform : MonoBehaviour
 {
     private Vector3 startPoint;
     private Vector3 endPoint;
+    private PlatformTrigger topTrigger;
+    private PlatformTrigger bottomTrigger;
     private Vector3 currentDestination;
     private Vector3 previousPosition;
     private Vector3 platformPositionDelta;
@@ -21,16 +23,22 @@ public class MovingPlatform : MonoBehaviour
         startPoint = transform.parent.GetChild(1).transform.position;
         endPoint = transform.parent.GetChild(2).transform.position;
 
+        topTrigger = transform.GetChild(0).GetComponent<PlatformTrigger>();
+        bottomTrigger = transform.GetChild(1).GetComponent<PlatformTrigger>();
+
         transform.position = startPoint;
         currentDestination = endPoint;
 
         timeStamp = Time.time - platformWaitTime;
     }
 
+    
     void Update()
     {
+
         Vector3 previousCurrentDestination = currentDestination;
 
+        // Keeps track of weather or not the platform has reached its destination
         if (Vector3.Distance(transform.position, startPoint) <= 0.1f)
             currentDestination = endPoint;
 
@@ -45,17 +53,14 @@ public class MovingPlatform : MonoBehaviour
     {
         previousPosition = transform.position;
 
-        if (timeStamp + platformWaitTime <= Time.time)
+        // Moves the platfrom towards the current destination
+        if (timeStamp + platformWaitTime <= Time.time && !bottomTrigger.isObjectHere)
             transform.Translate((currentDestination - transform.position).normalized * speed * Time.fixedDeltaTime);
 
         platformPositionDelta = transform.position - previousPosition;
-    }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.transform.position += platformPositionDelta;
-        }
+        // Adds the delta of the last platform movement to each object on top of it
+        foreach (Collider collider in topTrigger.colliderList)
+            collider.transform.position += platformPositionDelta;
     }
 }

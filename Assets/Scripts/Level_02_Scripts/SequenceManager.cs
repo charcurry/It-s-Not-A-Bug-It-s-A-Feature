@@ -40,6 +40,7 @@ public class SequenceManager : MonoBehaviour
             if (currentIndex == correctSequence.Length)
             {
                 puzzleCompleted = true;
+                SoundManager.PlaySound(SoundManager.Sound.Puzzle_Solved);
                 doorScript.Open();
             }
         }

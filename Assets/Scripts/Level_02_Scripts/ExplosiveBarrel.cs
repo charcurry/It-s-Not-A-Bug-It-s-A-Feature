@@ -18,6 +18,7 @@ public class ExplosiveBarrel : MonoBehaviour
 
     void Explode()
     {
+        SoundManager.PlaySound(SoundManager.Sound.Explosion, transform.position);
         if (explosionEffect != null)
         {
             GameObject explosionInstance = Instantiate(explosionEffect, transform.position, transform.rotation);
