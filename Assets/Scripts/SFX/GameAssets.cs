@@ -56,6 +56,7 @@ public class GameAssets : MonoBehaviour
         soundSettingsDictionary.Add(SoundManager.Sound.Correct_Sound, new SoundSettings { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
         soundSettingsDictionary.Add(SoundManager.Sound.Incorrect_Sound, new SoundSettings { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
         soundSettingsDictionary.Add(SoundManager.Sound.Puzzle_Solved, new SoundSettings { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
+        soundSettingsDictionary.Add(SoundManager.Sound.Explosion, new SoundSettings { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
     }
 
 }
