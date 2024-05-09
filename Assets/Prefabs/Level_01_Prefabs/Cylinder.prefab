@@ -342,9 +342,9 @@ GameObject:
   - component: {fileID: 870086882418527842}
   - component: {fileID: 7817209130454736310}
   - component: {fileID: 9109924166799018482}
-  - component: {fileID: 8908588890509798389}
   - component: {fileID: 7659863358508917174}
   - component: {fileID: 5543073750867759252}
+  - component: {fileID: 17606846584625465}
   - component: {fileID: 1583640802762443679}
   m_Layer: 0
   m_Name: Cylinder
@@ -978,22 +978,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8908588890509798389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4363307157532444069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09ae49962fcb28041aab66286b43b306, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickupable: 1
-  interactionCooldown: 0
-  oneTimeInteraction: 0
-  isPickedUp: 0
 --- !u!33 &7659863358508917174
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1027,8 +1011,24 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &17606846584625465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363307157532444069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70972df0b3f80a848a0ccdec8d6a586d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupable: 1
+  interactionCooldown: 0
+  oneTimeInteraction: 0
+  isPickedUp: 0
 --- !u!65 &1583640802762443679
 BoxCollider:
   m_ObjectHideFlags: 0

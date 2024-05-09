@@ -5,15 +5,14 @@ using UnityEngine;
 public class BoxInstantiation : MonoBehaviour
 {
     private ConveyorBelt conveyorBelt;
-    private GameObject conveyor;
+    public GameObject conveyor;
     public GameObject boxPrefab;
     public float instantiationInterval = 2f;
     private float timer;
-    public int boxCount = 0;
+    public int boxCount;
 
     void Start()
     {
-        conveyor = GameObject.FindGameObjectWithTag("Conveyor");
         conveyorBelt = conveyor.GetComponent<ConveyorBelt>();
         timer = instantiationInterval;
     }
@@ -23,7 +22,7 @@ public class BoxInstantiation : MonoBehaviour
         timer -= Time.deltaTime;
 
         // If the timer reaches zero or less and box count is less than the limit, instantiate the prefab and reset the timer
-        if (timer <= 0f && conveyorBelt.onBelt.Count < 23)
+        if (timer <= 0f && conveyorBelt.objectsOnBelt.Count != boxCount)
         {
             Instantiate(boxPrefab, transform.position, Quaternion.identity);
             timer = instantiationInterval;

@@ -24,9 +24,10 @@ public class ResetBelt : Interactable
         if (!canInteract())
             return;
 
-        foreach (GameObject obj in conveyorBelt.onBelt.ToArray())
+        foreach (Rigidbody objRigidbody in conveyorBelt.objectsOnBelt.ToArray())
         {
-            if(obj == obj.CompareTag("Box"))
+            GameObject obj = objRigidbody.gameObject;
+            if (obj.CompareTag("Box"))
             {
                 Destroy(obj);
             }
