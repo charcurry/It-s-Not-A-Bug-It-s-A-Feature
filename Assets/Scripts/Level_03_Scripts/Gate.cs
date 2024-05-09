@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
+
+    public string keyName;
+
     // When the key collides with the door
     void OnCollisionEnter(Collision collision)
     {
         // Plays the particle system that each object has as a child, then deactivates both objects
-        if (collision.gameObject.CompareTag("Key"))
+        if (collision.gameObject.CompareTag(keyName))
         {
             collision.transform.GetComponent<Interactable>().DeactivateObject();
             collision.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
