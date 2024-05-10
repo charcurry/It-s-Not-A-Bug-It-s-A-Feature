@@ -7,8 +7,16 @@ TagManager:
   - Key
   - Box
   - BoxSpawn
-  - KeyCard
+  - Conveyor
+  - Belt
   - KeyCartoon
+  - KeySimple
+  - KeyOld
+  - KeyCard
+  - KeyEye
+  - GlassBox
+  - SecondDoor
+  - SecondDoorLight
   layers:
   - Default
   - TransparentFX

@@ -15,6 +15,7 @@ public class OpenDoor : MonoBehaviour
 
     private IEnumerator OpenRoutine()
     {
+        SoundManager.PlaySound(SoundManager.Sound.Door_Open_2, transform.position);
         while (moveDistance < distance)
         {
             float moveStep = speed * Time.deltaTime;

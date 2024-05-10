@@ -9,7 +9,8 @@ public class PlayerTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        triggerObjects++;
+        if (!other.GetComponent<Collider>().isTrigger)
+            triggerObjects++;
 
         if (triggerObjects > 0)
             isObjectHere = true; 
@@ -17,7 +18,8 @@ public class PlayerTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        triggerObjects--;
+        if (!other.GetComponent<Collider>().isTrigger)
+            triggerObjects--;
 
         if (triggerObjects < 1)
             isObjectHere = false;

@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7da9e7bc02698bd4c87a0517fe4fde09, type: 2}
+    - target: {fileID: 834192292310563322, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
+      propertyPath: m_TagString
+      value: Belt
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
       propertyPath: m_Name
       value: Conveyor belt
@@ -107,9 +111,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7699739102007465801}
-    - targetCorrespondingSourceObject: {fileID: 834192292310563322, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 3389368507850802395}
   m_SourcePrefab: {fileID: 100100000, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
 --- !u!1 &4265989430145586312 stripped
 GameObject:
@@ -158,23 +159,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &4350787720723894307 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 834192292310563322, guid: 0d7ee0b9de74b9c49b013bde9ff2006e, type: 3}
-  m_PrefabInstance: {fileID: 4031494731407763929}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3389368507850802395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4350787720723894307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d63ca4ed2cd252408d2157b6c31f395, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  conveyorSpeed: 0.2
-  onBelt: []

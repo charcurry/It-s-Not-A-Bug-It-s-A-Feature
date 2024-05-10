@@ -5,6 +5,7 @@ using UnityEngine;
 using static UnityEngine.Object;
 using UnityEngine.UIElements;
 using static GameAssets;
+using static Unity.VisualScripting.Member;
 
 public static class SoundManager
 {
@@ -26,6 +27,11 @@ public static class SoundManager
         Incorrect_Sound,
         Puzzle_Solved,
         Explosion,
+        Air_Vent,
+        Door_Open_1,
+        Door_Open_2,
+        Box_Collision,
+        Key_Collision,
     }
 
     // This float is used to determine how frequently the player can play the playerMove sound.

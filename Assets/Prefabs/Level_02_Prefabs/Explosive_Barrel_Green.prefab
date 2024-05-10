@@ -283,7 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 5928917874525638761, guid: a199f88714b71c94e82271036ab36354, type: 3}
   explosionRadius: 5
-  maxLaunchForce: 200
+  maxLaunchForce: 150
 --- !u!1 &6652692404508723431
 GameObject:
   m_ObjectHideFlags: 0
