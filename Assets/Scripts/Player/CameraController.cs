@@ -3,30 +3,45 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class CameraController : MonoBehaviour
 {
-    private Transform playerTransform;
-    [HideInInspector] public float xRotation = 0f;
-    [HideInInspector] public float mouseSensitivity;
+    public Transform playerTransform;
+    public Rigidbody playerRigidbody;  
+    public float mouseSensitivity = 100f;
 
-    // Start is called before the first frame update
+    public Vector3 vecRelativeRotation;
     void Start()
     {
-
-        playerTransform = transform.parent.GetComponent<Transform>();
+        if (playerTransform == null)
+        {
+            playerTransform = transform.parent;
+            playerRigidbody = playerTransform.GetComponent<Rigidbody>();
+        }
         Cursor.lockState = CursorLockMode.Locked;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        float mouseX = Input.GetAxisRaw("Mouse X") * (700.0f * mouseSensitivity) * Time.deltaTime;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * (700.0f * mouseSensitivity) * Time.deltaTime;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        vecRelativeRotation.x -= mouseY;
+        vecRelativeRotation.x = Mathf.Clamp(vecRelativeRotation.x, -90f, 90f);
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, transform.rotation.eulerAngles.z);
-        playerTransform.Rotate(Vector3.up * mouseX);
+        vecRelativeRotation.y += mouseX;
+
+        vecRelativeRotation.y = vecRelativeRotation.y % 360.0f;
+
+        if (vecRelativeRotation.y > 180.0f)
+            vecRelativeRotation.y -= 360.0f;
+        else if (vecRelativeRotation.y < -180.0f)
+            vecRelativeRotation.y += 360.0f;
+        
+        transform.localRotation = Quaternion.Euler(vecRelativeRotation.x, 0f, 0f);
+
+        Quaternion newRotation = Quaternion.Euler(0f, vecRelativeRotation.y, 0f);
+        playerRigidbody.MoveRotation(newRotation);
     }
+
+
 }
