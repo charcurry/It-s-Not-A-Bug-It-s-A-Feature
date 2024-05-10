@@ -23,7 +23,6 @@ public class AirVent : MonoBehaviour
     {
         if (other.GetComponent<Rigidbody>())
         {
-            Debug.Log(Vector3.Distance(other.transform.position, gustOrigin));
             other.GetComponent<Rigidbody>().AddForce(Vector3.up * Mathf.Clamp(gustForce * (20 - Vector3.Distance(other.transform.position, gustOrigin)), Physics.gravity.y, 20), ForceMode.Acceleration);
         }
     }
