@@ -13,6 +13,7 @@ public class Gate : MonoBehaviour
         // Plays the particle system that each object has as a child, then deactivates both objects
         if (collision.gameObject.CompareTag(keyName))
         {
+            SoundManager.PlaySound(SoundManager.Sound.Unlocking_Door, transform.position);
             collision.transform.GetComponent<Interactable>().DeactivateObject();
             collision.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
 

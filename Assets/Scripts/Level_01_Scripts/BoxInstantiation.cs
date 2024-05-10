@@ -22,7 +22,7 @@ public class BoxInstantiation : MonoBehaviour
         timer -= Time.deltaTime;
 
         // If the timer reaches zero or less and box count is less than the limit, instantiate the prefab and reset the timer
-        if (timer <= 0f && conveyorBelt.objectsOnBelt.Count != boxCount)
+        if (timer <= 0f && conveyorBelt.objectsOnBelt.Count < boxCount)
         {
             Instantiate(boxPrefab, transform.position, Quaternion.identity);
             timer = instantiationInterval;
