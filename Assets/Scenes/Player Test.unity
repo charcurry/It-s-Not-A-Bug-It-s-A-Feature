@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 8340993}
   - component: {fileID: 8340996}
   - component: {fileID: 8340995}
-  - component: {fileID: 8340994}
+  - component: {fileID: 8340997}
   m_Layer: 0
   m_Name: Air Vent Trigger
   m_TagString: Untagged
@@ -157,18 +157,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 301626974}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8340994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8340992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d522976ac434477499e021b6dc518126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &8340995
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -200,6 +188,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8340992}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8340997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8340992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb9ff9315b60bd43bc6f49d95b3f76d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gustForce: 10
+  airHeight: 10
 --- !u!1 &50299152
 GameObject:
   m_ObjectHideFlags: 0
@@ -5638,7 +5640,7 @@ Transform:
   m_GameObject: {fileID: 301626973}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.65, y: 0.1, z: 0.96}
+  m_LocalPosition: {x: -5.22, y: 0.1, z: -3.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22067,7 +22069,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -42878,7 +42880,7 @@ Transform:
   m_GameObject: {fileID: 8130520205245906126}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.63, y: 0, z: -3.94}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []

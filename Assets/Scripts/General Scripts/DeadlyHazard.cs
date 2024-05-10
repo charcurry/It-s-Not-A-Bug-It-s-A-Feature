@@ -12,4 +12,13 @@ public class DeadlyHarzard : MonoBehaviour
             collision.transform.GetComponent<PlayerController>().Kill();
         }
     }
+
+    // If the player touches a trigger with this script, they die
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.transform.GetComponent<PlayerController>().Kill();
+        }
+    }
 }
