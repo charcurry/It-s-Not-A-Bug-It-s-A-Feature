@@ -65,7 +65,7 @@ public class UX_Callbacks : MonoBehaviour
 
     void UpdateTitle()
     {
-        if (UnityEngine.Random.value > 0.5f)
+        if (UnityEngine.Random.value > 0.25f)
         {
             TitleText.GetComponent<TMP_Text>().text = "ITS NOT A BUG ITS A FEATURE";
         }

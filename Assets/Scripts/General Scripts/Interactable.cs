@@ -19,6 +19,11 @@ public class Interactable : MonoBehaviour
         
     }
 
+    private void Awake()
+    {
+        gameObject.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
+    }
+
     public void DeactivateObject()
     {
         if (gameObject.GetComponent<Rigidbody>() != null)

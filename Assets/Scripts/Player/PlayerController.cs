@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
             uxVariables = GameObject.Find("UX_Main").GetComponent<Shared_UXVariables>();
         else
             doesUXVariablesExist = false;
-
+       
         isGrounded = true;
         wasGroundedLastFrame = true;
         isUnderObject = false;
@@ -115,6 +115,11 @@ public class PlayerController : MonoBehaviour
         spawnRotation = transform.rotation;
 
         rb = GetComponent<Rigidbody>();
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.drag = 2f;  
+        rb.angularDrag = 2f;
+        rb.mass = 2f;
+
         playerCamera = transform.GetChild(0).gameObject;
         playerCameraComponent = playerCamera.GetComponent<Camera>();
         groundTrigger = transform.GetChild(1).GetComponent<PlayerTrigger>();
@@ -334,7 +339,7 @@ public class PlayerController : MonoBehaviour
         else
             isMoving = false;
 
-        movementVector = new Vector3(moveLeftRight, 0, moveForwardBackward).normalized * acceleration;
+         movementVector = new Vector3(moveLeftRight, 0, moveForwardBackward).normalized * acceleration;
     }
 
     private void PlaySounds()
@@ -426,7 +431,7 @@ public class PlayerController : MonoBehaviour
         // Player position gets put back to their spawn point
         transform.position = spawnPosition;
         transform.rotation = spawnRotation;
-        playerCamera.GetComponent<CameraController>().xRotation = 0;
+        playerCamera.GetComponent<CameraController>().vecRelativeRotation.x = 0;
     }
 
     // Lets other scripts change the players spawn point
