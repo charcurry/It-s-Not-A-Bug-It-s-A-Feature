@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
             uxVariables = GameObject.Find("UX_Main").GetComponent<Shared_UXVariables>();
         else
             doesUXVariablesExist = false;
-       
+
         isGrounded = true;
         wasGroundedLastFrame = true;
         isUnderObject = false;
