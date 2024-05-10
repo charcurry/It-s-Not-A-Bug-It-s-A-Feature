@@ -7,12 +7,14 @@ public class Reset : MonoBehaviour
     private Vector3 playerInitialPosition;
     private GetPosition[] objectsToReset;
     private GameObject heldObject;
+    private CheckpointTrigger checkpoint;
 
     //Finds the players initial position, and the initial position of any object with the "GetPosition" script
     void Start()
     {
         playerInitialPosition = GameObject.FindWithTag("Player").transform.position;
         objectsToReset = FindObjectsOfType<GetPosition>();
+        checkpoint = FindObjectOfType<CheckpointTrigger>();
     }
 
     //Puts everything where they started, if they are in the objectsToReset array
@@ -39,8 +41,8 @@ public class Reset : MonoBehaviour
                 //newObjectsToReset.Add(newObject.GetComponent<GetPosition>());
             }
         }
-        GameObject.FindWithTag("Player").transform.position = playerInitialPosition;
-        objectsToReset = newObjectsToReset.ToArray();
+            GameObject.FindWithTag("Player").transform.position = playerInitialPosition;
+  
     }
 
     //!PlaceHolder! resets the level if the player triggers the resetter
