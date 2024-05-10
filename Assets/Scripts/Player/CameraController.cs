@@ -22,8 +22,8 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * (400.0f * mouseSensitivity) * Time.deltaTime;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * (400.0f * mouseSensitivity) * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * (400.0f * mouseSensitivity) * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * (400.0f * mouseSensitivity) * Time.deltaTime;
 
         vecRelativeRotation.x -= mouseY;
         vecRelativeRotation.x = Mathf.Clamp(vecRelativeRotation.x, -90f, 90f);
