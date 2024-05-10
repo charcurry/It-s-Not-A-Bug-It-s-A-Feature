@@ -55,10 +55,10 @@ public class PlayerController : MonoBehaviour
     private bool doesUXVariablesExist = true;
 
     [Header("Movement Properties")]
-    [SerializeField] private float acceleration = 30;
-    [SerializeField] private float maxSpeed = 40;
+    [SerializeField] private float acceleration = 60;
+    [SerializeField] private float maxSpeed = 80;
     [SerializeField] private float decelerationMultiplier = 0.8f;
-    [SerializeField] private float jumpStrength = 13;
+    [SerializeField] private float jumpStrength = 23;
     [SerializeField] public float gravityMultiplier = 3;
     [SerializeField] private float sprintMultiplier = 2;
     [SerializeField] private float crouchMultiplier = 0.6f;
@@ -334,7 +334,7 @@ public class PlayerController : MonoBehaviour
         else
             isMoving = false;
 
-        movementVector = new Vector3(moveLeftRight, 0, moveForwardBackward) * acceleration;
+        movementVector = new Vector3(moveLeftRight, 0, moveForwardBackward).normalized * acceleration;
     }
 
     private void PlaySounds()
