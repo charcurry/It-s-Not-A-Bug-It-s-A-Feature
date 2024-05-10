@@ -33,6 +33,7 @@ public static class SoundManager
         Box_Collision,
         Key_Collision,
         Unlocking_Door,
+        Nail_Gun,
     }
 
     // This float is used to determine how frequently the player can play the playerMove sound.
