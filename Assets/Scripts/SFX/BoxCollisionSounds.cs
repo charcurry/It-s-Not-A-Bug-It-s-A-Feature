@@ -6,6 +6,6 @@ public class BoxCollisionSounds : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        
+        SoundManager.PlaySound(SoundManager.Sound.Box_Collision, transform.position);
     }
 }

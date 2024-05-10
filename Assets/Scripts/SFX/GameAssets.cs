@@ -67,11 +67,15 @@ public class GameAssets : MonoBehaviour
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
         soundSettingsDictionary.Add(SoundManager.Sound.Explosion, new SoundSettings 
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
-        soundSettingsDictionary.Add(SoundManager.Sound.Jump_Pad, new SoundSettings 
-            { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
+        soundSettingsDictionary.Add(SoundManager.Sound.Air_Vent, new SoundSettings 
+            { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = true, isMoving = false, destroyAfterFinished = false });
         soundSettingsDictionary.Add(SoundManager.Sound.Door_Open_1, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
         soundSettingsDictionary.Add(SoundManager.Sound.Door_Open_2, new SoundSettings
             { maxDistance = 200f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
+        soundSettingsDictionary.Add(SoundManager.Sound.Box_Collision, new SoundSettings
+            { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
+        soundSettingsDictionary.Add(SoundManager.Sound.Key_Collision, new SoundSettings
+            { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
     }
 }

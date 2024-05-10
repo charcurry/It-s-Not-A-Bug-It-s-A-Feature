@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 225180196608833381}
   - component: {fileID: 9054920485923764679}
   - component: {fileID: 8882813127605988907}
+  - component: {fileID: -6339653586639806460}
   m_Layer: 0
   m_Name: Small_wooden_box
   m_TagString: Untagged
@@ -166,3 +167,15 @@ MonoBehaviour:
   interactionCooldown: 0
   oneTimeInteraction: 0
   isPickedUp: 0
+--- !u!114 &-6339653586639806460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789396989113974921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab15e94e5938d74ab0cc7f255e3c3a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
