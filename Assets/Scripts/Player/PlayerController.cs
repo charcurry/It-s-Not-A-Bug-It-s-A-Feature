@@ -55,12 +55,12 @@ public class PlayerController : MonoBehaviour
     private bool doesUXVariablesExist = true;
 
     [Header("Movement Properties")]
-    [SerializeField] private float acceleration = 60;
-    [SerializeField] private float maxSpeed = 80;
+    [SerializeField] private float acceleration = 90;
+    [SerializeField] private float maxSpeed = 120;
     [SerializeField] private float decelerationMultiplier = 0.8f;
     [SerializeField] private float jumpStrength = 23;
     [SerializeField] public float gravityMultiplier = 3;
-    [SerializeField] private float sprintMultiplier = 2;
+    [SerializeField] private float sprintMultiplier = 1.7f;
     [SerializeField] private float crouchMultiplier = 0.6f;
 
     [Header("Size Properties")]
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float heldObjectDistanceMax = 5;
     [SerializeField] private float scollSensitivity = 0.5f;
     [SerializeField] private float heldObjectDampenFactor = 0.8f;
-    [SerializeField] private float heldObjectPull = 35;
+    [SerializeField] private float heldObjectPull = 45;
 
     [Header("Miscellaneous Properties")]
     [SerializeField] private float dynamicFOVRateOfChange = 10;
@@ -351,7 +351,7 @@ public class PlayerController : MonoBehaviour
 
             // If the player is sprinting, the playerMoveTimerMax is halved to make the walking sound play more frequently. (more steps = faster walking sound)
             if (isSprinting)
-                SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax / 2f;
+                SoundManager.playerMoveTimerMax = SoundManager.defaultPlayerMoveTimerMax / 1.7f;
 
             SoundManager.PlaySound(SoundManager.Sound.Player_Move, transform.position);
         }
