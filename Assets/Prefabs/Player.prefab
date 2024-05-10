@@ -249,12 +249,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 780f928e6a18bbc43b54bda9978cdae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 60
-  maxSpeed: 80
+  acceleration: 90
+  maxSpeed: 120
   decelerationMultiplier: 0.8
   jumpStrength: 23
   gravityMultiplier: 3
-  sprintMultiplier: 2
+  sprintMultiplier: 1.7
   crouchMultiplier: 0.6
   playerHeight: 2
   cameraHeight: 1.6
@@ -267,7 +267,7 @@ MonoBehaviour:
   heldObjectDistanceMax: 5
   scollSensitivity: 0.5
   heldObjectDampenFactor: 0.8
-  heldObjectPull: 35
+  heldObjectPull: 45
   dynamicFOVRateOfChange: 10
   renderPlayerMesh: 1
   renderHeldObjectPoint: 0
@@ -1978,7 +1978,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 764
+  m_VersionIndex: 767
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

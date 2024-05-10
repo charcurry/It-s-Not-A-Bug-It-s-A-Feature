@@ -12,7 +12,10 @@ using UnityEngine.UI;
 public class UX_Callbacks : MonoBehaviour
 {
 
+    // State management for keyboard keys
     private KeyState KeyStates;
+
+    // GameObject references for UI components
     public GameObject TitleText;
     public GameObject CrosshairImageGameObject;
     public GameObject CanvasBackground;
@@ -25,22 +28,19 @@ public class UX_Callbacks : MonoBehaviour
     public GameObject Controls_BackToMenu;
     public GameObject Controls_ReturnToPaused;
 
-
+    // Timer variables for UI changes
     private float flStartTime = 0.0f;
 
-    //Interaction UI
-    //Notification handler
-    //Sound settings
-    //Objective UI
-    //Narrator UI
-    //Add crosshairs
+    // Enum for managing window modes
     public enum EWindowMode : Int32
     {
         WND_MODE_FULLSCREEN = 0,
         WND_MODE_EXCLUSIVE_FULLSCREEN,
         WND_MODE_WINDOWED,
         WND_MODE_MAX,
-    }
+    }   
+    
+    // Enum for tracking the current UI state
     public enum EUICurrentState
     {
         UI_STATE_MENU = 0,
@@ -63,13 +63,30 @@ public class UX_Callbacks : MonoBehaviour
         BUTTON_CALLBACK_MAX,
     }
 
+    void UpdateTitle()
+    {
+        if (UnityEngine.Random.value > 0.5f)
+        {
+            TitleText.GetComponent<TMP_Text>().text = "ITS NOT A BUG ITS A FEATURE";
+        }
+        else
+        {
+            TitleText.GetComponent<TMP_Text>().text = "           PUZZLE FACTORY";
+        }
+    }
+
+    // Variables to hold current and previous UI states
     private EUICurrentState UIState = EUICurrentState.UI_STATE_MENU;
     private EUICurrentState PrevUIState = EUICurrentState.UI_STATE_MENU;
+
+    // Handles UI state changes and updates the visibility and functionality of UI elements accordingly
     void OnUIStateChange(EUICurrentState _UIState)
     {
+        UpdateTitle();
         PrevUIState = UIState;
         UIState = _UIState;
 
+        // Toggle visibility of return buttons in the controls menu based on current state
         if (_UIState == EUICurrentState.UI_STATE_CONTROLS && PrevUIState == EUICurrentState.UI_STATE_PAUSED)
         {
             Controls_ReturnToPaused.SetActive(true);
@@ -81,7 +98,7 @@ public class UX_Callbacks : MonoBehaviour
             Controls_BackToMenu.SetActive(true);
         }
 
-
+        // Manage visibility of various UI elements based on the current state
         TitleText.SetActive(UIState != EUICurrentState.UI_STATE_INGAME_OVERLAY);
         CanvasBackground.SetActive(UIState != EUICurrentState.UI_STATE_INGAME_OVERLAY);
         MainMenu.SetActive(UIState == EUICurrentState.UI_STATE_MENU);
@@ -92,6 +109,8 @@ public class UX_Callbacks : MonoBehaviour
         Paused.SetActive(UIState == EUICurrentState.UI_STATE_PAUSED);
     }
 
+
+    // Handles changes in the window mode based on user selection
     public void OnWindowModeChange(Int32 WindowMode)
     {
 
@@ -115,10 +134,16 @@ public class UX_Callbacks : MonoBehaviour
             default:
                 break;
         }
-  
+
     }
+
+    // Handles button callbacks for various UI interactions
+
     public void OnUXCallback(int eCallback)
     {
+
+
+        // Handling different callbacks based on the enum
         switch ((EUXCallbacksNoParameter)eCallback)
         {
             case EUXCallbacksNoParameter.BUTTON_CALLBACK_PLAY:
@@ -179,50 +204,26 @@ public class UX_Callbacks : MonoBehaviour
         }
     }
 
+    // Initialize KeyStates and start timer
     void Start()
     {
         KeyStates = GetComponent<KeyState>();
         flStartTime = Time.time;
     }
 
-    private bool bTitleChangeFinished = false;
+    // Update is called once per frame to check key presses and update UI based on game state
     void Update()
     {
-        if (!bTitleChangeFinished) {
-            float flWaitTimer = 5.0f;
-            float flTimeDelta = Time.time - flStartTime;
+        // Check for ESC key to toggle pause state
 
-            if (flTimeDelta >= flWaitTimer)
-            {
-                TitleText.GetComponent<TMP_Text>().text = "ITS NOT A BUG ITS A FEATURE";
-
-                bTitleChangeFinished = true;
-            }
-            else if (flTimeDelta >= (flWaitTimer / 2.0f))
-            {
-                if (flTimeDelta <= (flWaitTimer / 1.5f))
-                {
-                    TitleText.GetComponent<TMP_Text>().text = "ITS NOT A BUG ITS A FEATURE";
-                }
-                else
-                {
-                    TitleText.GetComponent<TMP_Text>().text = "           PUZZLE FACTORY";
-                }
-            }
-
-        }
-
-
-    
-
-        if (KeyStates.CheckKeyState(KeyCode.Escape,EKeyQueryMode.KEYQUERY_SINGLEPRESS))
+        if (KeyStates.CheckKeyState(KeyCode.Escape, EKeyQueryMode.KEYQUERY_SINGLEPRESS))
         {
             if (UIState == EUICurrentState.UI_STATE_INGAME_OVERLAY)
                 OnUIStateChange(EUICurrentState.UI_STATE_PAUSED);
             else if (UIState == EUICurrentState.UI_STATE_PAUSED)
                 OnUIStateChange(EUICurrentState.UI_STATE_INGAME_OVERLAY);
         }
-
+        // Manage game time and cursor based on current UI state
         if (UIState == EUICurrentState.UI_STATE_INGAME_OVERLAY)
         {
             Time.timeScale = 1;
@@ -235,6 +236,5 @@ public class UX_Callbacks : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-
     }
 }

@@ -22102,7 +22102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2978892892016272683, guid: c9bd44d8df70d3241ad57d02532c0052, type: 3}
       propertyPath: m_Mass
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3187935787201092358, guid: c9bd44d8df70d3241ad57d02532c0052, type: 3}
       propertyPath: m_Layer
@@ -22110,15 +22110,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3786405797288658270, guid: c9bd44d8df70d3241ad57d02532c0052, type: 3}
       propertyPath: maxSpeed
-      value: 50
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 3786405797288658270, guid: c9bd44d8df70d3241ad57d02532c0052, type: 3}
       propertyPath: acceleration
-      value: 37.5
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3786405797288658270, guid: c9bd44d8df70d3241ad57d02532c0052, type: 3}
       propertyPath: jumpStrength
-      value: 13
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 3786405797288658270, guid: c9bd44d8df70d3241ad57d02532c0052, type: 3}
       propertyPath: heldObjectPull

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -69,9 +70,11 @@ public class Shared_UXVariables : MonoBehaviour
         flMusicVolume = (MusicVolumeObject.GetComponent<UI_Slider>().CurrentValue / 100.0f) * flMasterVolume;
         flNarratorVolume = (NarratorVolumeObject.GetComponent<UI_Slider>().CurrentValue / 100.0f) * flMasterVolume;
     }
-    public void OnCrosshairModeChange(Int32 _CrosshairMode)
+
+
+     public void OnCrosshairModeChange(TMP_Dropdown DropDown)
     {
-        CrosshairMode = (ECrosshairMode)_CrosshairMode;
+        CrosshairMode = (ECrosshairMode)DropDown.value;
       
     }
     void Start()
@@ -80,10 +83,6 @@ public class Shared_UXVariables : MonoBehaviour
     }
     void Update()
     {
-        // CrosshairMode = CrosshairModeObject.GetComponent<Dropdown>().value;
-
-        //   Debug.Log(CrosshairMode);
-
         switch (CrosshairMode)
         {
             case ECrosshairMode.CROSSHAIR_MODE_CROSS:
