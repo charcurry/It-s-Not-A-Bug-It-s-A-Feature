@@ -359,7 +359,7 @@ public class PlayerController : MonoBehaviour
         if (!wasGroundedLastFrame && isGrounded)
             SoundManager.PlaySound(SoundManager.Sound.Jump_Landing, transform.position);
 
-        if (jumpPressed && isGrounded && !isCrouching)
+        if (jumpPressed && (jumpTimeStamp == Time.time) && !isCrouching)
             SoundManager.PlaySound(SoundManager.Sound.Player_Jump, transform.position);
     }
 
