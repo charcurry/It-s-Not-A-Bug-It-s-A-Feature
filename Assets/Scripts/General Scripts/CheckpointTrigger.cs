@@ -10,7 +10,7 @@ public class CheckpointTrigger : MonoBehaviour
     [SerializeField] private float respawnFacingDirection;
 
     [Header("Respawn Point Set: GameObject")]
-    [SerializeField] private Transform respawnPoint;
+    [SerializeField] public Transform respawnPoint;
 
     [Header("Properties")]
     [SerializeField] private bool DestroyTriggerOnActivation = true;
