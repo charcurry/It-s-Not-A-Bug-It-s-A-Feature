@@ -13,20 +13,22 @@ public class AirVent : MonoBehaviour
 
     private void Start()
     {
+        // Sets the height at which the air vent affects objects
         gameObject.GetComponent<CapsuleCollider>().height = airHeight;
         gameObject.GetComponent<CapsuleCollider>().center = new Vector3(0, (airHeight / 2) - 0.3f, 0);
 
         gustOrigin = transform.parent.transform.position;
     }
 
-    // Get rigidbody component and apply upward force instantly
     private void OnTriggerStay(Collider other)
     {
+        // Adds player compensation for the upword force equal to thier garvityMultplier
         if (other.gameObject.CompareTag("Player"))
             playerCompensation = other.GetComponent<PlayerController>().gravityMultiplier;
         else
             playerCompensation = 1;
 
+        // Applies a upword force on any object in the trigger that gets weaker the further up the object is
         if (other.gameObject.CompareTag("Player") || other.GetComponent<Rigidbody>() && !other.GetComponent<Interactable>().isPickedUp)
         {
             other.GetComponent<Rigidbody>().AddForce(Vector3.up * Mathf.Clamp(playerCompensation * gustForce * (20 - Vector3.Distance(other.transform.position, gustOrigin)), Physics.gravity.y * playerCompensation, 20 * playerCompensation), ForceMode.Acceleration);
