@@ -34,6 +34,8 @@ public static class SoundManager
         Key_Collision,
         Unlocking_Door,
         Nail_Gun,
+        Glass_Shattering,
+        Timer_Beep,
     }
 
     // This float is used to determine how frequently the player can play the playerMove sound.
@@ -58,7 +60,7 @@ public static class SoundManager
         if (CanPlaySound(sound))
         {
             // This creates a new game object with an audio source and puts the correct audio clip in the audioSource.
-            GameObject soundGameObject = new GameObject("Sound");
+            GameObject soundGameObject = new(sound + "_Sound");
             AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
             audioSource.clip = GetAudioClip(sound);
 

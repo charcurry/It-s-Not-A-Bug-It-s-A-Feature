@@ -21,7 +21,7 @@ public class SignInteractable : Interactable
     {
         if (!canInteract())
             return;
-
+        isPickedUp = !isPickedUp;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.None;
     }

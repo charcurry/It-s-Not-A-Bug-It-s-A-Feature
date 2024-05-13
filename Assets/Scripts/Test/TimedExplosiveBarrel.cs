@@ -67,7 +67,7 @@ public class TimedExplosiveBarrel : MonoBehaviour
 
             if (effectTimeStamp + effectCooldown <= Time.time)
             {
-                // ADD BEEPING SOUND HERE
+                SoundManager.PlaySound(SoundManager.Sound.Timer_Beep, transform.position);
                 effectTimeStamp = Time.time;
 
                 if (isLedOn)

@@ -48,7 +48,7 @@ public class GameAssets : MonoBehaviour
     public void InitializeSoundSettings()
     {
         soundSettingsDictionary.Add(SoundManager.Sound.Moving_Platform, new SoundSettings 
-            { maxDistance = 25f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = true, isMoving = true, destroyAfterFinished = false });
+            { maxDistance = 25f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = true, isMoving = false, destroyAfterFinished = false });
         soundSettingsDictionary.Add(SoundManager.Sound.Player_Jump, new SoundSettings 
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
         soundSettingsDictionary.Add(SoundManager.Sound.Jump_Landing, new SoundSettings 
@@ -76,6 +76,10 @@ public class GameAssets : MonoBehaviour
         soundSettingsDictionary.Add(SoundManager.Sound.Unlocking_Door, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
         soundSettingsDictionary.Add(SoundManager.Sound.Nail_Gun, new SoundSettings
+            { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
+        soundSettingsDictionary.Add(SoundManager.Sound.Timer_Beep, new SoundSettings
+            { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
+        soundSettingsDictionary.Add(SoundManager.Sound.Glass_Shattering, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true });
     }
 }

@@ -22,7 +22,7 @@ public class ConveyorBelt : MonoBehaviour
 
     public void MoveBelt(float delta)
     {
-        foreach (Rigidbody objRb in objectsOnBelt)
+        foreach (Rigidbody objRb in objectsOnBelt.ToArray())
         {
             if (objRb != null)
             {
