@@ -268,6 +268,9 @@ MonoBehaviour:
   scollSensitivity: 0.5
   heldObjectDampenFactor: 0.8
   heldObjectPull: 45
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 179
   dynamicFOVRateOfChange: 10
   renderPlayerMesh: 1
   renderHeldObjectPoint: 0
@@ -283,7 +286,7 @@ GameObject:
   - component: {fileID: 8834074627380823173}
   - component: {fileID: 6249171920651144570}
   - component: {fileID: 3162863719698772318}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Held Object Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,8 +582,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7ca717bf3c1fc4da4241fdc9675507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xRotation: 0
+  playerTransform: {fileID: 0}
+  playerRigidbody: {fileID: 0}
   mouseSensitivity: 1
+  vecRelativeRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &6223404485754681033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,7 +1983,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 767
+  m_VersionIndex: 770
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

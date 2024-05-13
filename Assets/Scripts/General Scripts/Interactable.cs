@@ -21,7 +21,8 @@ public class Interactable : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
+        if (gameObject.GetComponent<Rigidbody>())
+            gameObject.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
     }
 
     public void DeactivateObject()

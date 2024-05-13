@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 1869315279771754567}
   - component: {fileID: 2966378122375654815}
   - component: {fileID: 2122237634254469971}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: End of Level Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

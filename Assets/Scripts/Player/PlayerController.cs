@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float scollSensitivity = 0.5f;
     [SerializeField] private float heldObjectDampenFactor = 0.8f;
     [SerializeField] private float heldObjectPull = 45;
+    [SerializeField] private LayerMask layerMask;
 
     [Header("Miscellaneous Properties")]
     [SerializeField] private float dynamicFOVRateOfChange = 10;
@@ -229,7 +230,7 @@ public class PlayerController : MonoBehaviour
         if (!isHoldingObject)
         {
             // Shoots a raycast out in the direction the player is looking
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactDistance, ~(1 << 6)))
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactDistance, layerMask))
             {
                 // Checks if the raycast hits an object with the Interactable parent script
                 if (hit.collider.GetComponent<Interactable>())
