@@ -13,6 +13,8 @@ public class AirVent : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position);
+
         gameObject.GetComponent<CapsuleCollider>().height = airHeight;
         gameObject.GetComponent<CapsuleCollider>().center = new Vector3(0, (airHeight / 2) - 0.3f, 0);
 
