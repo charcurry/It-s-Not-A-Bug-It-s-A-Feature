@@ -22,6 +22,7 @@ public class TimedExplosiveBarrel : Explodable
     private float effectCooldown;
     private bool isExplosionTimerStarted;
     private bool isLedOn;
+    private bool isExploding = false;
 
     private void Start()
     {
@@ -106,6 +107,11 @@ public class TimedExplosiveBarrel : Explodable
 
     public override void Explode()
     {
+        if (isExploding)
+            return;
+
+        isExploding = true;
+
         SoundManager.PlaySound(SoundManager.Sound.Explosion, transform.position);
 
         GameObject explosionInstance = Instantiate(explosionEffect, transform.position, transform.rotation);

@@ -16,6 +16,7 @@ public class ElectricalPanel : Explodable
         damagedPanel.SetActive(true);
         secondDoor.Open();
         secondDoorLight.color = Color.green;
+        SoundManager.PlaySound(SoundManager.Sound.Breaker, transform.position);
 
         gameObject.SetActive(false);
     }

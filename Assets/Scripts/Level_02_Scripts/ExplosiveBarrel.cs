@@ -11,6 +11,8 @@ public class ExplosiveBarrel : Explodable
     [Header("References")]
     public GameObject explosionEffect;
 
+    private bool isExploding = false;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R)) // R key for testing
@@ -21,6 +23,11 @@ public class ExplosiveBarrel : Explodable
 
     public override void Explode()
     {
+        if (isExploding)
+            return;
+
+        isExploding = true;
+
         SoundManager.PlaySound(SoundManager.Sound.Explosion, transform.position);
 
         GameObject explosionInstance = Instantiate(explosionEffect, transform.position, transform.rotation);
