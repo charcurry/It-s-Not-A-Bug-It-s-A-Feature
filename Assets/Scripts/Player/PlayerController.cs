@@ -86,7 +86,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool renderPlayerMesh = true;
     [SerializeField] private bool renderHeldObjectPoint = false;
 
-    [HideInInspector] public bool canControl = true;
+    [HideInInspector] public bool canControl;
+    [HideInInspector] public bool canJumpOnHeldObjects;
+    private bool canJump;
 
     // On Awake it initializes the sound settings.
     // THIS DOES NOT HAVE TO BE IN THIS FILE, IT CAN BE IN ANYTHING THAT EXISTS IN EVERY SCENE
@@ -115,6 +117,10 @@ public class PlayerController : MonoBehaviour
         isSprinting = false;
         isHoldingObject = false;
         willJump = false;
+
+        canControl = true;
+        canJumpOnHeldObjects = true;
+        canJump = true;
 
         rb = GetComponent<Rigidbody>();
         rb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -308,8 +314,16 @@ public class PlayerController : MonoBehaviour
             transform.GetComponent<CapsuleCollider>().center = new Vector3(0, (playerHeight / 2) - 1, 0);
         }
 
+        canJump = true;
+
+        // Checks if the only object the ground trigger detects is the same one as the player is holding, if true, the player can no longer jump
+        if (!canJumpOnHeldObjects)
+            if (groundTrigger.colliderList.Count == 1 && heldObject != null)
+                if (groundTrigger.colliderList[0].gameObject == heldObject.gameObject)
+                    canJump = false;
+
         // If the player is on the ground and pressed jump then add force to the y for a jump
-        if (jumpPressed && isGrounded && !isCrouching)
+        if (jumpPressed && isGrounded && !isCrouching && canJump)
         {
             willJump = true;
             jumpTimeStamp = Time.time;
