@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
 {
     public Transform playerTransform;
     public Rigidbody playerRigidbody;  
-    public float mouseSensitivity = 100f;
+    public float mouseSensitivity = 1f;
 
     public Vector3 vecRelativeRotation;
     void Start()
@@ -22,8 +22,8 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * (400.0f * mouseSensitivity) * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * (400.0f * mouseSensitivity) * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
         vecRelativeRotation.x -= mouseY;
         vecRelativeRotation.x = Mathf.Clamp(vecRelativeRotation.x, -90f, 90f);
