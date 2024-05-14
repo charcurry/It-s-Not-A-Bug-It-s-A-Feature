@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_03.unity
     guid: 8845b6b30c0e0b1409b32dd769719cc2
+  - enabled: 1
+    path: Assets/Scenes/UX_EmptyScene.unity
+    guid: 958fa8513ded9ac4c8e2a012861a7079
   m_configObjects: {}
