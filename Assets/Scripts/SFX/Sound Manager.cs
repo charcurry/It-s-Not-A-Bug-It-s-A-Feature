@@ -36,6 +36,7 @@ public static class SoundManager
         Nail_Gun,
         Glass_Shattering,
         Timer_Beep,
+        Breaker,
     }
 
     // This float is used to determine how frequently the player can play the playerMove sound.

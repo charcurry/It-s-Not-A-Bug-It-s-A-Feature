@@ -45,6 +45,7 @@ public class ExplosiveBarrel : MonoBehaviour
 
             if (collider.gameObject.name == "Electrical Panel")
             {
+                SoundManager.PlaySound(SoundManager.Sound.Breaker, collider.transform.position);
                 Vector3 panelPosition = collider.transform.position;
                 collider.gameObject.SetActive(false);
 
@@ -77,6 +78,7 @@ public class ExplosiveBarrel : MonoBehaviour
             // For the glass box blocking the last button
             if (collider.gameObject.tag == "GlassBox")
             {
+                SoundManager.PlaySound(SoundManager.Sound.Glass_Shattering, collider.transform.position);
                 collider.gameObject.SetActive(false);
             }
         }
