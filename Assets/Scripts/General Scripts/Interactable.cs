@@ -22,7 +22,10 @@ public class Interactable : MonoBehaviour
     private void Awake()
     {
         if (gameObject.GetComponent<Rigidbody>())
+        {
+            gameObject.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             gameObject.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
+        }
     }
 
     public void DeactivateObject()
