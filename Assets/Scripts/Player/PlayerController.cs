@@ -6,6 +6,7 @@ using System;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
+using System.Runtime.CompilerServices;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,8 +21,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody heldObject;
     private GameObject heldObjectPoint;
 
-    private Vector3 spawnPosition;
-    private Quaternion spawnRotation;
+    [HideInInspector] public Vector3 spawnPosition;
+    [HideInInspector] public float spawnRotation;
     private Vector3 movementVector;
 
     private float accelerationBaseValue;
@@ -93,6 +94,9 @@ public class PlayerController : MonoBehaviour
     {
         GameAssets.i.InitializeSoundSettings();
         SoundManager.Initialize();
+
+        spawnPosition = transform.position;
+        spawnRotation = transform.rotation.eulerAngles.y;
     }
 
     // Start is called before the first frame update
@@ -111,9 +115,6 @@ public class PlayerController : MonoBehaviour
         isSprinting = false;
         isHoldingObject = false;
         willJump = false;
-
-        spawnPosition = transform.position;
-        spawnRotation = transform.rotation;
 
         rb = GetComponent<Rigidbody>();
         rb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -431,14 +432,15 @@ public class PlayerController : MonoBehaviour
 
         // Player position gets put back to their spawn point
         transform.position = spawnPosition;
-        transform.rotation = spawnRotation;
         playerCamera.GetComponent<CameraController>().vecRelativeRotation.x = 0;
+        playerCamera.GetComponent<CameraController>().vecRelativeRotation.y = spawnRotation;
+        transform.rotation = Quaternion.Euler(0, spawnRotation, 0);
     }
 
     // Lets other scripts change the players spawn point
     public void SetRespawn(Vector3 position, float facingDirection = 0)
     {
         spawnPosition = position;
-        spawnRotation = Quaternion.Euler(0, facingDirection, 0);
+        spawnRotation = facingDirection;
     }
 }
