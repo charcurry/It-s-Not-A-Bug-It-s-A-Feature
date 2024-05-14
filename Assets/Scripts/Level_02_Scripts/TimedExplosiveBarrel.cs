@@ -7,7 +7,7 @@ public class TimedExplosiveBarrel : MonoBehaviour
     [Header("Properties")]
     [SerializeField] private float explosionRadius = 5f;
     [SerializeField] private float maxLaunchForce = 150f;
-    [SerializeField] private bool beginTimerOnStart = true;
+    [SerializeField] private bool beginTimerOnStart = false;
     [SerializeField] private float timeToExplode = 15;
 
     [Header("References")]
@@ -17,31 +17,38 @@ public class TimedExplosiveBarrel : MonoBehaviour
     [SerializeField] Material ledOffMat;
     [SerializeField] Material ledOnMat;
 
-    private float timeStamp;
+    private float explosionTimeStamp;
     private float effectTimeStamp;
     private float effectCooldown;
-    private bool isTimerStarted;
+    private bool isExplosionTimerStarted;
     private bool isLedOn;
 
     private void Start()
     {
-        timeStamp = 0;
-        isLedOn = true;
+        explosionTimeStamp = 0;
+        isLedOn = false;
 
         if (beginTimerOnStart)
         {
-            isTimerStarted = true;
-            timeStamp = Time.time;
+            isExplosionTimerStarted = true;
+            explosionTimeStamp = Time.time;
             effectTimeStamp = Time.time;
         }
     }
 
     private void Update()
     {
-        if (isTimerStarted)
+        if (Input.GetKeyDown(KeyCode.R)) // R key for testing
         {
-            float timeRemaining = timeStamp + timeToExplode - Time.time;
+            StartExplosionTimer();
+        }
 
+        // If the timer on the barrel is going, once it reaches zero, explode
+        if (isExplosionTimerStarted)
+        {
+            float timeRemaining = explosionTimeStamp + timeToExplode - Time.time;
+
+            // After certain amounts of time have passed, the barrel's led flashs on and off quicker and it beeps faster
             switch (timeRemaining) 
             {
                 case >= 10:
@@ -49,15 +56,15 @@ public class TimedExplosiveBarrel : MonoBehaviour
                     break;
 
                 case < 10 when timeRemaining >= 5:
-                    effectCooldown = 0.7f;
+                    effectCooldown = 0.5f;
                     break;
 
-                case < 5 when timeRemaining >= 1:
-                    effectCooldown = 0.45f;
+                case < 5 when timeRemaining >= 1.5f:
+                    effectCooldown = 0.2f;
                     break;
 
-                case < 1 when timeRemaining > 0:
-                    effectCooldown = 0.15f;
+                case < 1.5f when timeRemaining > 0:
+                    effectCooldown = 0.1f;
                     break;
 
                 case <= 0:
@@ -86,10 +93,14 @@ public class TimedExplosiveBarrel : MonoBehaviour
         }
     }
 
-    public void StartTimer()
+    // Starts the barrel's explosion timer
+    public void StartExplosionTimer()
     {
-        isTimerStarted = true;
-        timeStamp = Time.time;
+        if (isExplosionTimerStarted)
+            return;
+
+        isExplosionTimerStarted = true;
+        explosionTimeStamp = Time.time;
         effectTimeStamp = Time.time;
     }
 
