@@ -22077,14 +22077,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2636539815940619142, guid: c9bd44d8df70d3241ad57d02532c0052, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3786405797288658270, guid: c9bd44d8df70d3241ad57d02532c0052, type: 3}
-      propertyPath: layerMask.m_Bits
-      value: 435
-      objectReference: {fileID: 0}
     - target: {fileID: 4004649485248150520, guid: c9bd44d8df70d3241ad57d02532c0052, type: 3}
       propertyPath: m_Mesh
       value: 

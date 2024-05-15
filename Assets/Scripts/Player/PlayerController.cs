@@ -7,7 +7,6 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
 using System.Runtime.CompilerServices;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
