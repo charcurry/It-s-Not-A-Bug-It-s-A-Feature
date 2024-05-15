@@ -10,6 +10,10 @@ public class NailGun : MonoBehaviour
     [SerializeField] private float projectileSpeed = 100f;
     [SerializeField] private float recoilDistance = 0.1f;
     [SerializeField] private float recoilSpeed = 8f;
+    [SerializeField] private float destroyTime = 2f;
+
+    [Header("Player Properties")]
+    [SerializeField] private Camera playerCamera;
 
     private Vector3 originalPosition;
 
@@ -20,9 +24,10 @@ public class NailGun : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire2"))
         {
             Fire();
+            SoundManager.PlaySound(SoundManager.Sound.Nail_Gun, transform.position);
         }
 
         // Smoothly return the nail gun to its original position after recoil
@@ -37,10 +42,19 @@ public class NailGun : MonoBehaviour
 
         if (rb != null)
         {
-            rb.velocity = firePoint.forward * projectileSpeed;
+            Vector3 fireDirection = playerCamera.transform.forward;
+            rb.velocity = fireDirection * projectileSpeed;
         }
 
+        StartCoroutine(DestroyProjectile(projectile, destroyTime));
+
         ApplyRecoil();
+    }
+
+    private IEnumerator DestroyProjectile(GameObject projectile, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(projectile);
     }
 
     private void ApplyRecoil()
