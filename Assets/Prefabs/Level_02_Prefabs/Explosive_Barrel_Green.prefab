@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 6617942136192504332}
   - component: {fileID: 4007268165071059998}
   - component: {fileID: 2779052287630192690}
+  - component: {fileID: 3080100735356252942}
   m_Layer: 0
   m_Name: Explosive_Barrel_Green
   m_TagString: Untagged
@@ -384,6 +385,18 @@ MonoBehaviour:
   ledLight: {fileID: 4919039795681742335}
   ledOffMat: {fileID: 2100000, guid: 3067b2226a6ef324a8e2f3792e3b80bb, type: 2}
   ledOnMat: {fileID: 2100000, guid: 949b8e195d2e3bd42ac553a12c4bbf57, type: 2}
+--- !u!114 &3080100735356252942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008616620558849255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dec9c85c8dd8644ba61e4f33cae7eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6652692404508723431
 GameObject:
   m_ObjectHideFlags: 0
