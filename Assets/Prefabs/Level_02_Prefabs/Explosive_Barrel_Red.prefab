@@ -174,8 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f7875f42d5409f47a2e36394d8fbd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRadius: 5
-  maxLaunchForce: 150
+  explosionRadius: 4
+  maxLaunchForce: 250
   explosionEffect: {fileID: 5928917874525638761, guid: a199f88714b71c94e82271036ab36354, type: 3}
 --- !u!64 &4684472963621826312
 MeshCollider:

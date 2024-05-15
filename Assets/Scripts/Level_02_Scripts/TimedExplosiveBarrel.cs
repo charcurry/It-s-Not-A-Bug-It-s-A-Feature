@@ -133,7 +133,12 @@ public class TimedExplosiveBarrel : Explodable
                     // Calculate force based on distance to barrel
                     float distance = Vector3.Distance(transform.position, collider.transform.position);
                     float forceMagnitude = Mathf.Lerp(maxLaunchForce, 0, distance / explosionRadius);
+
+                    // Barrel explosion should only apply horizontal force, this is to prevent the player being launched straight through ceilings, into space
                     Vector3 forceDirection = (collider.transform.position - transform.position).normalized;
+                    forceDirection.y = 0;
+                    forceDirection.Normalize();
+
                     rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
                 }
             }

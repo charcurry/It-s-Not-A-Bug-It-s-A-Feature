@@ -375,10 +375,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc7ab4cfd4fe844b88a225a0ae8a17c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRadius: 5
-  maxLaunchForce: 150
+  explosionRadius: 4
+  maxLaunchForce: 250
   beginTimerOnStart: 0
-  timeToExplode: 15
+  timeToExplode: 10
   explosionEffect: {fileID: 5928917874525638761, guid: a199f88714b71c94e82271036ab36354, type: 3}
   ledMeshRender: {fileID: 4033892908314188797}
   ledLight: {fileID: 4919039795681742335}

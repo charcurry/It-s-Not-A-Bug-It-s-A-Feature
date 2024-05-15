@@ -11,6 +11,7 @@ public class SequenceManager : MonoBehaviour
     public GameObject[] gameObjects;
     public Material redMaterial;
     public Material greenMaterial;
+    public Material destroyedMaterial;
     private bool puzzleCompleted = false;
 
     void Start()
@@ -65,5 +66,14 @@ public class SequenceManager : MonoBehaviour
         }
         SoundManager.PlaySound(SoundManager.Sound.Incorrect_Sound);
         currentIndex = 0;
+    }
+
+    // Set buttons to disabled material for when the electrical panel is damaged
+    public void SetToDisabledMaterial()
+    {
+        foreach (GameObject obj in gameObjects)
+        {
+            obj.GetComponent<Renderer>().material = destroyedMaterial;
+        }
     }
 }
