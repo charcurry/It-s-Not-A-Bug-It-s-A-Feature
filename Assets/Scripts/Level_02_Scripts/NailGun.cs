@@ -11,6 +11,7 @@ public class NailGun : MonoBehaviour
     [SerializeField] private float recoilDistance = 0.1f;
     [SerializeField] private float recoilSpeed = 8f;
     [SerializeField] private float destroyTime = 2f;
+    [SerializeField] private float fireDelay = 0.2f;
 
     [Header("Player Properties")]
     [SerializeField] private Camera playerCamera;
@@ -21,6 +22,7 @@ public class NailGun : MonoBehaviour
 
     private Vector3 originalPosition;
     private Vector3 swayPosition;
+    private bool canFire = true;
 
     private void Start()
     {
@@ -31,7 +33,7 @@ public class NailGun : MonoBehaviour
     {
         HandleSway();
 
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && canFire)
         {
             Fire();
             SoundManager.PlaySound(SoundManager.Sound.Nail_Gun, transform.position);
@@ -52,6 +54,10 @@ public class NailGun : MonoBehaviour
 
     private void Fire()
     {
+        if (!canFire) return;
+
+        canFire = false;
+
         // Fire nail projectile
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
@@ -65,6 +71,8 @@ public class NailGun : MonoBehaviour
         StartCoroutine(DestroyProjectile(projectile, destroyTime));
 
         ApplyRecoil();
+
+        StartCoroutine(CheckCanFire());
     }
 
     private IEnumerator DestroyProjectile(GameObject projectile, float delay)
@@ -76,5 +84,11 @@ public class NailGun : MonoBehaviour
     private void ApplyRecoil()
     {
         transform.Translate(-recoilDistance, 0, 0);
+    }
+
+    private IEnumerator CheckCanFire()
+    {
+        yield return new WaitForSeconds(fireDelay);
+        canFire = true;
     }
 }
