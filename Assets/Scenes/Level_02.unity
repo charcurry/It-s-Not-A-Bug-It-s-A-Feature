@@ -43291,7 +43291,7 @@ MonoBehaviour:
   destroyTime: 2
   playerCamera: {fileID: 894543940}
   swayAmount: 0.1
-  swaySmoothness: 2
+  swaySmoothness: 10
 --- !u!1001 &2025118827173224953
 PrefabInstance:
   m_ObjectHideFlags: 0
