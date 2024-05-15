@@ -46,7 +46,7 @@ public class NailGun : MonoBehaviour
         float swayX = Mathf.Clamp(Input.GetAxis("Mouse X") * swayAmount, -swayAmount, swayAmount);
         float swayY = Mathf.Clamp(Input.GetAxis("Mouse Y") * swayAmount, -swayAmount, swayAmount);
 
-        Vector3 targetSwayPosition = new Vector3(swayX, swayY, 0);
+        Vector3 targetSwayPosition = new Vector3(-swayX, -swayY, 0);
         swayPosition = Vector3.Lerp(swayPosition, targetSwayPosition, Time.deltaTime * swaySmoothness);
     }
 
