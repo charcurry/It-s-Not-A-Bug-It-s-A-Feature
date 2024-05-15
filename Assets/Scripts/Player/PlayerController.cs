@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
 using System.Runtime.CompilerServices;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private float accelerationBaseValue;
     private float maxSpeedBaseValue;
     private float jumpTimeStamp;
+    private float clippingTimeStamp;
     private float heldObjectDistanceCurrent;
 
     private bool isGrounded;
@@ -82,6 +84,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
 
     [Header("Miscellaneous Properties")]
+    [SerializeField] private float clippingDuration = 1;
     [SerializeField] private float dynamicFOVRateOfChange = 10;
     [SerializeField] private bool renderPlayerMesh = true;
     [SerializeField] private bool renderHeldObjectPoint = false;
@@ -154,6 +157,7 @@ public class PlayerController : MonoBehaviour
         heldObject = null;
 
         jumpTimeStamp = -0.2f;
+        clippingTimeStamp = -clippingDuration;
 
         if (!renderPlayerMesh)
             transform.GetComponent<MeshRenderer>().forceRenderingOff = true;
@@ -166,6 +170,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         ManageInputs();
+
+        // Sets the ability to clip through objects to false 
+        if (clippingTimeStamp + clippingDuration <= Time.time)
+            SetClip(false);
 
         // Sets the position of the heldObjectPoint
         heldObjectPoint.transform.position = playerCamera.transform.position + (playerCamera.transform.forward * heldObjectDistanceCurrent);
@@ -456,5 +464,23 @@ public class PlayerController : MonoBehaviour
     {
         spawnPosition = position;
         spawnRotation = facingDirection;
+    }
+
+    // Lets other scripts set wither or not the player can clip through objects on the clippable layer
+    public void SetClip(bool canClip)
+    {
+        if (canClip)
+        {
+            transform.GetComponent<Collider>().excludeLayers = (1 << 8);
+            groundTrigger.gameObject.GetComponent<Collider>().excludeLayers = (1 << 8);
+            headTrigger.gameObject.GetComponent<Collider>().excludeLayers = (1 << 8);
+            clippingTimeStamp = Time.time;
+        }
+        else
+        {
+            transform.GetComponent<Collider>().excludeLayers = 0;
+            groundTrigger.gameObject.GetComponent<Collider>().excludeLayers = 0;
+            headTrigger.gameObject.GetComponent<Collider>().excludeLayers = 0;
+        }
     }
 }

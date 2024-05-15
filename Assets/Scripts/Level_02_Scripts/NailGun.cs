@@ -15,7 +15,12 @@ public class NailGun : MonoBehaviour
     [Header("Player Properties")]
     [SerializeField] private Camera playerCamera;
 
+    [Header("Sway Properties")]
+    [SerializeField] private float swayAmount = 0.02f;
+    [SerializeField] private float swaySmoothness = 4f;
+
     private Vector3 originalPosition;
+    private Vector3 swayPosition;
 
     private void Start()
     {
@@ -24,6 +29,8 @@ public class NailGun : MonoBehaviour
 
     private void Update()
     {
+        HandleSway();
+
         if (Input.GetButtonDown("Fire2"))
         {
             Fire();
@@ -31,7 +38,16 @@ public class NailGun : MonoBehaviour
         }
 
         // Smoothly return the nail gun to its original position after recoil
-        transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * recoilSpeed);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition + swayPosition, Time.deltaTime * recoilSpeed);
+    }
+
+    private void HandleSway()
+    {
+        float swayX = Mathf.Clamp(Input.GetAxis("Mouse X") * swayAmount, -swayAmount, swayAmount);
+        float swayY = Mathf.Clamp(Input.GetAxis("Mouse Y") * swayAmount, -swayAmount, swayAmount);
+
+        Vector3 targetSwayPosition = new Vector3(swayX, swayY, 0);
+        swayPosition = Vector3.Lerp(swayPosition, targetSwayPosition, Time.deltaTime * swaySmoothness);
     }
 
     private void Fire()

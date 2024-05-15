@@ -23,6 +23,10 @@ public class AirVent : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.gameObject.CompareTag("NailProjectile"))
+        {
+            return;
+        }
         // Adds player compensation for the upword force equal to thier garvityMultplier
         if (other.gameObject.CompareTag("Player"))
             playerCompensation = other.GetComponent<PlayerController>().gravityMultiplier;
