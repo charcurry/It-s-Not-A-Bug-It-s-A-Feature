@@ -142,6 +142,15 @@ public class TimedExplosiveBarrel : Explodable
                     rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
                 }
             }
+
+            if (collider.CompareTag("Player"))
+            {
+                Debug.Log(Vector3.Distance(collider.transform.position, transform.position));
+                if (Vector3.Distance(collider.transform.position, transform.position) < 2)
+                {
+                    collider.GetComponent<PlayerController>().SetClip(true);
+                }
+            }
         }
 
         Destroy(gameObject);
