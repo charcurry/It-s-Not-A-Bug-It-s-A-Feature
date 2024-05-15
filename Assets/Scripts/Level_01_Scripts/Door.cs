@@ -12,7 +12,7 @@ public class Door : Interactable
     public Vector3 openPosConveyor;
     public float speed = 1f;
 
-    private bool isOpen = false;
+    public bool isOpen = false;
 
     void Start()
     {
