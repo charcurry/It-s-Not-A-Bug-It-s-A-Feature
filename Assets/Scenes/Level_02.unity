@@ -22924,7 +22924,7 @@ GameObject:
   - component: {fileID: 1107758599}
   - component: {fileID: 1107758598}
   - component: {fileID: 1107758597}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ClipWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41417,7 +41417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08af04b12d54de540a67d772afc50e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 500
   maxOffset: 2
   minOnTime: 0.4
   maxOnTime: 0.7
