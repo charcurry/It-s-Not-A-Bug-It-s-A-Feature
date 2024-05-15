@@ -175,7 +175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionRadius: 4
-  maxLaunchForce: 250
+  playerExplosionRadius: 5
+  maxLaunchForce: 125
   explosionEffect: {fileID: 5928917874525638761, guid: a199f88714b71c94e82271036ab36354, type: 3}
 --- !u!64 &4684472963621826312
 MeshCollider:

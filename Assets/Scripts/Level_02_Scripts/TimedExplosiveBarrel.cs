@@ -5,8 +5,9 @@ using UnityEngine;
 public class TimedExplosiveBarrel : Explodable
 {
     [Header("Properties")]
-    [SerializeField] private float explosionRadius = 5f;
-    [SerializeField] private float maxLaunchForce = 150f;
+    [SerializeField] private float explosionRadius = 4f;
+    [SerializeField] private float playerExplosionRadius = 5f;
+    [SerializeField] private float maxLaunchForce = 125f;
     [SerializeField] private bool beginTimerOnStart = false;
     [SerializeField] private float timeToExplode = 15;
 
@@ -119,6 +120,7 @@ public class TimedExplosiveBarrel : Explodable
 
         // Find player or anything with a rigidbody or collider
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        Collider[] playerColliders = Physics.OverlapSphere(transform.position, playerExplosionRadius);
 
         foreach (var collider in colliders)
         {
@@ -142,13 +144,34 @@ public class TimedExplosiveBarrel : Explodable
                     rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
                 }
             }
+        }
 
+        foreach (var collider in playerColliders)
+        {
             if (collider.CompareTag("Player"))
             {
                 Debug.Log(Vector3.Distance(collider.transform.position, transform.position));
                 if (Vector3.Distance(collider.transform.position, transform.position) < 2)
                 {
                     collider.GetComponent<PlayerController>().SetClip(true);
+                }
+
+                if (collider.GetComponent<Rigidbody>())
+                {
+                    Rigidbody rb = collider.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        // Calculate force based on distance to barrel
+                        float distance = Vector3.Distance(transform.position, collider.transform.position);
+                        float forceMagnitude = Mathf.Lerp(maxLaunchForce, 0, distance / playerExplosionRadius);
+
+                        // Barrel explosion should only apply horizontal force, this is to prevent the player being launched straight through ceilings, into space
+                        Vector3 forceDirection = (collider.transform.position - transform.position).normalized;
+                        forceDirection.y = 0;
+                        forceDirection.Normalize();
+
+                        rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+                    }
                 }
             }
         }
