@@ -8,6 +8,10 @@ public class LightFlicker : MonoBehaviour
     [SerializeField] private float flickerDuration = 3.0f;
     [SerializeField] private float flickerInterval = 0.1f;
 
+    [SerializeField] private List<Renderer> gameObjects;
+    [SerializeField] private Material onMaterial;
+    [SerializeField] private Material offMaterial;
+
     public void StartFlickering()
     {
         StartCoroutine(FlickerLights());
@@ -21,16 +25,29 @@ public class LightFlicker : MonoBehaviour
         {
             foreach (Light light in spotLights)
             {
-                light.enabled = Random.value > 0.5f;
+                bool isOn = Random.value > 0.5f;
+                light.enabled = isOn;
+
+                // Change materials when flickering
+                foreach (Renderer obj in gameObjects)
+                {
+                    obj.material = isOn ? onMaterial : offMaterial;
+                }
             }
 
             yield return new WaitForSeconds(flickerInterval);
         }
 
-        // Make sure they are on when the flicker ends
+        // Make sure they are off when the flicker ends
         foreach (Light light in spotLights)
         {
-            light.enabled = true;
+            light.enabled = false;
+        }
+
+        // Set materials to off when flicker ends cause no power
+        foreach (Renderer obj in gameObjects)
+        {
+            obj.material = offMaterial;
         }
     }
 }
