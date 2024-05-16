@@ -6,6 +6,8 @@ public class SequenceManager : MonoBehaviour
 {
     [Header("Properties")]
     [SerializeField] private int[] correctSequence = new int[] { 1, 2, 3, 4, 5 }; // The puzzle order
+
+    [Header("References")]
     [SerializeField] private OpenDoor doorScript;
     [SerializeField] private Light[] lights;
     [SerializeField] private GameObject[] gameObjects;

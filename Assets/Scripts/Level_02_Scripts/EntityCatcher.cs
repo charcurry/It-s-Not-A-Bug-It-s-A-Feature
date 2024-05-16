@@ -12,6 +12,13 @@ public class EntityCatcher : MonoBehaviour
         if (eTarget != null)
         {
             other.transform.position = eTarget.position;
+
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
         }
     }
 }

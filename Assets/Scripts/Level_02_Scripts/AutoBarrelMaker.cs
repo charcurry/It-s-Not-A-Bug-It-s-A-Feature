@@ -6,10 +6,13 @@ public class AutoBarrelMaker : MonoBehaviour
 {
     // Script that auto creates one red barrel, if barrel has exploded, a new one will spawn
     [Header("Properties")]
-    [SerializeField] private GameObject barrelPrefab;
-    [SerializeField] private Transform spawnPoint;
     [SerializeField] private float launchForce = 5f;
     [SerializeField] private float spawnDelay = 1.5f;
+
+    [Header("References")]
+    [SerializeField] private GameObject barrelPrefab;
+    [SerializeField] private Transform spawnPoint;
+
     private GameObject currentBarrel;
     private bool isSpawning;
 
