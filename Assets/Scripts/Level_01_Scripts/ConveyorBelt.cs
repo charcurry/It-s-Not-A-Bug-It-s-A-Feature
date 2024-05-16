@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class ConveyorBelt : MonoBehaviour
 {
-    [SerializeField] private float speed = 1f;
-    public int boxCount;
-    public List<Rigidbody> objectsOnBelt = new List<Rigidbody>();
-    public List<Renderer> beltRenderers = new List<Renderer>();
+    private float speed = 1f;
+    [HideInInspector] public List<Rigidbody> objectsOnBelt = new List<Rigidbody>();
+    [HideInInspector] public List<Renderer> beltRenderers = new List<Renderer>();
 
     private void Start()
     {
@@ -64,7 +63,8 @@ public class ConveyorBelt : MonoBehaviour
     {
             Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
             objectsOnBelt.Remove(rb);
-        //Allow box to rotate after its removed from belt
+
+        // Allow box to rotate after its removed from belt
         if (collision.gameObject.CompareTag("Box"))
         {
             rb.freezeRotation = false;

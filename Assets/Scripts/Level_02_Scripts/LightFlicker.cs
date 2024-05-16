@@ -5,9 +5,11 @@ using UnityEngine;
 public class LightFlicker : MonoBehaviour
 {
     [Header("Properties")]
-    [SerializeField] private List<Light> spotLights;
     [SerializeField] private float flickerDuration = 3.0f;
     [SerializeField] private float flickerInterval = 0.1f;
+
+    [Header("References")]
+    [SerializeField] private List<Light> spotLights;
     [SerializeField] private List<Renderer> gameObjects;
     [SerializeField] private Material onMaterial;
     [SerializeField] private Material offMaterial;

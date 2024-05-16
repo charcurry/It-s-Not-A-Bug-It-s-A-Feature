@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SpikeKill : MonoBehaviour
 {
-    Interactable interactable;
-    BoxInstantiation boxInstantiation;
-    GameObject boxSpawn;
-    public bool isSpiked;
+    private Interactable interactable;
+    private BoxInstantiation boxInstantiation;
+    private GameObject boxSpawn;
+    [HideInInspector] public bool isSpiked;
     private void Start()
     {
         isSpiked = false;

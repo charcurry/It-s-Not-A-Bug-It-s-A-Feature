@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class BoxInstantiation : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private GameObject conveyor;
+    [SerializeField] private GameObject boxPrefab;
+
+    [Header("Properties")]
+    [SerializeField] private Transform targetArea;
+    [SerializeField] private float instantiationInterval = 2f;
+    [SerializeField] private int boxCount;
+
     private ConveyorBelt conveyorBelt;
-    public GameObject conveyor;
-    public GameObject boxPrefab;
-    public Transform targetArea;
-    public float instantiationInterval = 2f;
     private float timer;
-    public int boxCount;
 
     void Start()
     {
