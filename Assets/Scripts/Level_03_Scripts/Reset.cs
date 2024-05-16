@@ -2,27 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Reset : MonoBehaviour
 {
     private Vector3 playerInitialPosition;
-    private GetPosition[] objectsToReset;
+    private List<GetPosition> objectsToResetList = new List<GetPosition>(); // Use List instead of array
     private GameObject heldObject;
+    public bool HasDuplicated;
     private CheckpointTrigger checkpoint;
 
-    //Finds the players initial position, and the initial position of any object with the "GetPosition" script
     void Start()
     {
         playerInitialPosition = GameObject.FindWithTag("Player").transform.position;
-        objectsToReset = FindObjectsOfType<GetPosition>();
+        GetPosition[] objectsToResetArray = FindObjectsOfType<GetPosition>();
+        objectsToResetList.AddRange(objectsToResetArray);
         checkpoint = FindObjectOfType<CheckpointTrigger>();
     }
 
-    //Puts everything where they started, if they are in the objectsToReset array
     public void ResetLevel()
     {
-        List<GetPosition> newObjectsToReset = new List<GetPosition>();
+        Vector3 playerPrevPosition = GameObject.FindWithTag("Player").transform.position;
 
-        foreach (GetPosition obj in objectsToReset)
+        foreach (GetPosition obj in objectsToResetList)
         {
             Interactable interactable = obj.GetComponent<Interactable>();
             if (interactable != null && !interactable.isPickedUp)
@@ -30,29 +31,27 @@ public class Reset : MonoBehaviour
                 obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 obj.transform.position = obj.GetComponent<GetPosition>().initialPosition;
                 obj.transform.rotation = obj.GetComponent<GetPosition>().initialRotation;
-                //obj.gameObject.SetActive(true);
-                newObjectsToReset.Add(obj);
             }
             else if (interactable != null && interactable.isPickedUp)
             {
+                HasDuplicated = true;
                 heldObject = obj.gameObject;
-                GameObject newObject = Instantiate(heldObject, GameObject.FindWithTag("Player").transform.position, heldObject.GetComponent<GetPosition>().initialRotation);
+                GameObject newObject = Instantiate(heldObject, playerPrevPosition, heldObject.GetComponent<GetPosition>().initialRotation);
                 newObject.GetComponent<Rigidbody>().useGravity = true;
-                //newObjectsToReset.Add(newObject.GetComponent<GetPosition>());
+                objectsToResetList.Add(newObject.GetComponent<GetPosition>());
+                break; // Exit the loop after duplicating one object
             }
         }
-            GameObject.FindWithTag("Player").transform.position = playerInitialPosition;
-  
+
+        GameObject.FindWithTag("Player").transform.position = checkpoint.currentRespawnPoint.position;
     }
 
-    //!PlaceHolder! resets the level if the player triggers the resetter
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             ResetLevel();
+            Debug.Log("Level Reset");
         }
     }
-
-
 }

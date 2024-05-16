@@ -15,6 +15,8 @@ public class CheckpointTrigger : MonoBehaviour
     [Header("Properties")]
     [SerializeField] private bool DestroyTriggerOnActivation = true;
 
+    public Transform currentRespawnPoint;
+
     // If the player touches a trigger with this script, their respawn point gets changed to a new position
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +26,7 @@ public class CheckpointTrigger : MonoBehaviour
                 other.GetComponent<PlayerController>().SetRespawn(respawnPosition, respawnFacingDirection);
             else
                 other.GetComponent<PlayerController>().SetRespawn(respawnPoint.position, respawnPoint.rotation.eulerAngles.y);
+            currentRespawnPoint = respawnPoint;
 
             if (DestroyTriggerOnActivation)
                 Destroy(gameObject);
