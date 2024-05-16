@@ -5,20 +5,20 @@ using UnityEngine;
 public class Door : Interactable
 {
     // References to door and conveyor door
-    public Transform door;
-    public Transform conveyorDoor;
+    [Header("References")]
+    [SerializeField] private Transform door;
+    [SerializeField] private Transform conveyorDoor;
 
-    // Positions for the door closed and open
-    public Vector3 closedPos;
-    public Vector3 openPos;
-
-    // Positions for the conveyor door closed and open
-    public Vector3 closedPosConveyor;
-    public Vector3 openPosConveyor;
+    // Positions for the door and conveyor door closed and open
+    [Header("Properties")]
+    [SerializeField] private Vector3 closedPos;
+    [SerializeField] private Vector3 openPos;
+    [SerializeField] private Vector3 closedPosConveyor;
+    [SerializeField] private Vector3 openPosConveyor;
 
     // Speed at which the door moves
-    public float speed = 1f;
-    public bool isOpen = false;
+    [HideInInspector] public float speed = 1f;
+    [HideInInspector] public bool isOpen = false;
 
     void Start()
     {

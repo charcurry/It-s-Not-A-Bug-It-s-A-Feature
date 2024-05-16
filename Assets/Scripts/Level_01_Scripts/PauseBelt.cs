@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PauseBelt : MonoBehaviour
 {
-    ConveyorBeltController beltController;
-    ConveyorBelt belt;
-    Door door;
-    public GameObject conveyor;
-    public GameObject doorButton;
+    private ConveyorBeltController beltController;
+    private ConveyorBelt belt;
+    private Door door;
+
+    [Header("References")]
+    [SerializeField] private GameObject conveyor;
+    [SerializeField] private GameObject doorButton;
+
     private bool resume = false;
 
     void Start()

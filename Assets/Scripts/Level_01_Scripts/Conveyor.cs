@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class ConveyorBeltController : MonoBehaviour
 {
+    [Header("Properties")]
     public float conveyorSpeed;
     public float objectSpeed;
-    public List<ConveyorBelt> conveyorBelts = new List<ConveyorBelt>();
+    [HideInInspector] public List<ConveyorBelt> conveyorBelts = new List<ConveyorBelt>();
 
     private void FixedUpdate()
     {

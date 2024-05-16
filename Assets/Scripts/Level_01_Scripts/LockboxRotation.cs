@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LockboxRotation : Interactable
+public class LockBoxRotation : Interactable
 {
-    Rigidbody rb;
+    private Rigidbody rb;
 
     void Start()
     {
