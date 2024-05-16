@@ -5,20 +5,22 @@ using UnityEngine;
 public class NailGun : MonoBehaviour
 {
     [Header("Nail Gun Properties")]
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform firePoint;
     [SerializeField] private float projectileSpeed = 100f;
     [SerializeField] private float recoilDistance = 0.1f;
     [SerializeField] private float recoilSpeed = 8f;
     [SerializeField] private float destroyTime = 2f;
     [SerializeField] private float fireDelay = 0.2f;
 
-    [Header("Player Properties")]
-    [SerializeField] private Camera playerCamera;
-
     [Header("Sway Properties")]
     [SerializeField] private float swayAmount = 0.02f;
     [SerializeField] private float swaySmoothness = 4f;
+
+    [Header("Player References")]
+    [SerializeField] private Camera playerCamera;
+
+    [Header("References")]
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
 
     private Vector3 originalPosition;
     private Vector3 swayPosition;

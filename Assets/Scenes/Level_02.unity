@@ -16758,6 +16758,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5093748519307764666, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 253
+      objectReference: {fileID: 0}
+    - target: {fileID: 5093748519307764666, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 432
+      objectReference: {fileID: 0}
+    - target: {fileID: 5093748519307764666, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 5093748519307764666, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5093748519307764666, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5093748519307764666, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5093748519307764666, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5093748519307764666, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813195003559540834, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -253
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813195003559540834, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 435.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813195003559540834, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813195003559540834, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813195003559540834, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813195003559540834, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8129040214963468600, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
       propertyPath: m_Name
       value: Electrical Panel Room 2
@@ -16765,34 +16821,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8129040214963468600, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 782321683}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
---- !u!1 &782321682 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8129040214963468600, guid: c15d6155fa2db8d4eb3db467efb105b1, type: 3}
-  m_PrefabInstance: {fileID: 782321681}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &782321683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782321682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f01c2aa4f7d31444bced90cce9521a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagedPanel: {fileID: 5681621891947896378}
-  secondDoor: {fileID: 1622720054}
-  secondDoorLight: {fileID: 876879847}
-  lightFlicker: {fileID: 1096011986}
-  sequenceManager: {fileID: 1992616296}
-  glitchEffect: {fileID: 2034645950}
 --- !u!1 &793016455
 GameObject:
   m_ObjectHideFlags: 0
@@ -21939,14 +21969,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cc96a701264b4439f9f1f2c1d06072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flickerDuration: 1.5
+  flickerInterval: 0.05
   spotLights:
   - {fileID: 844990497}
   - {fileID: 46345332}
   - {fileID: 1300357547}
   - {fileID: 815787793}
   - {fileID: 23629514}
-  flickerDuration: 1.5
-  flickerInterval: 0.05
   gameObjects:
   - {fileID: 543450653399724411}
   - {fileID: 1307264347}
@@ -43404,7 +43434,7 @@ MonoBehaviour:
   projectileSpeed: 40
   recoilDistance: 0.1
   recoilSpeed: 8
-  destroyTime: 2
+  destroyTime: 5
   fireDelay: 0.2
   playerCamera: {fileID: 894543940}
   swayAmount: 0.1
@@ -43486,10 +43516,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451227806381dc648a88e9503e41aec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrelPrefab: {fileID: 6008616620558849255, guid: 0596916945d4cc84c81e369f7e925422, type: 3}
-  spawnPoint: {fileID: 1041493544}
   launchForce: 5
   spawnDelay: 1.5
+  barrelPrefab: {fileID: 6008616620558849255, guid: 0596916945d4cc84c81e369f7e925422, type: 3}
+  spawnPoint: {fileID: 1041493544}
 --- !u!1001 &5681621891947896377
 PrefabInstance:
   m_ObjectHideFlags: 0
