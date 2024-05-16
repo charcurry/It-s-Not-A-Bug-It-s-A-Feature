@@ -26,12 +26,14 @@ public class Reset : MonoBehaviour
         foreach (GetPosition obj in objectsToResetList)
         {
             Interactable interactable = obj.GetComponent<Interactable>();
+            //Reset without duplication
             if (interactable != null && !interactable.isPickedUp)
             {
                 obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 obj.transform.position = obj.GetComponent<GetPosition>().initialPosition;
                 obj.transform.rotation = obj.GetComponent<GetPosition>().initialRotation;
             }
+            //Reset with duplication
             else if (interactable != null && interactable.isPickedUp)
             {
                 HasDuplicated = true;
@@ -39,13 +41,22 @@ public class Reset : MonoBehaviour
                 GameObject newObject = Instantiate(heldObject, playerPrevPosition, heldObject.GetComponent<GetPosition>().initialRotation);
                 newObject.GetComponent<Rigidbody>().useGravity = true;
                 objectsToResetList.Add(newObject.GetComponent<GetPosition>());
-                break; // Exit the loop after duplicating one object
+                break; 
             }
         }
-
-        GameObject.FindWithTag("Player").transform.position = checkpoint.currentRespawnPoint.position;
+        //Player respawns at last checkpoint
+        if (checkpoint.currentRespawnPoint != null)
+        {
+            GameObject.FindWithTag("Player").transform.position = checkpoint.currentRespawnPoint.position;
+        }
+        //Player respawns at spawn
+        else 
+        {
+            GameObject.FindWithTag("Player").transform.position = playerInitialPosition;
+        }
     }
 
+    //Player enters the reset
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
