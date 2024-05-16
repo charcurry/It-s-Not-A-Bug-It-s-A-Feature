@@ -20,6 +20,7 @@ public class PauseBelt : MonoBehaviour
 
     void Update()
     {
+        // If the door is open resume the belt if it was last paused
         if (door.isOpen)
         {
             if (resume)
@@ -28,6 +29,7 @@ public class PauseBelt : MonoBehaviour
                 resume = false;
             }
         }
+        // If the door is closed pause the belt if it was last running
         else
         {
             if (!resume)
@@ -38,6 +40,7 @@ public class PauseBelt : MonoBehaviour
         }
     }
 
+    // Check if there are objects (boxes) on the belt
     private bool CheckIfObjectOnBelt()
     {
         foreach (Rigidbody objRb in belt.objectsOnBelt)
@@ -52,6 +55,7 @@ public class PauseBelt : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+        // If a box is on the belt and the door is closed, pause the belt
         if (collision.gameObject.CompareTag("Box") && CheckIfObjectOnBelt())
         {
             beltController.conveyorBelts.Remove(belt);
@@ -60,6 +64,7 @@ public class PauseBelt : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
+        // If a box exits the belt and the door is open, resume the belt
         if (collision.gameObject.CompareTag("Box") && CheckIfObjectOnBelt() && door.isOpen == true)
         {
             beltController.conveyorBelts.Add(belt);

@@ -6,26 +6,24 @@ public class LockboxRotation : Interactable
 {
     Rigidbody rb;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    // Coroutine to freeze rotation while the box is picked up
     IEnumerator FreezeRotation()
     {
+        // Loop as long as the box is picked up
         while (isPickedUp)
         {
+            // Freeze rotation of the Rigidbody to prevent it from rotating
             rb.freezeRotation = true;
+            // Wait for the next frame
             yield return null;
         }
-        rb.freezeRotation = false; // Unfreeze rotation when not picked up
+        // Once the box is no longer picked up allow rotation
+        rb.freezeRotation = false;
     }
 
     public override void interaction()
@@ -33,11 +31,12 @@ public class LockboxRotation : Interactable
         if (!canInteract())
             return;
 
-        isPickedUp = !isPickedUp; // Toggle the value of isPickedUp
+        isPickedUp = !isPickedUp;
 
+        // If the box is picked up start the coroutine to freeze rotation
         if (isPickedUp)
         {
-            StartCoroutine(FreezeRotation()); // Start freezing rotation if picked up
+            StartCoroutine(FreezeRotation());
         }
     }
 }

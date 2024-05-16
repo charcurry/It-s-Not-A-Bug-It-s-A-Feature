@@ -11,12 +11,6 @@ public class SignInteractable : Interactable
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public override void interaction()
     {
         if (!canInteract())
