@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 630999861440419314}
   - component: {fileID: 8500957567353963524}
   - component: {fileID: 1302213610591041108}
+  - component: {fileID: -4308509399321954598}
+  - component: {fileID: -5040315128241534650}
   m_Layer: 0
   m_Name: NailProjectile
   m_TagString: NailProjectile
@@ -133,3 +135,27 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &-4308509399321954598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6112448994627611358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 106c6d3f908e9f0469a108ad5aa8cf7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5040315128241534650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6112448994627611358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd4fede8cc6acd43b9553225f0407a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
