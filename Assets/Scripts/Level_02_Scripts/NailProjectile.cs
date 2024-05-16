@@ -14,6 +14,11 @@ public class NailProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            return;
+        }
+
         rb.isKinematic = true;
 
         transform.parent = collision.transform;
