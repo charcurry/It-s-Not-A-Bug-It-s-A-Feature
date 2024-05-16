@@ -33,18 +33,20 @@ public class CheapGlitchEffect : MonoBehaviour
         }
     }
 
+    // Move the wall towards the target position
     private void MoveObject()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
-        // If the wall has reached the position, choose a new random position
         if (transform.position == targetPosition)
         {
+            // Just pick a random range for more glitch looking effect
             float randomOffset = Random.Range(-maxOffset, maxOffset);
             targetPosition = new Vector3(originalPosition.x + randomOffset, originalPosition.y, originalPosition.z);
         }
     }
 
+    // Start the glitch effect by enabling and disabling the mesh renderer
     private IEnumerator GlitchEffect()
     {
         while (true)
@@ -60,7 +62,7 @@ public class CheapGlitchEffect : MonoBehaviour
         }
     }
 
-    // For when the electrical panel is damaged
+    // Stop the glitch effect
     public void StopGlitchEffect()
     {
         if (glitchCoroutine != null)

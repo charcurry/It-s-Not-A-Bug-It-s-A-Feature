@@ -4,46 +4,35 @@ using UnityEngine;
 
 public class SequenceManager : MonoBehaviour
 {
-    public int[] correctSequence = new int[] { 1, 2, 3, 4, 5 }; // The puzzle order, goes from 1-5
+    [Header("Properties")]
+    [SerializeField] private int[] correctSequence = new int[] { 1, 2, 3, 4, 5 }; // The puzzle order
+    [SerializeField] private OpenDoor doorScript;
+    [SerializeField] private Light[] lights;
+    [SerializeField] private GameObject[] gameObjects;
+    [SerializeField] private Material redMaterial;
+    [SerializeField] private Material greenMaterial;
+    [SerializeField] private Material destroyedMaterial;
+
     private int currentIndex = 0;
-    public OpenDoor doorScript;
-    public Light[] lights; // Array of lights to show progress
-    public GameObject[] gameObjects;
-    public Material redMaterial;
-    public Material greenMaterial;
-    public Material destroyedMaterial;
     private bool puzzleCompleted = false;
 
     void Start()
     {
-        // Set all floor buttons to red material and lights to red color at start
-        foreach (GameObject obj in gameObjects)
-        {
-            obj.GetComponent<Renderer>().material = redMaterial;
-        }
-        foreach (Light light in lights)
-        {
-            light.color = Color.red;
-        }
+        // Set all buttons and lights to inactive state
+        SetButtonMaterial(redMaterial);
+        SetLightsColor(Color.red);
     }
 
     public void TriggerEntered(int triggerId)
     {
-        if (puzzleCompleted) return; // Ignore triggers if the puzzle is already completed
+        // Ignore if puzzle is already completed
+        if (puzzleCompleted)
+            return;
 
-        if (currentIndex < correctSequence.Length && triggerId == correctSequence[currentIndex])
+        // Check if the entered trigger is correct
+        if (CheckTrigger(triggerId))
         {
-            // Progress index and change material colors and light colors if right order
-            gameObjects[currentIndex].GetComponent<Renderer>().material = greenMaterial;
-            lights[currentIndex].color = Color.green;
-            SoundManager.PlaySound(SoundManager.Sound.Correct_Sound, gameObjects[currentIndex].transform.position);
-            currentIndex++;
-            if (currentIndex == correctSequence.Length)
-            {
-                puzzleCompleted = true;
-                SoundManager.PlaySound(SoundManager.Sound.Puzzle_Solved);
-                doorScript.Open();
-            }
+            HandleCorrectOrder();
         }
         else
         {
@@ -51,29 +40,76 @@ public class SequenceManager : MonoBehaviour
         }
     }
 
-    void ResetSequence()
+    // Check if the id matches the order
+    private bool CheckTrigger(int triggerId)
     {
-        if (puzzleCompleted) return;
+        return currentIndex < correctSequence.Length && triggerId == correctSequence[currentIndex];
+    }
 
-        // Reset all floor buttons to red material and lights to red color, and index to 0 if wrong order
-        foreach (GameObject obj in gameObjects)
+    // Handle if correct order
+    private void HandleCorrectOrder()
+    {
+        // Update button material and light color for the current index
+        UpdateMatAndLights(currentIndex, greenMaterial, Color.green);
+        SoundManager.PlaySound(SoundManager.Sound.Correct_Sound, gameObjects[currentIndex].transform.position);
+        currentIndex++;
+
+        // Check if the puzzle is completed
+        if (currentIndex == correctSequence.Length)
         {
-            obj.GetComponent<Renderer>().material = redMaterial;
+            CompletePuzzle();
         }
-        foreach (Light light in lights)
-        {
-            light.color = Color.red;
-        }
+    }
+
+    // Complete the puzzle
+    private void CompletePuzzle()
+    {
+        puzzleCompleted = true;
+        SoundManager.PlaySound(SoundManager.Sound.Puzzle_Solved);
+        doorScript.Open();
+    }
+
+    // Reset the puzzle to its start state
+    private void ResetSequence()
+    {
+        if (puzzleCompleted)
+            return;
+
+        // Reset all buttons and lights
+        SetButtonMaterial(redMaterial);
+        SetLightsColor(Color.red);
         SoundManager.PlaySound(SoundManager.Sound.Incorrect_Sound);
         currentIndex = 0;
     }
 
-    // Set buttons to disabled material for when the electrical panel is damaged
+    // Change button materials when electrical panel is damaged
     public void SetToDisabledMaterial()
+    {
+        SetButtonMaterial(destroyedMaterial);
+    }
+
+    // Set material for all floor buttons
+    private void SetButtonMaterial(Material material)
     {
         foreach (GameObject obj in gameObjects)
         {
-            obj.GetComponent<Renderer>().material = destroyedMaterial;
+            obj.GetComponent<Renderer>().material = material;
         }
+    }
+
+    // Set color for all lights
+    private void SetLightsColor(Color color)
+    {
+        foreach (Light light in lights)
+        {
+            light.color = color;
+        }
+    }
+
+    // Update material and light color for each button
+    private void UpdateMatAndLights(int index, Material material, Color color)
+    {
+        gameObjects[index].GetComponent<Renderer>().material = material;
+        lights[index].color = color;
     }
 }

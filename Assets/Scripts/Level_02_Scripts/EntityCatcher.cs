@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EntityCatcher : MonoBehaviour
 {
+    // This script just tp's anything that has somehow falling out of the map back into the first room
     public Transform eTarget;
 
     private void OnTriggerEnter(Collider other)

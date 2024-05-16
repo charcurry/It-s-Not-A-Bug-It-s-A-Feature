@@ -18,6 +18,7 @@ public class AutoBarrelMaker : MonoBehaviour
         CreateAndLaunchBarrel();
     }
 
+    // Check if a new barrel needs to spawn
     void Update()
     {
         if (currentBarrel == null && !isSpawning)
@@ -26,6 +27,7 @@ public class AutoBarrelMaker : MonoBehaviour
         }
     }
 
+    // Spawn and launch the barrel from the spawn point
     private void CreateAndLaunchBarrel()
     {
         currentBarrel = Instantiate(barrelPrefab, spawnPoint.position, spawnPoint.rotation);
@@ -37,6 +39,7 @@ public class AutoBarrelMaker : MonoBehaviour
         isSpawning = false;
     }
 
+    // Delay spawning
     private IEnumerator DelaySpawn(float delay)
     {
         isSpawning = true;
