@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosiveBarrel : MonoBehaviour
+public class ExplosiveBarrel : Explodable
 {
+    [Header("Properties")]
+    public float explosionRadius = 4f;
+    public float playerExplosionRadius = 5f;
+    public float maxLaunchForce = 125f;
+
+    [Header("References")]
     public GameObject explosionEffect;
-    public float explosionRadius = 5f;
-    public float maxLaunchForce = 150f;
+
+    private bool isExploding = false;
 
     void Update()
     {
@@ -16,71 +22,86 @@ public class ExplosiveBarrel : MonoBehaviour
         }
     }
 
-    void Explode()
+    public override void Explode()
     {
+        if (isExploding)
+            return;
+
+        isExploding = true;
+
         SoundManager.PlaySound(SoundManager.Sound.Explosion, transform.position);
 
-        if (explosionEffect != null)
-        {
-            GameObject explosionInstance = Instantiate(explosionEffect, transform.position, transform.rotation);
-            Destroy(explosionInstance, 1f);
-        }
+        GameObject explosionInstance = Instantiate(explosionEffect, transform.position, transform.rotation);
+        Destroy(explosionInstance, 1f);
 
         // Find player or anything with a rigidbody or collider
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        Collider[] playerColliders = Physics.OverlapSphere(transform.position, playerExplosionRadius);
 
+        // Apply normal explosion force to regular objects
         foreach (var collider in colliders)
         {
-            Rigidbody rb = collider.GetComponent<Rigidbody>();
-            if (rb != null)
+            if (collider.GetComponent<Explodable>() && collider.gameObject != gameObject)
+                collider.GetComponent<Explodable>().Explode();
+
+            if (collider.GetComponent<Rigidbody>())
             {
-                // Calculate force based on distance to barrel
-                float distance = Vector3.Distance(transform.position, collider.transform.position);
-                float forceMagnitude = Mathf.Lerp(maxLaunchForce, 0, distance / explosionRadius);
-                Vector3 forceDirection = (collider.transform.position - transform.position).normalized;
-                rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+                Rigidbody rb = collider.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    // Calculate force based on distance to barrel
+                    float distance = Vector3.Distance(transform.position, collider.transform.position);
+                    float forceMagnitude = Mathf.Lerp(maxLaunchForce, 0, distance / explosionRadius);
+
+                    // Barrel explosion should only apply horizontal force, this is to prevent objects being launched straight through ceilings, into space
+                    Vector3 forceDirection = (collider.transform.position - transform.position).normalized;
+                    forceDirection.y = 0;
+                    forceDirection.Normalize();
+
+                    rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+                }
             }
+        }
 
-            // Tried using mesh render but just replacing the panel with the damage one works fine
-
-            if (collider.gameObject.name == "Electrical Panel")
+        // Apply larger explosion force to player
+        foreach (var collider in playerColliders)
+        {
+            if (collider.CompareTag("Player"))
             {
-                Vector3 panelPosition = collider.transform.position;
-                collider.gameObject.SetActive(false);
-
-                GameObject damagedPanel = GameObject.Find("Electrical Panel Damaged");
-                if (damagedPanel != null)
+                Debug.Log(Vector3.Distance(collider.transform.position, transform.position));
+                if (Vector3.Distance(collider.transform.position, transform.position) < 2)
                 {
-                    damagedPanel.transform.position = panelPosition;
-                    damagedPanel.SetActive(true);
+                    collider.GetComponent<PlayerController>().SetClip(true);
                 }
 
-                // Second door to open
-                GameObject door = GameObject.FindGameObjectWithTag("SecondDoor");
-                if (door != null)
+                if (collider.GetComponent<Rigidbody>())
                 {
-                    door.GetComponent<OpenDoor>().Open();
-                }
-
-                // And finally, the light changes color to green
-                GameObject damageLight = GameObject.FindGameObjectWithTag("SecondDoorLight");
-                if (damageLight != null)
-                {
-                    Light lightComponent = damageLight.GetComponent<Light>();
-                    if (lightComponent != null)
+                    Rigidbody rb = collider.GetComponent<Rigidbody>();
+                    if (rb != null)
                     {
-                        lightComponent.color = Color.green;
+                        // Calculate force based on distance to barrel
+                        float distance = Vector3.Distance(transform.position, collider.transform.position);
+                        float forceMagnitude = Mathf.Lerp(maxLaunchForce, 0, distance / playerExplosionRadius);
+
+                        // Barrel explosion should only apply horizontal force, this is to prevent the player being launched straight through ceilings, into space
+                        Vector3 forceDirection = (collider.transform.position - transform.position).normalized;
+                        forceDirection.y = 0;
+                        forceDirection.Normalize();
+
+                        rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
                     }
                 }
-            }
-
-            // For the glass box blocking the last button
-            if (collider.gameObject.tag == "GlassBox")
-            {
-                collider.gameObject.SetActive(false);
             }
         }
 
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("NailProjectile"))
+        {
+            Explode();
+        }
     }
 }

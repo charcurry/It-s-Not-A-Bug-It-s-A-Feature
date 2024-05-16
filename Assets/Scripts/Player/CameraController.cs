@@ -6,20 +6,19 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform playerTransform;
     public Rigidbody playerRigidbody;  
     public float mouseSensitivity = 1f;
 
     public Vector3 vecRelativeRotation;
+
     void Start()
     {
-        if (playerTransform == null)
-        {
-            playerTransform = transform.parent;
-            playerRigidbody = playerTransform.GetComponent<Rigidbody>();
-        }
+        playerRigidbody = transform.parent.GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        vecRelativeRotation.y = playerRigidbody.GetComponent<PlayerController>().spawnRotation;
     }
+
     void Update()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
@@ -37,10 +36,6 @@ public class CameraController : MonoBehaviour
             vecRelativeRotation.y += 360.0f;
         
         transform.localRotation = Quaternion.Euler(vecRelativeRotation.x, 0f, 0f);
-
-        Quaternion newRotation = Quaternion.Euler(0f, vecRelativeRotation.y, 0f);
-        playerRigidbody.MoveRotation(newRotation);
+        playerRigidbody.MoveRotation(Quaternion.Euler(0f, vecRelativeRotation.y, 0f));
     }
-
-
 }

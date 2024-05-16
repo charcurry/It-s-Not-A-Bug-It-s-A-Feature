@@ -18,6 +18,7 @@ TagManager:
   - SecondDoor
   - SecondDoorLight
   - ButtonBox
+  - NailProjectile
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - UI
   - Player
   - Ground
-  - 
+  - ClipLayer
   - 
   - 
   - 

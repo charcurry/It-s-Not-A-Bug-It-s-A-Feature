@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class PlayerTrigger : MonoBehaviour
 {
-    [HideInInspector] public bool isObjectHere = false; 
-    private int triggerObjects = 0;
+    [HideInInspector] public bool isObjectHere = false;
+    [HideInInspector] public List<Collider> colliderList = new List<Collider>();
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.GetComponent<Collider>().isTrigger)
-            triggerObjects++;
+            colliderList.Add(other);
 
-        if (triggerObjects > 0)
+        if (colliderList.Count > 0)
             isObjectHere = true; 
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.GetComponent<Collider>().isTrigger)
-            triggerObjects--;
+            colliderList.Remove(other);
 
-        if (triggerObjects < 1)
+        if (colliderList.Count < 1)
             isObjectHere = false;
     }
-
 }

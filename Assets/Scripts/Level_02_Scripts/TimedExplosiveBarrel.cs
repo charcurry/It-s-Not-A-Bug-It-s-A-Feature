@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimedExplosiveBarrel : MonoBehaviour
+public class TimedExplosiveBarrel : Explodable
 {
     [Header("Properties")]
-    [SerializeField] private float explosionRadius = 5f;
-    [SerializeField] private float maxLaunchForce = 150f;
+    [SerializeField] private float explosionRadius = 4f;
+    [SerializeField] private float playerExplosionRadius = 5f;
+    [SerializeField] private float maxLaunchForce = 125f;
     [SerializeField] private bool beginTimerOnStart = false;
     [SerializeField] private float timeToExplode = 15;
 
@@ -22,6 +23,7 @@ public class TimedExplosiveBarrel : MonoBehaviour
     private float effectCooldown;
     private bool isExplosionTimerStarted;
     private bool isLedOn;
+    private bool isExploding = false;
 
     private void Start()
     {
@@ -49,7 +51,7 @@ public class TimedExplosiveBarrel : MonoBehaviour
             float timeRemaining = explosionTimeStamp + timeToExplode - Time.time;
 
             // After certain amounts of time have passed, the barrel's led flashs on and off quicker and it beeps faster
-            switch (timeRemaining) 
+            switch (timeRemaining)
             {
                 case >= 10:
                     effectCooldown = 1;
@@ -104,68 +106,73 @@ public class TimedExplosiveBarrel : MonoBehaviour
         effectTimeStamp = Time.time;
     }
 
-    void Explode()
+    public override void Explode()
     {
+        if (isExploding)
+            return;
+
+        isExploding = true;
+
         SoundManager.PlaySound(SoundManager.Sound.Explosion, transform.position);
 
-        if (explosionEffect != null)
-        {
-            GameObject explosionInstance = Instantiate(explosionEffect, transform.position, transform.rotation);
-            Destroy(explosionInstance, 1f);
-        }
+        GameObject explosionInstance = Instantiate(explosionEffect, transform.position, transform.rotation);
+        Destroy(explosionInstance, 1f);
 
         // Find player or anything with a rigidbody or collider
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        Collider[] playerColliders = Physics.OverlapSphere(transform.position, playerExplosionRadius);
 
         foreach (var collider in colliders)
         {
-            Rigidbody rb = collider.GetComponent<Rigidbody>();
-            if (rb != null)
+            if (collider.GetComponent<Explodable>() && collider.gameObject != gameObject)
+                collider.GetComponent<Explodable>().Explode();
+
+            if (collider.GetComponent<Rigidbody>())
             {
-                // Calculate force based on distance to barrel
-                float distance = Vector3.Distance(transform.position, collider.transform.position);
-                float forceMagnitude = Mathf.Lerp(maxLaunchForce, 0, distance / explosionRadius);
-                Vector3 forceDirection = (collider.transform.position - transform.position).normalized;
-                rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+                Rigidbody rb = collider.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    // Calculate force based on distance to barrel
+                    float distance = Vector3.Distance(transform.position, collider.transform.position);
+                    float forceMagnitude = Mathf.Lerp(maxLaunchForce, 0, distance / explosionRadius);
+
+                    // Barrel explosion should only apply horizontal force, this is to prevent the player being launched straight through ceilings, into space
+                    Vector3 forceDirection = (collider.transform.position - transform.position).normalized;
+                    forceDirection.y = 0;
+                    forceDirection.Normalize();
+
+                    rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+                }
             }
+        }
 
-            // Tried using mesh render but just replacing the panel with the damage one works fine
-
-            if (collider.gameObject.name == "Electrical Panel")
+        foreach (var collider in playerColliders)
+        {
+            if (collider.CompareTag("Player"))
             {
-                Vector3 panelPosition = collider.transform.position;
-                collider.gameObject.SetActive(false);
-
-                GameObject damagedPanel = GameObject.Find("Electrical Panel Damaged");
-                if (damagedPanel != null)
+                Debug.Log(Vector3.Distance(collider.transform.position, transform.position));
+                if (Vector3.Distance(collider.transform.position, transform.position) < 2)
                 {
-                    damagedPanel.transform.position = panelPosition;
-                    damagedPanel.SetActive(true);
+                    collider.GetComponent<PlayerController>().SetClip(true);
                 }
 
-                // Second door to open
-                GameObject door = GameObject.FindGameObjectWithTag("SecondDoor");
-                if (door != null)
+                if (collider.GetComponent<Rigidbody>())
                 {
-                    door.GetComponent<OpenDoor>().Open();
-                }
-
-                // And finally, the light changes color to green
-                GameObject damageLight = GameObject.FindGameObjectWithTag("SecondDoorLight");
-                if (damageLight != null)
-                {
-                    Light lightComponent = damageLight.GetComponent<Light>();
-                    if (lightComponent != null)
+                    Rigidbody rb = collider.GetComponent<Rigidbody>();
+                    if (rb != null)
                     {
-                        lightComponent.color = Color.green;
+                        // Calculate force based on distance to barrel
+                        float distance = Vector3.Distance(transform.position, collider.transform.position);
+                        float forceMagnitude = Mathf.Lerp(maxLaunchForce, 0, distance / playerExplosionRadius);
+
+                        // Barrel explosion should only apply horizontal force, this is to prevent the player being launched straight through ceilings, into space
+                        Vector3 forceDirection = (collider.transform.position - transform.position).normalized;
+                        forceDirection.y = 0;
+                        forceDirection.Normalize();
+
+                        rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
                     }
                 }
-            }
-
-            // For the glass box blocking the last button
-            if (collider.gameObject.tag == "GlassBox")
-            {
-                collider.gameObject.SetActive(false);
             }
         }
 

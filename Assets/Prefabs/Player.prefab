@@ -249,6 +249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 780f928e6a18bbc43b54bda9978cdae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPosition: {x: 0, y: 0, z: 0}
+  spawnRotation: 0
   acceleration: 90
   maxSpeed: 120
   decelerationMultiplier: 0.8
@@ -271,10 +273,12 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 179
+  clippingDuration: 1
   dynamicFOVRateOfChange: 10
   renderPlayerMesh: 1
   renderHeldObjectPoint: 0
   canControl: 1
+  canJumpOnHeldObjects: 0
 --- !u!1 &3187935787201092358
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isObjectHere: 0
+  colliderList: []
 --- !u!1 &5568074258705182603
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,7 +587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7ca717bf3c1fc4da4241fdc9675507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
   playerRigidbody: {fileID: 0}
   mouseSensitivity: 1
   vecRelativeRotation: {x: 0, y: 0, z: 0}
@@ -1983,7 +1987,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 770
+  m_VersionIndex: 773
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2104,3 +2108,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isObjectHere: 0
+  colliderList: []

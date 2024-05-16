@@ -6,6 +6,7 @@ using System;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
+using System.Runtime.CompilerServices;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,13 +21,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody heldObject;
     private GameObject heldObjectPoint;
 
-    private Vector3 spawnPosition;
-    private Quaternion spawnRotation;
+    [HideInInspector] public Vector3 spawnPosition;
+    [HideInInspector] public float spawnRotation;
     private Vector3 movementVector;
 
     private float accelerationBaseValue;
     private float maxSpeedBaseValue;
     private float jumpTimeStamp;
+    private float clippingTimeStamp;
     private float heldObjectDistanceCurrent;
 
     private bool isGrounded;
@@ -81,11 +83,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
 
     [Header("Miscellaneous Properties")]
+    [SerializeField] private float clippingDuration = 1;
     [SerializeField] private float dynamicFOVRateOfChange = 10;
     [SerializeField] private bool renderPlayerMesh = true;
     [SerializeField] private bool renderHeldObjectPoint = false;
 
-    [HideInInspector] public bool canControl = true;
+    [HideInInspector] public bool canControl;
+    [HideInInspector] public bool canJumpOnHeldObjects;
+    private bool canJump;
 
     // On Awake it initializes the sound settings.
     // THIS DOES NOT HAVE TO BE IN THIS FILE, IT CAN BE IN ANYTHING THAT EXISTS IN EVERY SCENE
@@ -93,6 +98,9 @@ public class PlayerController : MonoBehaviour
     {
         GameAssets.i.InitializeSoundSettings();
         SoundManager.Initialize();
+
+        spawnPosition = transform.position;
+        spawnRotation = transform.rotation.eulerAngles.y;
     }
 
     // Start is called before the first frame update
@@ -112,8 +120,9 @@ public class PlayerController : MonoBehaviour
         isHoldingObject = false;
         willJump = false;
 
-        spawnPosition = transform.position;
-        spawnRotation = transform.rotation;
+        canControl = true;
+        canJumpOnHeldObjects = true;
+        canJump = true;
 
         rb = GetComponent<Rigidbody>();
         rb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -147,6 +156,7 @@ public class PlayerController : MonoBehaviour
         heldObject = null;
 
         jumpTimeStamp = -0.2f;
+        clippingTimeStamp = -clippingDuration;
 
         if (!renderPlayerMesh)
             transform.GetComponent<MeshRenderer>().forceRenderingOff = true;
@@ -159,6 +169,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         ManageInputs();
+
+        // Sets the ability to clip through objects to false 
+        if (clippingTimeStamp + clippingDuration <= Time.time)
+            SetClip(false);
 
         // Sets the position of the heldObjectPoint
         heldObjectPoint.transform.position = playerCamera.transform.position + (playerCamera.transform.forward * heldObjectDistanceCurrent);
@@ -307,8 +321,16 @@ public class PlayerController : MonoBehaviour
             transform.GetComponent<CapsuleCollider>().center = new Vector3(0, (playerHeight / 2) - 1, 0);
         }
 
+        canJump = true;
+
+        // Checks if the only object the ground trigger detects is the same one as the player is holding, if true, the player can no longer jump
+        if (!canJumpOnHeldObjects)
+            if (groundTrigger.colliderList.Count == 1 && heldObject != null)
+                if (groundTrigger.colliderList[0].gameObject == heldObject.gameObject)
+                    canJump = false;
+
         // If the player is on the ground and pressed jump then add force to the y for a jump
-        if (jumpPressed && isGrounded && !isCrouching)
+        if (jumpPressed && isGrounded && !isCrouching && canJump)
         {
             willJump = true;
             jumpTimeStamp = Time.time;
@@ -431,14 +453,33 @@ public class PlayerController : MonoBehaviour
 
         // Player position gets put back to their spawn point
         transform.position = spawnPosition;
-        transform.rotation = spawnRotation;
         playerCamera.GetComponent<CameraController>().vecRelativeRotation.x = 0;
+        playerCamera.GetComponent<CameraController>().vecRelativeRotation.y = spawnRotation;
+        transform.rotation = Quaternion.Euler(0, spawnRotation, 0);
     }
 
     // Lets other scripts change the players spawn point
     public void SetRespawn(Vector3 position, float facingDirection = 0)
     {
         spawnPosition = position;
-        spawnRotation = Quaternion.Euler(0, facingDirection, 0);
+        spawnRotation = facingDirection;
+    }
+
+    // Lets other scripts set wither or not the player can clip through objects on the clippable layer
+    public void SetClip(bool canClip)
+    {
+        if (canClip)
+        {
+            transform.GetComponent<Collider>().excludeLayers = (1 << 8);
+            groundTrigger.gameObject.GetComponent<Collider>().excludeLayers = (1 << 8);
+            headTrigger.gameObject.GetComponent<Collider>().excludeLayers = (1 << 8);
+            clippingTimeStamp = Time.time;
+        }
+        else
+        {
+            transform.GetComponent<Collider>().excludeLayers = 0;
+            groundTrigger.gameObject.GetComponent<Collider>().excludeLayers = 0;
+            headTrigger.gameObject.GetComponent<Collider>().excludeLayers = 0;
+        }
     }
 }

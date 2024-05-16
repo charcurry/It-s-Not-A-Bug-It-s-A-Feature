@@ -24,6 +24,7 @@ public class UX_Callbacks : MonoBehaviour
     public GameObject Controls;
     public GameObject InGameOverlay;
     public GameObject Paused;
+    public GameObject GameOver;
 
     public GameObject Controls_BackToMenu;
     public GameObject Controls_ReturnToPaused;
@@ -49,6 +50,7 @@ public class UX_Callbacks : MonoBehaviour
         UI_STATE_CONTROLS,
         UI_STATE_INGAME_OVERLAY,
         UI_STATE_PAUSED,
+        UI_STATE_GAMEOVER,
         UI_STATE_MAX,
     }
     public enum EUXCallbacksNoParameter
@@ -98,6 +100,7 @@ public class UX_Callbacks : MonoBehaviour
             Controls_BackToMenu.SetActive(true);
         }
 
+        GameOver.SetActive(UIState == EUICurrentState.UI_STATE_GAMEOVER);
         // Manage visibility of various UI elements based on the current state
         TitleText.SetActive(UIState != EUICurrentState.UI_STATE_INGAME_OVERLAY);
         CanvasBackground.SetActive(UIState != EUICurrentState.UI_STATE_INGAME_OVERLAY);
@@ -204,11 +207,23 @@ public class UX_Callbacks : MonoBehaviour
         }
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        int lastSceneIndex = SceneManager.sceneCountInBuildSettings - 1;
+
+        if (scene.buildIndex == lastSceneIndex)
+        {
+            OnUIStateChange(EUICurrentState.UI_STATE_GAMEOVER);
+        }
+
+    }
     // Initialize KeyStates and start timer
     void Start()
     {
         KeyStates = GetComponent<KeyState>();
         flStartTime = Time.time;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     // Update is called once per frame to check key presses and update UI based on game state
@@ -230,7 +245,7 @@ public class UX_Callbacks : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        else if (UIState == EUICurrentState.UI_STATE_PAUSED)
+        else /*if (UIState == EUICurrentState.UI_STATE_PAUSED)*/
         {
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
