@@ -450,8 +450,12 @@ public class PlayerController : MonoBehaviour
             heldObjectDistanceCurrent = heldObjectDistanceDefault;
             heldObject = null;
         }
+        Respawn();
+    }
 
-        // Player position gets put back to their spawn point
+    // Player position gets put back to their spawn point
+    public void Respawn()
+    {
         transform.position = spawnPosition;
         playerCamera.GetComponent<CameraController>().vecRelativeRotation.x = 0;
         playerCamera.GetComponent<CameraController>().vecRelativeRotation.y = spawnRotation;
