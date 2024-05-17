@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 4007268165071059998}
   - component: {fileID: 2779052287630192690}
   - component: {fileID: 3080100735356252942}
+  - component: {fileID: 6296210391337181179}
   m_Layer: 0
   m_Name: Explosive_Barrel_Green
   m_TagString: Untagged
@@ -377,10 +378,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionRadius: 4
-  playerExplosionRadius: 5
+  playerExplosionRadius: 9
   maxLaunchForce: 125
   beginTimerOnStart: 0
-  timeToExplode: 10
+  timeToExplode: 1.5
   explosionEffect: {fileID: 5928917874525638761, guid: a199f88714b71c94e82271036ab36354, type: 3}
   ledMeshRender: {fileID: 4033892908314188797}
   ledLight: {fileID: 4919039795681742335}
@@ -398,6 +399,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dec9c85c8dd8644ba61e4f33cae7eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &6296210391337181179
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008616620558849255}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1500
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6652692404508723431
 GameObject:
   m_ObjectHideFlags: 0
