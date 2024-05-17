@@ -14,13 +14,13 @@ public class ExplosiveBarrel : Explodable
 
     private bool isExploding = false;
 
-    void Update()
+    /*void Update()
     {
         if (Input.GetKeyDown(KeyCode.R)) // R key for testing
         {
             Explode();
         }
-    }
+    }*/
 
     public override void Explode()
     {

@@ -10,7 +10,14 @@ public class OpenDoor : MonoBehaviour
 
     public void Open()
     {
+        StopAllCoroutines();
         StartCoroutine(OpenRoutine());
+    }
+
+    public void Close()
+    {
+        StopAllCoroutines();
+        StartCoroutine(CloseRoutine());
     }
 
     private IEnumerator OpenRoutine()
@@ -21,6 +28,18 @@ public class OpenDoor : MonoBehaviour
             float moveStep = speed * Time.deltaTime;
             moveDistance += moveStep;
             transform.Translate(0, moveStep, 0);
+            yield return null;
+        }
+    }
+
+    private IEnumerator CloseRoutine()
+    {
+        SoundManager.PlaySound(SoundManager.Sound.Door_Open_2, transform.position);
+        while (moveDistance > 0)
+        {
+            float moveStep = speed * Time.deltaTime;
+            moveDistance -= moveStep;
+            transform.Translate(0, -moveStep, 0);
             yield return null;
         }
     }

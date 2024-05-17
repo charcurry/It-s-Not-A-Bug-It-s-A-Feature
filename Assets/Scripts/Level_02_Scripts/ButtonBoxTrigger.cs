@@ -5,6 +5,7 @@ using UnityEngine;
 public class ButtonBoxTrigger : MonoBehaviour
 {
     public Material switchMaterial;
+    public Material defaultMaterial;
     public GameObject floorButton;
     public Light lightObject;
     public OpenDoor doorScript;
@@ -20,6 +21,18 @@ public class ButtonBoxTrigger : MonoBehaviour
             floorButton.GetComponent<Renderer>().material = switchMaterial;
             lightObject.color = Color.green;
             doorScript.Open();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (isTriggered && other.CompareTag("ButtonBox"))
+        {
+            isTriggered = false;
+            SoundManager.PlaySound(SoundManager.Sound.Incorrect_Sound);
+            floorButton.GetComponent<Renderer>().material = defaultMaterial;
+            lightObject.color = Color.red;
+            doorScript.Close();
         }
     }
 }

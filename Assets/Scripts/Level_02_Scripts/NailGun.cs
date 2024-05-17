@@ -25,14 +25,21 @@ public class NailGun : MonoBehaviour
     private Vector3 originalPosition;
     private Vector3 swayPosition;
     private bool canFire = true;
+    private bool isEnabled = false;
+    private MeshRenderer[] meshRenderers;
 
     private void Start()
     {
         originalPosition = transform.localPosition;
+        meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        HideNailGun();
     }
 
     private void Update()
     {
+        // If not equipped then just do nothing
+        if (!isEnabled) return;
+
         HandleSway();
 
         if (Input.GetButtonDown("Fire2") && canFire)
@@ -43,6 +50,13 @@ public class NailGun : MonoBehaviour
 
         // Smoothly return the nail gun to its original position after recoil
         transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition + swayPosition, Time.deltaTime * recoilSpeed);
+    }
+
+    // Enable the nail gun
+    public void EnableNailGun()
+    {
+        isEnabled = true;
+        ShowNailGun();
     }
 
     // Handle sway of nail gun based on mouse movement
@@ -73,9 +87,7 @@ public class NailGun : MonoBehaviour
         }
 
         StartCoroutine(DestroyProjectile(projectile, destroyTime));
-
         ApplyRecoil();
-
         StartCoroutine(CheckCanFire());
     }
 
@@ -97,5 +109,23 @@ public class NailGun : MonoBehaviour
     {
         yield return new WaitForSeconds(fireDelay);
         canFire = true;
+    }
+
+    // Not being used
+    private void HideNailGun()
+    {
+        foreach (MeshRenderer renderer in meshRenderers)
+        {
+            renderer.enabled = false;
+        }
+    }
+
+    // Show the nail gun
+    private void ShowNailGun()
+    {
+        foreach (MeshRenderer renderer in meshRenderers)
+        {
+            renderer.enabled = true;
+        }
     }
 }
