@@ -143,6 +143,9 @@ public class TimedExplosiveBarrel : Explodable
             if (collider.GetComponent<Explodable>() && collider.gameObject != gameObject)
                 collider.GetComponent<Explodable>().Explode();
 
+            if (collider.GetComponent<Box>())
+                collider.GetComponent<Box>().DestroyBox();
+
             if (collider.GetComponent<Rigidbody>())
             {
                 Rigidbody rb = collider.GetComponent<Rigidbody>();

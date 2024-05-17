@@ -65,11 +65,18 @@ public class UX_Callbacks : MonoBehaviour
         BUTTON_CALLBACK_MAX,
     }
 
+    private bool bTitleUpdateFinished = false;
     void UpdateTitle()
     {
+        if (bTitleUpdateFinished == true )
+        {
+            return;
+        }
+
         if (UnityEngine.Random.value > 0.25f)
         {
             TitleText.GetComponent<TMP_Text>().text = "ITS NOT A BUG ITS A FEATURE";
+            bTitleUpdateFinished = true;
         }
         else
         {
@@ -144,8 +151,6 @@ public class UX_Callbacks : MonoBehaviour
 
     public void OnUXCallback(int eCallback)
     {
-
-
         // Handling different callbacks based on the enum
         switch ((EUXCallbacksNoParameter)eCallback)
         {
