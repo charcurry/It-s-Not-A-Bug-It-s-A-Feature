@@ -32,7 +32,7 @@ public static class SoundManager
         Door_Open_2,
         Box_Collision,
         Key_Collision,
-        Unlocking_Door,
+        Unlocking_Lock,
         Nail_Gun,
         Glass_Shattering,
         Timer_Beep,
@@ -98,6 +98,7 @@ public static class SoundManager
             audioSource.loop = settings.isLooped;
             audioSource.dopplerLevel = settings.dopplerLevel;
             audioSource.rolloffMode = settings.audioRolloffMode;
+            audioSource.volume = settings.volume;
 
             // Once everything is in place, the sound is played.
             audioSource.Play();

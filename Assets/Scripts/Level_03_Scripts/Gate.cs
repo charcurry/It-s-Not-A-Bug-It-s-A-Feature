@@ -17,7 +17,7 @@ public class Gate : MonoBehaviour
                 SoundManager.PlaySound(SoundManager.Sound.Key_Card_Swipe, transform.position);
             else
             {
-                SoundManager.PlaySound(SoundManager.Sound.Unlocking_Door, transform.position);
+                SoundManager.PlaySound(SoundManager.Sound.Unlocking_Lock, transform.position);
             }
             collision.transform.GetComponent<Interactable>().DeactivateObject();
             collision.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
