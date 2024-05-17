@@ -6,6 +6,7 @@ public class KeyCollisionSounds : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        SoundManager.PlaySound(SoundManager.Sound.Key_Collision, transform.position);
+        // FIX THIS
+        // SoundManager.PlaySound(SoundManager.Sound.Key_Collision, transform.position);
     }
 }

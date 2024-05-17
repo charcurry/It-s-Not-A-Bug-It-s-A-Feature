@@ -15,7 +15,7 @@ public class OpenGate : MonoBehaviour
     private void Start()
     {
         isOpening = false;
-        lerpTarget = Quaternion.Euler(0, -80, 0);
+        lerpTarget = Quaternion.Euler(0, +80, 0);
         timeCount = 0.0f;
     }
 
