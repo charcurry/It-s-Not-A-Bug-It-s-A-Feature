@@ -35,8 +35,10 @@ public class SpikeBox : MonoBehaviour
             // Freeze all constraints on the box Rigidbody and freeze rotation
             collision.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             collision.gameObject.GetComponent<Rigidbody>().freezeRotation = true;
-            // Set the rotation of the Rigidbody to (0,0,0)
-            collision.gameObject.GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, 0, 0);
+            // Set the rotation of the Rigidbody to (0,currentYRotation,0)
+            float currentYRotation = collision.gameObject.GetComponent<Rigidbody>().rotation.eulerAngles.y;
+            Quaternion newRotation = Quaternion.Euler(0, currentYRotation, 0);
+            collision.gameObject.GetComponent<Rigidbody>().rotation = newRotation;
             // Spike is activated
             isSpiked = true;
         }

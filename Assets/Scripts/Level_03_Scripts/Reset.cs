@@ -44,16 +44,9 @@ public class Reset : MonoBehaviour
                 break; 
             }
         }
+
         // Player respawns at last checkpoint
-        if (checkpoint.currentRespawnPoint != null)
-        {
-            GameObject.FindWithTag("Player").transform.position = checkpoint.currentRespawnPoint.position;
-        }
-        // Player respawns at spawn
-        else 
-        {
-            GameObject.FindWithTag("Player").transform.position = playerInitialPosition;
-        }
+        GameObject.FindWithTag("Player").GetComponent<PlayerController>().Respawn();
     }
 
     // Player enters the reset

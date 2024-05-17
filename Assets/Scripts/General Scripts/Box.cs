@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class Box : Interactable
 {
-    // Plays a box collision sound whenever the box colliders with something
+    private bool canPlaySound = false;
+
+    private void Start()
+    {
+        // Start the coroutine to enable sound after a delay
+        StartCoroutine(EnableSoundAfterDelay(1f));
+    }
+
+    private IEnumerator EnableSoundAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        canPlaySound = true;
+    }
+
+    // Plays a box collision sound whenever the box collides with something, after the delay
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("Conveyor"))
+        if (canPlaySound && !collision.gameObject.CompareTag("Conveyor"))
         {
             SoundManager.PlaySound(SoundManager.Sound.Box_Collision, transform.position);
         }
