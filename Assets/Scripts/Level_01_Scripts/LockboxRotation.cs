@@ -19,10 +19,6 @@ public class LockBoxRotation : Interactable
         {
             // Freeze rotation of the Rigidbody to prevent it from rotating
             rb.freezeRotation = true;
-            // Set the rotation of the Rigidbody to (0,currentYRotation,0)
-            float currentYRotation = rb.rotation.eulerAngles.y;
-            Quaternion newRotation = Quaternion.Euler(0, currentYRotation, 0);
-            rb.rotation = newRotation;
             // Wait for the next frame
             yield return null;
         }
