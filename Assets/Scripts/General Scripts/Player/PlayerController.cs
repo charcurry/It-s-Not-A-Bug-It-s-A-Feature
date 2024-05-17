@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     private bool isHoldingObject;
     private bool willJump;
 
+    [HideInInspector] public bool usedJumpBug;
+
     private bool upPressed;
     private bool downPressed;
     private bool rightPressed;
@@ -119,6 +121,8 @@ public class PlayerController : MonoBehaviour
         isSprinting = false;
         isHoldingObject = false;
         willJump = false;
+
+        usedJumpBug = false;
 
         canControl = true;
         canJumpOnHeldObjects = true;
@@ -324,10 +328,20 @@ public class PlayerController : MonoBehaviour
         canJump = true;
 
         // Checks if the only object the ground trigger detects is the same one as the player is holding, if true, the player can no longer jump
-        if (!canJumpOnHeldObjects)
-            if (groundTrigger.colliderList.Count == 1 && heldObject != null)
-                if (groundTrigger.colliderList[0].gameObject == heldObject.gameObject)
+        if (groundTrigger.colliderList.Count == 1 && heldObject != null)
+        {
+            if (groundTrigger.colliderList[0].gameObject == heldObject.gameObject)
+            {
+                if (jumpPressed && isGrounded && !isCrouching && canJump)
+                    usedJumpBug = true;
+
+                Debug.Log(usedJumpBug);
+
+                if (!canJumpOnHeldObjects)
                     canJump = false;
+            }
+        }
+
 
         // If the player is on the ground and pressed jump then add force to the y for a jump
         if (jumpPressed && isGrounded && !isCrouching && canJump)
