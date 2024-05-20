@@ -93,13 +93,17 @@ public class UX_Callbacks : MonoBehaviour
     // Handles UI state changes and updates the visibility and functionality of UI elements accordingly
     void OnUIStateChange(EUICurrentState _UIState)
     {
+        bInGame = false;
         UpdateTitle();
         PrevUIState = UIState;
         UIState = _UIState;
 
+        bInGame = UIState == EUICurrentState.UI_STATE_INGAME_OVERLAY || _UIState == EUICurrentState.UI_STATE_PAUSED;
+
         // Toggle visibility of return buttons in the controls menu based on current state
         if (_UIState == EUICurrentState.UI_STATE_CONTROLS && PrevUIState == EUICurrentState.UI_STATE_PAUSED)
         {
+            bInGame = true;
             Controls_ReturnToPaused.SetActive(true);
             Controls_BackToMenu.SetActive(false);
         }
@@ -108,6 +112,8 @@ public class UX_Callbacks : MonoBehaviour
             Controls_ReturnToPaused.SetActive(false);
             Controls_BackToMenu.SetActive(true);
         }
+
+
 
         GameOver.SetActive(UIState == EUICurrentState.UI_STATE_GAMEOVER);
         // Manage visibility of various UI elements based on the current state
@@ -243,7 +249,7 @@ public class UX_Callbacks : MonoBehaviour
         {
             if (UIState == EUICurrentState.UI_STATE_INGAME_OVERLAY)
                 OnUIStateChange(EUICurrentState.UI_STATE_PAUSED);
-            else if (UIState == EUICurrentState.UI_STATE_PAUSED)
+            else if (UIState == EUICurrentState.UI_STATE_PAUSED || bInGame)
                 OnUIStateChange(EUICurrentState.UI_STATE_INGAME_OVERLAY);
         }
         // Manage game time and cursor based on current UI state

@@ -53,6 +53,10 @@ public class Shared_UXVariables : MonoBehaviour
 
     public GameObject CrosshairGameObject;
     public UnityEngine.UI.Image CrosshairImage;
+
+    public UnityEngine.UI.Image CrosshairControlsNormalImage;
+    public UnityEngine.UI.Image CrosshairControlsInteracImage;
+
     public UnityEngine.Sprite CrosshairSquareNormal;
     public UnityEngine.Sprite CrosshairSquareInterac;
     public UnityEngine.Sprite CrosshairCrossNormal;
@@ -87,6 +91,9 @@ public class Shared_UXVariables : MonoBehaviour
         {
             case ECrosshairMode.CROSSHAIR_MODE_CROSS:
                 {
+                    CrosshairControlsNormalImage.sprite = CrosshairCrossNormal;
+                    CrosshairControlsInteracImage.sprite = CrosshairCrossInterac;
+
                     if (bIsInteracting)
                     {
                         CrosshairImage.sprite = CrosshairCrossInterac;
@@ -99,6 +106,9 @@ public class Shared_UXVariables : MonoBehaviour
                 }
             case ECrosshairMode.CROSSHAIR_MODE_SQUARE:
                 {
+                    CrosshairControlsNormalImage.sprite = CrosshairSquareNormal;
+                    CrosshairControlsInteracImage.sprite = CrosshairSquareInterac;
+
                     if (bIsInteracting)
                     {
                         CrosshairImage.sprite = CrosshairSquareInterac;
