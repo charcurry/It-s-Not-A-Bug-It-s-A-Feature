@@ -30,6 +30,7 @@ public class UX_Callbacks : MonoBehaviour
     public GameObject Controls_BackToMenu;
     public GameObject Controls_ReturnToPaused;
 
+    private bool bInGame = false;
     // Timer variables for UI changes
     private float flStartTime = 0.0f;
 
