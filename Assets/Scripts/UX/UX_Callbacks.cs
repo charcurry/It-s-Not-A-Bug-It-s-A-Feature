@@ -25,7 +25,6 @@ public class UX_Callbacks : MonoBehaviour
     public GameObject InGameOverlay;
     public GameObject Paused;
     public GameObject GameOver;
-    public GameObject Logo;
 
     public GameObject Controls_BackToMenu;
     public GameObject Controls_ReturnToPaused;
@@ -125,7 +124,6 @@ public class UX_Callbacks : MonoBehaviour
         InGameOverlay.SetActive(UIState == EUICurrentState.UI_STATE_INGAME_OVERLAY);
         CrosshairImageGameObject.SetActive(UIState == EUICurrentState.UI_STATE_INGAME_OVERLAY);
         Paused.SetActive(UIState == EUICurrentState.UI_STATE_PAUSED);
-        Logo.SetActive(UIState != EUICurrentState.UI_STATE_INGAME_OVERLAY);
     }
 
 
