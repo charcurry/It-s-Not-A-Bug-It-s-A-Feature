@@ -10,7 +10,6 @@ public class ElectricalPanel : Explodable
     [SerializeField] private Light secondDoorLight;
     [SerializeField] private LightFlicker lightFlicker;
     [SerializeField] private SequenceManager sequenceManager;
-    [SerializeField] private CheapGlitchEffect glitchEffect;
 
     public override void Explode()
     {
@@ -21,11 +20,6 @@ public class ElectricalPanel : Explodable
         secondDoorLight.color = Color.green;
         lightFlicker.StartFlickering();
         sequenceManager.SetToDisabledMaterial();
-
-        if (glitchEffect != null)
-        {
-            glitchEffect.StopGlitchEffect();
-        }
 
         SoundManager.PlaySound(SoundManager.Sound.Breaker, transform.position);
         gameObject.SetActive(false);
