@@ -12,6 +12,7 @@ public class CheapGlitchEffect : MonoBehaviour
     [SerializeField] private float maxOnTime = 0.7f;
     [SerializeField] private float minOffTime = 6.0f;
     [SerializeField] private float maxOffTime = 18.0f;
+    [SerializeField] private float startDelay = 7.0f;
 
     private MeshRenderer meshRenderer;
     private Vector3 originalPosition;
@@ -22,6 +23,12 @@ public class CheapGlitchEffect : MonoBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
         originalPosition = transform.position;
+        StartCoroutine(StartWithDelay());
+    }
+
+    private IEnumerator StartWithDelay()
+    {
+        yield return new WaitForSeconds(startDelay);
         glitchCoroutine = StartCoroutine(GlitchEffect());
     }
 
