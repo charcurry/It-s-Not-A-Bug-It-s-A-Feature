@@ -98,7 +98,7 @@ public static class SoundManager
             audioSource.loop = settings.isLooped;
             audioSource.dopplerLevel = settings.dopplerLevel;
             audioSource.rolloffMode = settings.audioRolloffMode;
-            audioSource.volume = settings.volume;
+            audioSource.volume = (settings.volume.currentValue / 100.0f) * (i.masterVolumeSlider.currentValue / 100.0f);
 
             // Once everything is in place, the sound is played.
             audioSource.Play();
