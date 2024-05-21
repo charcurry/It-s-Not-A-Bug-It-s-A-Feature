@@ -38,6 +38,8 @@ public class Shared_UXVariables : MonoBehaviour
     public GameObject narratorVolumeObject;
     public GameObject crosshairModeObject;
 
+    public GameObject gameAssetsManager;
+
     public GameObject crosshairGameObject;
     public UnityEngine.UI.Image crosshairImage;
     public UnityEngine.UI.Image crosshairControlsNormalImage;
@@ -46,6 +48,11 @@ public class Shared_UXVariables : MonoBehaviour
     public UnityEngine.Sprite crosshairSquareInterac;
     public UnityEngine.Sprite crosshairCrossNormal;
     public UnityEngine.Sprite crosshairCrossInterac;
+
+    public float GetSfxVolume()
+    {
+        return sfxVolume;
+    }
 
     void Start()
     {
@@ -91,6 +98,8 @@ public class Shared_UXVariables : MonoBehaviour
 
     void OnSliderUpdate()
     {
+        gameAssetsManager.GetComponent<GameAssets>().InitializeSoundSettings();
+
         mouseSensitivity = sensitivitySliderObject.GetComponent<UISlider>().currentValue;
         masterVolume = masterVolumeObject.GetComponent<UISlider>().currentValue / 100.0f;
         sfxVolume = (sfxVolumeObject.GetComponent<UISlider>().currentValue / 100.0f) * masterVolume;

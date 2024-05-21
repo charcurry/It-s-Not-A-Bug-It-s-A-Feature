@@ -2084,6 +2084,7 @@ MonoBehaviour:
   musicVolumeObject: {fileID: 382312218}
   narratorVolumeObject: {fileID: 1408107177}
   crosshairModeObject: {fileID: 984996735}
+  gameAssetsManager: {fileID: 1956597704}
   crosshairGameObject: {fileID: 79684115}
   crosshairImage: {fileID: 79684117}
   crosshairControlsNormalImage: {fileID: 1419426027}
@@ -2676,7 +2677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1083631886
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3880,7 +3881,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1516410304
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4405,6 +4406,11 @@ RectTransform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1609930319663005613, guid: 5041dc510af1010418791828810d7e93, type: 3}
   m_PrefabInstance: {fileID: 1903182663}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1956597704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4938662484063516730, guid: d5fe167beb72d314f880bf9ee77ca5b8, type: 3}
+  m_PrefabInstance: {fileID: 644439723}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1957455105
 GameObject:
