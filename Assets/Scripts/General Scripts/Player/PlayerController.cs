@@ -98,6 +98,8 @@ public class PlayerController : MonoBehaviour
     // THIS DOES NOT HAVE TO BE IN THIS FILE, IT CAN BE IN ANYTHING THAT EXISTS IN EVERY SCENE
     public void Awake()
     {
+        SoundManager.Initialize();
+        NarratorManager.get.Initialize();
         spawnPosition = transform.position;
         spawnRotation = transform.rotation.eulerAngles.y;
     }
@@ -138,7 +140,7 @@ public class PlayerController : MonoBehaviour
         heldObjectPoint = transform.GetChild(3).gameObject;
 
         if (doesUXVariablesExist)
-            playerCamera.GetComponent<CameraController>().mouseSensitivity = uxVariables.flMouseSensitivity;
+            playerCamera.GetComponent<CameraController>().mouseSensitivity = uxVariables.mouseSensitivity;
         else
             playerCamera.GetComponent<CameraController>().mouseSensitivity = 1;
 
@@ -179,7 +181,7 @@ public class PlayerController : MonoBehaviour
         heldObjectPoint.transform.position = playerCamera.transform.position + (playerCamera.transform.forward * heldObjectDistanceCurrent);
 
         if (doesUXVariablesExist)
-            playerCamera.GetComponent<CameraController>().mouseSensitivity = uxVariables.flMouseSensitivity;
+            playerCamera.GetComponent<CameraController>().mouseSensitivity = uxVariables.mouseSensitivity;
 
         // Calls on GroundTrigger to find out whether or not the player is grounded (:
         if (jumpTimeStamp + 0.2f < Time.time)
@@ -199,7 +201,7 @@ public class PlayerController : MonoBehaviour
         speedXZ = Math.Sqrt(Math.Pow(rb.velocity.x, 2) + Math.Pow(rb.velocity.z, 2));
 
         // Changes fov based on speed
-        if (doesUXVariablesExist && uxVariables.bDynamicFov || !doesUXVariablesExist)
+        if (doesUXVariablesExist && uxVariables.dynamicFov || !doesUXVariablesExist)
             playerCameraComponent.fieldOfView = Mathf.Lerp(playerCameraComponent.fieldOfView, 60 + (15 * Mathf.Clamp01(((float)speedXZ - 2) / ((maxSpeedBaseValue * sprintMultiplier * 1.2f) - 2))), Time.deltaTime * dynamicFOVRateOfChange);
 
         ManageInputs(true);
@@ -240,7 +242,7 @@ public class PlayerController : MonoBehaviour
     private void ObjectInteraction()
     {
         if (doesUXVariablesExist)
-            uxVariables.bIsInteracting = false;
+            uxVariables.isInteracting = false;
 
         if (!isHoldingObject)
         {
@@ -251,7 +253,7 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.GetComponent<Interactable>())
                 {
                     if (doesUXVariablesExist)
-                        uxVariables.bIsInteracting = true;
+                        uxVariables.isInteracting = true;
 
                     if (interactPressed)
                     {
