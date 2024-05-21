@@ -202,7 +202,7 @@ public class TimedExplosiveBarrel : Explodable
     {
         if (collision.gameObject.CompareTag("NailProjectile"))
         {
-            StartExplosionTimer();
+            Explode();
         }
     }
 }

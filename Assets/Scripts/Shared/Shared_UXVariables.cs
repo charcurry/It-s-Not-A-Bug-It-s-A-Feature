@@ -12,109 +12,95 @@ public class Shared_UXVariables : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public enum ECrosshairMode
+    public enum CrosshairMode
     {
-        CROSSHAIR_MODE_CROSS=0,
-        CROSSHAIR_MODE_SQUARE,
-        CROSSHAIR_MODE_MAX,
+        CrosshairModeCross = 0,
+        CrosshairModeSquare,
+        CrosshairModeMax,
     }
 
-    ECrosshairMode CrosshairMode = ECrosshairMode.CROSSHAIR_MODE_CROSS;
+    private CrosshairMode crosshairMode = CrosshairMode.CrosshairModeCross;
 
-    [HideInInspector]
-    public float flMouseSensitivity = 1.0f;
+    [HideInInspector] public float mouseSensitivity = 1.0f;
+    [HideInInspector] public bool dynamicFov = true;
+    [HideInInspector] public bool isInteracting = false;
+    [HideInInspector] public float masterVolume = 1.0f;
+    [HideInInspector] public float sfxVolume = 1.0f;
+    [HideInInspector] public float musicVolume = 1.0f;
+    [HideInInspector] public float narratorVolume = 1.0f;
 
-    [HideInInspector]
-    public bool bDynamicFov = true;
+    [Header("References")]
+    public GameObject sensitivitySliderObject;
+    public GameObject dynamicFovToggleObject;
+    public GameObject masterVolumeObject;
+    public GameObject sfxVolumeObject;
+    public GameObject musicVolumeObject;
+    public GameObject narratorVolumeObject;
+    public GameObject crosshairModeObject;
 
-    [HideInInspector]
-    public bool bIsInteracting = false;
+    public GameObject crosshairGameObject;
+    public UnityEngine.UI.Image crosshairImage;
+    public UnityEngine.UI.Image crosshairControlsNormalImage;
+    public UnityEngine.UI.Image crosshairControlsInteracImage;
+    public UnityEngine.Sprite crosshairSquareNormal;
+    public UnityEngine.Sprite crosshairSquareInterac;
+    public UnityEngine.Sprite crosshairCrossNormal;
+    public UnityEngine.Sprite crosshairCrossInterac;
 
-    [HideInInspector]
-    public float flMasterVolume = 1.0f;
+    void Start()
+    {
+        // Initialization code here if needed
+    }
 
-    [HideInInspector]
-    public float flSfxVolume = 1.0f;
+    void Update()
+    {
+        switch (crosshairMode)
+        {
+            case CrosshairMode.CrosshairModeCross:
+                crosshairControlsNormalImage.sprite = crosshairCrossNormal;
+                crosshairControlsInteracImage.sprite = crosshairCrossInterac;
 
-    [HideInInspector]
-    public float flMusicVolume = 1.0f;
+                if (isInteracting)
+                {
+                    crosshairImage.sprite = crosshairCrossInterac;
+                }
+                else
+                {
+                    crosshairImage.sprite = crosshairCrossNormal;
+                }
+                break;
 
-    [HideInInspector]
-    public float flNarratorVolume = 1.0f;
+            case CrosshairMode.CrosshairModeSquare:
+                crosshairControlsNormalImage.sprite = crosshairSquareNormal;
+                crosshairControlsInteracImage.sprite = crosshairSquareInterac;
 
-    public GameObject SensitivitySliderObject;
-    public GameObject DynamicFovToggleObject;
-    public GameObject MasterVolumeObject;
-    public GameObject SfxVolumeObject;
-    public GameObject MusicVolumeObject;
-    public GameObject NarratorVolumeObject;
+                if (isInteracting)
+                {
+                    crosshairImage.sprite = crosshairSquareInterac;
+                }
+                else
+                {
+                    crosshairImage.sprite = crosshairSquareNormal;
+                }
+                break;
+        }
 
-    public GameObject CrosshairModeObject;
-
-    public GameObject CrosshairGameObject;
-    public UnityEngine.UI.Image CrosshairImage;
-    public UnityEngine.Sprite CrosshairSquareNormal;
-    public UnityEngine.Sprite CrosshairSquareInterac;
-    public UnityEngine.Sprite CrosshairCrossNormal;
-    public UnityEngine.Sprite CrosshairCrossInterac;
-    //  public UI_Slider SensitivitySlider;
-
-    // public UnityEngine.UI.Toggle DynamicFovToggle;
-
+        dynamicFov = dynamicFovToggleObject.GetComponent<UnityEngine.UI.Toggle>().isOn;
+        OnSliderUpdate();
+    }
 
     void OnSliderUpdate()
     {
-        flMouseSensitivity = SensitivitySliderObject.GetComponent<UI_Slider>().CurrentValue;
-        flMasterVolume = MasterVolumeObject.GetComponent<UI_Slider>().CurrentValue / 100.0f;
-        flSfxVolume = (SfxVolumeObject.GetComponent<UI_Slider>().CurrentValue / 100.0f) * flMasterVolume;
-        flMusicVolume = (MusicVolumeObject.GetComponent<UI_Slider>().CurrentValue / 100.0f) * flMasterVolume;
-        flNarratorVolume = (NarratorVolumeObject.GetComponent<UI_Slider>().CurrentValue / 100.0f) * flMasterVolume;
+        mouseSensitivity = sensitivitySliderObject.GetComponent<UISlider>().currentValue;
+        masterVolume = masterVolumeObject.GetComponent<UISlider>().currentValue / 100.0f;
+        sfxVolume = (sfxVolumeObject.GetComponent<UISlider>().currentValue / 100.0f) * masterVolume;
+        musicVolume = (musicVolumeObject.GetComponent<UISlider>().currentValue / 100.0f) * masterVolume;
+        narratorVolume = (narratorVolumeObject.GetComponent<UISlider>().currentValue / 100.0f) * masterVolume;
     }
 
-
-     public void OnCrosshairModeChange(TMP_Dropdown DropDown)
+    public void OnCrosshairModeChange(TMP_Dropdown dropDown)
     {
-        CrosshairMode = (ECrosshairMode)DropDown.value;
-      
-    }
-    void Start()
-    {
-        
-    }
-    void Update()
-    {
-        switch (CrosshairMode)
-        {
-            case ECrosshairMode.CROSSHAIR_MODE_CROSS:
-                {
-                    if (bIsInteracting)
-                    {
-                        CrosshairImage.sprite = CrosshairCrossInterac;
-                    }
-                    else
-                    {
-                        CrosshairImage.sprite = CrosshairCrossNormal;
-                    }
-                    break;
-                }
-            case ECrosshairMode.CROSSHAIR_MODE_SQUARE:
-                {
-                    if (bIsInteracting)
-                    {
-                        CrosshairImage.sprite = CrosshairSquareInterac;
-                    }
-                    else
-                    {
-                        CrosshairImage.sprite = CrosshairSquareNormal;
-                    }
-                    break;
-                }
-        }
-
-        //can be optimized
-        //Register Delegates to receive updates
-        bDynamicFov = DynamicFovToggleObject.GetComponent<UnityEngine.UI.Toggle>().isOn;
-        OnSliderUpdate();
+        crosshairMode = (CrosshairMode)dropDown.value;
     }
 }
 

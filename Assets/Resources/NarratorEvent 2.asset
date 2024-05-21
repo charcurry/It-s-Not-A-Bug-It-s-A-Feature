@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db61d84d1b18d8942b1a3d1a3f886ed7, type: 3}
   m_Name: NarratorEvent 2
   m_EditorClassIdentifier: 
-  NarratorEventID: Start2
+  NarratorEventID: Start3
   audio_clips:
-  - {fileID: 8300000, guid: 4bd006e73bdae17409d2a63ff1756cf5, type: 3}
+  - {fileID: 8300000, guid: a2adff674af53a64cba1c2b4ec0ed878, type: 3}
   subtitles:
   - TEst Subtitle
-  TriggeredById: start2
+  TriggeredById: start3
   TriggeredDelay: 0
   DiscardById: 
   Interruptable: 0

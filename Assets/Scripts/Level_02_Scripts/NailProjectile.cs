@@ -25,4 +25,9 @@ public class NailProjectile : MonoBehaviour
 
         GetComponent<Collider>().enabled = false;
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        rb.isKinematic = false;
+    }
 }
