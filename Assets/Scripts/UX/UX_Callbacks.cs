@@ -28,6 +28,9 @@ public class UXCallbacks : MonoBehaviour
     public GameObject controlsBackToMenu;
     public GameObject controlsReturnToPaused;
 
+    public GameObject settingsBackToMenu;
+    public GameObject settingsReturnToPaused;
+
     private bool inGame = false;
 
     // Timer variables for UI changes
@@ -112,6 +115,18 @@ public class UXCallbacks : MonoBehaviour
         {
             controlsReturnToPaused.SetActive(false);
             controlsBackToMenu.SetActive(true);
+        }
+
+        if (newUIState == UICurrentState.VideoSettings && prevUIState == UICurrentState.Paused)
+        {
+            inGame = true;
+            settingsReturnToPaused.SetActive(true);
+            settingsBackToMenu.SetActive(false);
+        }
+        else
+        {
+            settingsReturnToPaused.SetActive(false);
+            settingsBackToMenu.SetActive(true);
         }
 
         gameOver.SetActive(uiState == UICurrentState.GameOver);
