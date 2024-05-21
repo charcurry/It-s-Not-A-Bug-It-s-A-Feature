@@ -4,48 +4,47 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Slider : MonoBehaviour
+public class UISlider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private Slider Slider;
-    private TMP_Text ValueText;
+    // Private variables
+    private Slider slider;
+    private TMP_Text valueText;
 
-    public float MinValue = 0;
-    public float MaxValue = 100;
-    public float CurrentValue = 0;
+    [Header("Properties")]
+    [SerializeField] private float minValue = 0;
+    [SerializeField] private float maxValue = 100;
+    [SerializeField] public float currentValue = 0;
 
     void Start()
     {
-        Slider = gameObject.GetComponent<Slider>();
+        slider = gameObject.GetComponent<Slider>();
 
         Transform valueTextTransform = transform.Find("Value");
 
         if (valueTextTransform != null)
-            ValueText = valueTextTransform.GetComponent<TMP_Text>();
-        
-        Slider.minValue = MinValue;
-        Slider.maxValue = MaxValue;
-        // Set the initial value
-        Slider.value = CurrentValue;
-        Slider.onValueChanged.AddListener(delegate { OnValueChange(); });
-        // Update the text when starting
+        {
+            valueText = valueTextTransform.GetComponent<TMP_Text>();
+        }
+
+        slider.minValue = minValue;
+        slider.maxValue = maxValue;
+        slider.value = currentValue;
+        slider.onValueChanged.AddListener(delegate { OnValueChange(); });
         UpdateText();
     }
 
-    public void UpdateText()
+    void UpdateText()
     {
-        // Assuming you have a TMP_Text component assigned to ValueText
-        if (ValueText != null)
+        if (valueText != null)
         {
-            float roundedValue = Mathf.Round(Slider.value * 100) / 100; 
-            ValueText.text = roundedValue.ToString("F2"); 
+            float roundedValue = Mathf.Round(slider.value * 100) / 100;
+            valueText.text = roundedValue.ToString("F2");
         }
     }
-    public void OnValueChange()
+
+    void OnValueChange()
     {
-        CurrentValue = Slider.value;
-        // Update text whenever the value changes
+        currentValue = slider.value;
         UpdateText();
     }
-
 }
