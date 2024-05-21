@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1302213610591041108}
   - component: {fileID: -4308509399321954598}
   - component: {fileID: -5040315128241534650}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NailProjectile
   m_TagString: NailProjectile
   m_Icon: {fileID: 0}
