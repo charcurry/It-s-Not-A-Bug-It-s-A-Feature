@@ -13698,8 +13698,20 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -888447324491273448, guid: 19f314f8bb8f04a4a87ee480d0a876bc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -261092084840383615, guid: 19f314f8bb8f04a4a87ee480d0a876bc, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -261092084840383615, guid: 19f314f8bb8f04a4a87ee480d0a876bc, type: 3}
       propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -261092084840383615, guid: 19f314f8bb8f04a4a87ee480d0a876bc, type: 3}
+      propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -261092084840383615, guid: 19f314f8bb8f04a4a87ee480d0a876bc, type: 3}
