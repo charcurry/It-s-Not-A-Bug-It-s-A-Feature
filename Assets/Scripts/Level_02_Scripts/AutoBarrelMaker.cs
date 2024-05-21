@@ -6,47 +6,64 @@ public class AutoBarrelMaker : MonoBehaviour
 {
     // Script that auto creates one red barrel, if barrel has exploded, a new one will spawn
     [Header("Properties")]
-    [SerializeField] private float launchForce = 5f;
     [SerializeField] private float spawnDelay = 1.5f;
+    [SerializeField] private float moveDuration = 1.0f;
+    [SerializeField] private Vector3 platformOffset;
 
     [Header("References")]
     [SerializeField] private GameObject barrelPrefab;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform platform;
 
+    private Vector3 initialPlatformPosition;
     private GameObject currentBarrel;
     private bool isSpawning;
 
     void Start()
     {
-        CreateAndLaunchBarrel();
+        initialPlatformPosition = platform.position;
+        StartCoroutine(SpawnBarrelProcess());
     }
 
-    // Check if a new barrel needs to spawn
     void Update()
     {
         if (currentBarrel == null && !isSpawning)
         {
-            StartCoroutine(DelaySpawn(spawnDelay));
+            StartCoroutine(SpawnBarrelProcess());
         }
     }
 
-    // Spawn and launch the barrel from the spawn point
-    private void CreateAndLaunchBarrel()
+    private IEnumerator SpawnBarrelProcess()
     {
+        isSpawning = true;
+
+        // Move platform down
+        yield return MovePlatform(initialPlatformPosition + platformOffset, moveDuration);
+
+        // Wait for the spawn delay
+        yield return new WaitForSeconds(spawnDelay);
+
+        // Spawn barrel
         currentBarrel = Instantiate(barrelPrefab, spawnPoint.position, spawnPoint.rotation);
-        Rigidbody rb = currentBarrel.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.AddForce(Vector3.up * launchForce, ForceMode.Impulse);
-        }
+
+        // Move platform up
+        yield return MovePlatform(initialPlatformPosition, moveDuration);
+
         isSpawning = false;
     }
 
-    // Delay spawning
-    private IEnumerator DelaySpawn(float delay)
+    private IEnumerator MovePlatform(Vector3 targetPosition, float duration)
     {
-        isSpawning = true;
-        yield return new WaitForSeconds(delay);
-        CreateAndLaunchBarrel();
+        Vector3 startPosition = platform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            platform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        platform.position = targetPosition;
     }
 }
