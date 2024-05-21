@@ -18,15 +18,24 @@ public class BoxSpawner : MonoBehaviour
 
     void Start()
     {
-        CreateAndLaunchBox();
+        CheckAndCreateBox();
     }
 
     // Check if a new box needs to spawn
     void Update()
     {
-        if (currentBox == null && !isSpawning)
+        if (GameObject.FindGameObjectWithTag("ButtonBox") == null && !isSpawning)
         {
             StartCoroutine(DelaySpawn(spawnDelay));
+        }
+    }
+
+    // Check and create the box
+    private void CheckAndCreateBox()
+    {
+        if (GameObject.FindGameObjectWithTag("ButtonBox") == null)
+        {
+            CreateAndLaunchBox();
         }
     }
 
@@ -34,6 +43,7 @@ public class BoxSpawner : MonoBehaviour
     private void CreateAndLaunchBox()
     {
         currentBox = Instantiate(boxPrefab, spawnPoint.position, spawnPoint.rotation);
+        currentBox.tag = "ButtonBox";
         Rigidbody rb = currentBox.GetComponent<Rigidbody>();
         if (rb != null)
         {

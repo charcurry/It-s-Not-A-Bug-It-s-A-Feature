@@ -36,5 +36,12 @@ public class Box : Interactable
         // ADD SOUND HERE
 
         DeactivateObject();
+        StartCoroutine(FullDestroy(5f));
+    }
+
+    private IEnumerator FullDestroy(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }
