@@ -98,6 +98,8 @@ public class PlayerController : MonoBehaviour
     // THIS DOES NOT HAVE TO BE IN THIS FILE, IT CAN BE IN ANYTHING THAT EXISTS IN EVERY SCENE
     public void Awake()
     {
+        SoundManager.Initialize();
+        NarratorManager.get.Initialize();
         spawnPosition = transform.position;
         spawnRotation = transform.rotation.eulerAngles.y;
     }
