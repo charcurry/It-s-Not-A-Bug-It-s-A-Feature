@@ -8,6 +8,7 @@ public class MovingPlatform : MonoBehaviour
     private Vector3 startPoint;
     private Vector3 endPoint;
     private PlatformTrigger topTrigger;
+    [SerializeField]
     private PlatformTrigger bottomTrigger;
     private Vector3 currentDestination;
     private Vector3 previousPosition;
