@@ -68,15 +68,4 @@ public class AutoBarrelMaker : MonoBehaviour
 
         platform.position = targetPosition;
     }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-        }
-        else
-        {
-            Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
-        }
-    }
 }
