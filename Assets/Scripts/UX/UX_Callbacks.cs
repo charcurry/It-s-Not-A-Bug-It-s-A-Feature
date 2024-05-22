@@ -31,6 +31,11 @@ public class UXCallbacks : MonoBehaviour
     public GameObject settingsBackToMenu;
     public GameObject settingsReturnToPaused;
 
+    public RectTransform creditsContent; 
+    public float creditsScrollSpeed = 70f;
+
+    private Vector3 vecCreditsOriginalLocalPosition;
+
     private bool inGame = false;
 
     // Timer variables for UI changes
@@ -98,7 +103,6 @@ public class UXCallbacks : MonoBehaviour
     void OnUIStateChange(UICurrentState newUIState)
     {
         inGame = false;
-        UpdateTitle();
         prevUIState = uiState;
         uiState = newUIState;
 
@@ -128,6 +132,9 @@ public class UXCallbacks : MonoBehaviour
             settingsReturnToPaused.SetActive(false);
             settingsBackToMenu.SetActive(true);
         }
+        
+        if (UICurrentState.InGameOverlay != newUIState && prevUIState != UICurrentState.InGameOverlay)
+            UpdateTitle();
 
         gameOver.SetActive(uiState == UICurrentState.GameOver);
         // Manage visibility of various UI elements based on the current state
@@ -222,6 +229,7 @@ public class UXCallbacks : MonoBehaviour
     {
         keyStates = GetComponent<KeyState>();
         startTime = Time.time;
+        vecCreditsOriginalLocalPosition = creditsContent.localPosition;
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -229,6 +237,10 @@ public class UXCallbacks : MonoBehaviour
     // Update is called once per frame to check key presses and update UI based on game state
     void Update()
     {
+        if (uiState == UICurrentState.GameOver)
+            creditsContent.localPosition += new Vector3(0, creditsScrollSpeed * Time.unscaledDeltaTime, 0);
+        else
+            creditsContent.localPosition = vecCreditsOriginalLocalPosition;
         // Check for ESC key to toggle pause state
         if (keyStates.CheckKeyState(KeyCode.Escape, EKeyQueryMode.KEYQUERY_SINGLEPRESS))
         {
