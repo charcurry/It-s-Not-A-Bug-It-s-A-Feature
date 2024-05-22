@@ -18265,7 +18265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08af04b12d54de540a67d772afc50e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
+  speed: 750
   maxOffset: 2
   minOnTime: 0.4
   maxOnTime: 0.7
@@ -82698,7 +82698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08af04b12d54de540a67d772afc50e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
+  speed: 750
   maxOffset: 2
   minOnTime: 0.4
   maxOnTime: 0.7

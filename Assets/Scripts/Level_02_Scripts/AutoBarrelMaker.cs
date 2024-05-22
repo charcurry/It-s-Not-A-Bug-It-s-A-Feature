@@ -54,7 +54,7 @@ public class AutoBarrelMaker : MonoBehaviour
 
     private IEnumerator MovePlatform(Vector3 targetPosition, float duration)
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.2f);
 
         Vector3 startPosition = platform.position;
         float elapsedTime = 0f;
