@@ -6,6 +6,7 @@ public class HeartButton : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private OpenDoor doorScript;
+    [SerializeField] private AirVent airVentScript;
     [SerializeField] private Material switchMaterial;
     [SerializeField] private Material defaultMaterial;
 
@@ -18,7 +19,12 @@ public class HeartButton : MonoBehaviour
             isTriggered = true;
             SoundManager.PlaySound(SoundManager.Sound.Puzzle_Solved);
             gameObject.GetComponent<Renderer>().material = switchMaterial;
-            doorScript.Open();
+
+            if (doorScript != null)
+                doorScript.Open();
+
+            if (airVentScript != null)
+                airVentScript.TurnOn();
         }
     }
 
@@ -29,7 +35,12 @@ public class HeartButton : MonoBehaviour
             isTriggered = false;
             SoundManager.PlaySound(SoundManager.Sound.Incorrect_Sound);
             gameObject.GetComponent<Renderer>().material = defaultMaterial;
-            doorScript.Close();
+
+            if (doorScript != null)
+                doorScript.Close();
+
+            if (airVentScript != null)
+                airVentScript.TurnOff();
         }
     }
 }
