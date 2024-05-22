@@ -20,7 +20,9 @@ public class GameAssets : MonoBehaviour
         {
             InitializeSoundSettings();
             Initialize();
+            PlaySound(Sound.Back_Ground_Music);
         }
+
         if (!soundSettingsDictionary.ContainsKey(Sound.Air_Vent))
         {
             Debug.Log("Air Vent Sound Settings Not Present");
@@ -120,6 +122,8 @@ public class GameAssets : MonoBehaviour
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
         soundSettingsDictionary.Add(Sound.Key_Card_Swipe, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
+        soundSettingsDictionary.Add(Sound.Back_Ground_Music, new SoundSettings
+            { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = true, isMoving = false, destroyAfterFinished = false, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
         isInitialized = true;
     }
 }

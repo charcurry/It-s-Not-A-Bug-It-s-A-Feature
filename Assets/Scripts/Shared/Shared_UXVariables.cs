@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using static Shared_UXVariables;
+using static SoundManager;
 
 public class Shared_UXVariables : MonoBehaviour
 {

@@ -20,9 +20,6 @@ public static class SoundManager
         Moving_Platform,
         Player_Jump,
         Jump_Landing,
-        Background_Music_1,
-        Background_Music_2,
-        Background_Music_3,
         Correct_Sound,
         Incorrect_Sound,
         Puzzle_Solved,
@@ -40,6 +37,7 @@ public static class SoundManager
         Barrel_Collision,
         Nail_Gun_Hit,
         Key_Card_Swipe,
+        Back_Ground_Music,
     }
 
     // This float is used to determine how frequently the player can play the playerMove sound.

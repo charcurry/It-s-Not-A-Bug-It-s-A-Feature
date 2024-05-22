@@ -19,15 +19,15 @@ public class EndOfLevelTeleport : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 2)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             NarratorManager.get.TriggerHappened("start");
         }
-        if (SceneManager.GetActiveScene().buildIndex == 3)
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             NarratorManager.get.TriggerHappened("start3");
         }
-        if (SceneManager.GetActiveScene().buildIndex == 4)
+        if (SceneManager.GetActiveScene().buildIndex == 3)
         {
             NarratorManager.get.TriggerHappened("start4");
         }

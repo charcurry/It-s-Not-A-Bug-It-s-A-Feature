@@ -17,16 +17,13 @@ public class SignInteractable : Interactable
 
     public void Update()
     {
-        if (isPickedUp)
+        if (isPickedUp && NarratorManager.get.QueuedNarratorEvents.Count == 0 && NarratorManager.get.current_playing_event == null)
         {
             wasInteracted = true;
         }
         if (wasInteracted)
         {
-            if (NarratorManager.get.QueuedNarratorEvents.Count == 0 && NarratorManager.get.current_playing_event == null)
-            {
-                NarratorManager.get.TriggerHappened("signInteracted");
-            }
+            NarratorManager.get.TriggerHappened("signInteracted");
         }
     }
 }
