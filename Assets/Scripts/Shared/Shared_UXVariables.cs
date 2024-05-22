@@ -98,8 +98,8 @@ public class Shared_UXVariables : MonoBehaviour
 
     void OnSliderUpdate()
     {
-        gameAssetsManager.GetComponent<GameAssets>().soundSettingsDictionary.Clear();
-        gameAssetsManager.GetComponent<GameAssets>().InitializeSoundSettings();
+        //gameAssetsManager.GetComponent<GameAssets>().soundSettingsDictionary.Clear();
+        //gameAssetsManager.GetComponent<GameAssets>().InitializeSoundSettings();
 
         mouseSensitivity = sensitivitySliderObject.GetComponent<UISlider>().currentValue;
         masterVolume = masterVolumeObject.GetComponent<UISlider>().currentValue / 100.0f;

@@ -7,18 +7,31 @@ public class AirVent : MonoBehaviour
     private Vector3 gustOrigin;
     private float playerCompensation;
     private bool isOn;
+    private AudioSource audioSource;
+
+    [Header("References")]
+    [SerializeField] private ParticleSystem gustParticle;
 
     [Header("Properties")]
     [SerializeField] private float gustForce = 10;
     [SerializeField] private float airHeight = 10;
     [SerializeField] private bool isOnAtStart = true;
 
+    private void Awake()
+    {
+        audioSource = GetComponentInChildren<AudioSource>();
+    }
+
     private void Start()
     {
         isOn = isOnAtStart;
 
         if (isOn)
-            SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position);
+        {
+            Debug.Log(audioSource);
+            audioSource.Play();
+            gustParticle.Play();
+        }
 
         gameObject.GetComponent<CapsuleCollider>().height = airHeight;
         gameObject.GetComponent<CapsuleCollider>().center = new Vector3(0, (airHeight / 2) - 0.3f, 0);
@@ -49,7 +62,8 @@ public class AirVent : MonoBehaviour
         if (!isOnAtStart)
         {
             isOn = true;
-            SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position);
+            audioSource.Play();
+            gustParticle.Play();
         }
     }
 
@@ -58,9 +72,8 @@ public class AirVent : MonoBehaviour
         if (!isOnAtStart)
         {
             isOn = false;
-
-            // THIS NEEDS TO STOP PLAYING
-            // SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position);
+            audioSource.Stop();
+            gustParticle.Stop();
         }
     }
 }
