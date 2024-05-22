@@ -23,7 +23,10 @@ public class SignInteractable : Interactable
         }
         if (wasInteracted)
         {
-            NarratorManager.get.TriggerHappened("signInteracted");
+            if (NarratorManager.get.QueuedNarratorEvents.Count == 0 && NarratorManager.get.current_playing_event == null)
+            {
+                NarratorManager.get.TriggerHappened("signInteracted");
+            }
         }
     }
 }
