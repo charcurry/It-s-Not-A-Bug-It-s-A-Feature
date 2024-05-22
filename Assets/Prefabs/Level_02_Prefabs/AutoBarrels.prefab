@@ -1190,6 +1190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1488155103947545221}
   - component: {fileID: 8862852013478927778}
+  - component: {fileID: 2533219535103750195}
   m_Layer: 0
   m_Name: AutoBarrels
   m_TagString: Untagged
@@ -1235,6 +1236,27 @@ MonoBehaviour:
   barrelPrefab: {fileID: 6008616620558849255, guid: 0596916945d4cc84c81e369f7e925422, type: 3}
   spawnPoint: {fileID: 5081303875184861272}
   platform: {fileID: 1413025306147083465}
+--- !u!135 &2533219535103750195
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439446702875183048}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 400
+  m_Center: {x: 0, y: -200, z: 0}
 --- !u!1 &2166464428862843935
 GameObject:
   m_ObjectHideFlags: 0
@@ -13588,5 +13610,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 400, y: 25, z: 400}
+  m_Size: {x: 500, y: 50, z: 500}
   m_Center: {x: 0, y: 0, z: 0}

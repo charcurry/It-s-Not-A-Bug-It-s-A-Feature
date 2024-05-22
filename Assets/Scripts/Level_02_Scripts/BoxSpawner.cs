@@ -91,4 +91,15 @@ public class BoxSpawner : MonoBehaviour
             StartCoroutine(SpawnBoxProcess());
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+        }
+        else
+        {
+            Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+        }
+    }
 }
