@@ -1,12 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using System;
-using UnityEngine.UI;
-using Unity.VisualScripting;
-using UnityEngine.UIElements;
-using System.Runtime.CompilerServices;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -171,6 +167,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+            canJumpOnHeldObjects = true;
+        else
+            canJumpOnHeldObjects = false;
+
         ManageInputs();
 
         // Sets the ability to clip through objects to false 
