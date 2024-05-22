@@ -76,8 +76,10 @@ public class NailGun : MonoBehaviour
 
         canFire = false;
 
-        // Fire nail projectile
-        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        // Calculate rotation cause prefab wants to be dumb and not work
+        Quaternion correctRotation = firePoint.rotation * Quaternion.Euler(0, 90, 180);
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, correctRotation);
+
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
         if (rb != null)
