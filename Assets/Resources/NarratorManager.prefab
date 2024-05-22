@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5353ac56adca5134cbb1c8daa7d702de, type: 2}
   - {fileID: 11400000, guid: 3f37415531baecd4fa9df6edb16c7546, type: 2}
   - {fileID: 11400000, guid: 938a101ceaedb714cb8830401ca13e8b, type: 2}
+  - {fileID: 11400000, guid: 79f161fe33b4122408636d732b85d201, type: 2}
   InterruptedNarratorEvents: []
   DoneNarratorEvents: []
 --- !u!82 &-7913461020679349155

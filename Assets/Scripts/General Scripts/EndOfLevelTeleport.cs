@@ -22,7 +22,6 @@ public class EndOfLevelTeleport : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             NarratorManager.get.TriggerHappened("start");
-            NarratorManager.get.TriggerHappened("start2");
         }
         if (SceneManager.GetActiveScene().buildIndex == 3)
         {

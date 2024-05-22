@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SignInteractable : Interactable
 {
+    public bool wasInteracted = false;
     public override void interaction()
     {
         if (!canInteract())
@@ -12,5 +13,17 @@ public class SignInteractable : Interactable
         isPickedUp = !isPickedUp;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.None;
+    }
+
+    public void Update()
+    {
+        if (isPickedUp)
+        {
+            wasInteracted = true;
+        }
+        if (wasInteracted)
+        {
+            NarratorManager.get.TriggerHappened("signInteracted");
+        }
     }
 }

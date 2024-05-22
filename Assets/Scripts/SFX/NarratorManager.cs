@@ -73,6 +73,14 @@ public class NarratorManager : MonoBehaviour
             last_time_checked_queued_narrator = Time.time;
             CheckQueue();
         }
+
+        foreach (NarratorEvent narratorEvent in DoneNarratorEvents)
+        {
+            if (narratorEvent.NarratorEventID == "Start1")
+            {
+                get.TriggerHappened("start2");
+            }
+        }
     }
 
     public void CheckQueue()
