@@ -103,7 +103,6 @@ public class UXCallbacks : MonoBehaviour
     void OnUIStateChange(UICurrentState newUIState)
     {
         inGame = false;
-        UpdateTitle();
         prevUIState = uiState;
         uiState = newUIState;
 
@@ -133,6 +132,9 @@ public class UXCallbacks : MonoBehaviour
             settingsReturnToPaused.SetActive(false);
             settingsBackToMenu.SetActive(true);
         }
+        
+        if (UICurrentState.InGameOverlay != newUIState && prevUIState != UICurrentState.InGameOverlay)
+            UpdateTitle();
 
         gameOver.SetActive(uiState == UICurrentState.GameOver);
         // Manage visibility of various UI elements based on the current state
