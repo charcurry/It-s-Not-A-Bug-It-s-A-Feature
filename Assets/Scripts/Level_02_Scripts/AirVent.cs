@@ -17,13 +17,18 @@ public class AirVent : MonoBehaviour
     [SerializeField] private float airHeight = 10;
     [SerializeField] private bool isOnAtStart = true;
 
-    private void Start()
+    private void Awake()
     {
         audioSource = GetComponentInChildren<AudioSource>();
+    }
+
+    private void Start()
+    {
         isOn = isOnAtStart;
 
         if (isOn)
         {
+            Debug.Log(audioSource);
             audioSource.Play();
             gustParticle.Play();
         }

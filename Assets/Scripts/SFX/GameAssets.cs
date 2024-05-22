@@ -12,10 +12,20 @@ public class GameAssets : MonoBehaviour
     {
         if (GameObject.Find("UX_Main") != null)
             uxVariables = GameObject.Find("UX_Main").GetComponent<Shared_UXVariables>();
+    }
+
+    public void Update()
+    {
         if (!isInitialized)
         {
             InitializeSoundSettings();
             Initialize();
+        }
+        if (!soundSettingsDictionary.ContainsKey(Sound.Air_Vent))
+        {
+            Debug.Log("Air Vent Sound Settings Not Present");
+            soundSettingsDictionary.Add(Sound.Air_Vent, new SoundSettings
+            { maxDistance = 17.5f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Linear, isLooped = true, isMoving = false, destroyAfterFinished = false, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
         }
     }
 
