@@ -47,6 +47,16 @@ public static class SoundManager
     // The PlayerController script sets the playerMoveTimerMax to its value.
     public static float playerMoveTimerMax;
 
+    private static SoundSettings defaultSoundSettings = new SoundSettings
+    {
+        maxDistance = 100f,
+        dopplerLevel = 0f,
+        audioRolloffMode = AudioRolloffMode.Logarithmic,
+        isLooped = false,
+        isMoving = false,
+        destroyAfterFinished = true,
+    };
+
     // This dictionary is used to store the last time a sound was played.
     private static Dictionary<Sound, float> soundTimerDictionary;
 
@@ -69,6 +79,7 @@ public static class SoundManager
             audioSource.clip = GetAudioClip(sound);
 
             // This gets the sound settings from the GameAssets object for the correct sound.
+
             SoundSettings settings = i.soundSettingsDictionary[sound];
 
             // This checks if the sound is moving.

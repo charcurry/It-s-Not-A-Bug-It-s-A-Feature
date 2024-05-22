@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static SoundManager;
 
 public class GameAssets : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class GameAssets : MonoBehaviour
             uxVariables = GameObject.Find("UX_Main").GetComponent<Shared_UXVariables>();
         if (!isInitialized)
         {
-            i.InitializeSoundSettings();
+            InitializeSoundSettings();
+            Initialize();
         }
     }
 
@@ -31,7 +33,7 @@ public class GameAssets : MonoBehaviour
     }
 
     // This dictionary is used to store the sound settings for each sound.
-    public Dictionary<SoundManager.Sound, SoundSettings> soundSettingsDictionary = new Dictionary<SoundManager.Sound, SoundSettings>();
+    public Dictionary<Sound, SoundSettings> soundSettingsDictionary = new();
 
     public UISlider masterVolumeSlider = null;
     // This array is used to store all the sound audio clips.
@@ -43,7 +45,7 @@ public class GameAssets : MonoBehaviour
     [Serializable]
     public class SoundAudioClip
     {
-        public SoundManager.Sound sound;
+        public Sound sound;
         public AudioClip audioClip;
     }
 
@@ -66,48 +68,47 @@ public class GameAssets : MonoBehaviour
     {
 
         masterVolumeSlider = uxVariables.masterVolumeObject.GetComponent<UISlider>();
-
-        soundSettingsDictionary.Add(SoundManager.Sound.Moving_Platform, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Moving_Platform, new SoundSettings
             { maxDistance = 25f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = true, isMoving = false, destroyAfterFinished = false, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Player_Jump, new SoundSettings 
+        soundSettingsDictionary.Add(Sound.Player_Jump, new SoundSettings 
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Jump_Landing, new SoundSettings 
+        soundSettingsDictionary.Add(Sound.Jump_Landing, new SoundSettings 
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Player_Move, new SoundSettings 
+        soundSettingsDictionary.Add(Sound.Player_Move, new SoundSettings 
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Correct_Sound, new SoundSettings 
+        soundSettingsDictionary.Add(Sound.Correct_Sound, new SoundSettings 
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Incorrect_Sound, new SoundSettings 
+        soundSettingsDictionary.Add(Sound.Incorrect_Sound, new SoundSettings 
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Puzzle_Solved, new SoundSettings 
+        soundSettingsDictionary.Add(Sound.Puzzle_Solved, new SoundSettings 
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Explosion, new SoundSettings 
+        soundSettingsDictionary.Add(Sound.Explosion, new SoundSettings 
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Air_Vent, new SoundSettings 
+        soundSettingsDictionary.Add(Sound.Air_Vent, new SoundSettings 
             { maxDistance = 17.5f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Linear, isLooped = true, isMoving = false, destroyAfterFinished = false, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Door_Open_1, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Door_Open_1, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Door_Open_2, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Door_Open_2, new SoundSettings
             { maxDistance = 200f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Box_Collision, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Box_Collision, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Key_Collision, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Key_Collision, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Unlocking_Lock, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Unlocking_Lock, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Nail_Gun, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Nail_Gun, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Timer_Beep, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Timer_Beep, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Glass_Shattering, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Glass_Shattering, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Breaker, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Breaker, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Barrel_Collision, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Barrel_Collision, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Nail_Gun_Hit, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Nail_Gun_Hit, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
-        soundSettingsDictionary.Add(SoundManager.Sound.Key_Card_Swipe, new SoundSettings
+        soundSettingsDictionary.Add(Sound.Key_Card_Swipe, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
         isInitialized = true;
     }
