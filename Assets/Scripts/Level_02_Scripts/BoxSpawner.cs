@@ -8,16 +8,21 @@ public class BoxSpawner : MonoBehaviour
     [Header("Properties")]
     [SerializeField] private float launchForce = 5f;
     [SerializeField] private float spawnDelay = 1.5f;
+    [SerializeField] private float moveDuration = 1.0f;
+    [SerializeField] private Vector3 platformOffset;
 
     [Header("References")]
     [SerializeField] private GameObject boxPrefab;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform platform;
 
+    private Vector3 initialPlatformPosition;
     private GameObject currentBox;
     private bool isSpawning;
 
     void Start()
     {
+        initialPlatformPosition = platform.position;
         CheckAndCreateBox();
     }
 
@@ -26,17 +31,28 @@ public class BoxSpawner : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("ButtonBox") == null && !isSpawning)
         {
-            StartCoroutine(DelaySpawn(spawnDelay));
+            StartCoroutine(SpawnBoxProcess());
         }
     }
 
-    // Check and create the box
-    private void CheckAndCreateBox()
+    // Spawning the box
+    private IEnumerator SpawnBoxProcess()
     {
-        if (GameObject.FindGameObjectWithTag("ButtonBox") == null)
-        {
-            CreateAndLaunchBox();
-        }
+        isSpawning = true;
+
+        // Move platform down
+        yield return MovePlatform(initialPlatformPosition + platformOffset, moveDuration);
+
+        // Wait for the spawn delay
+        yield return new WaitForSeconds(spawnDelay);
+
+        // Spawn box
+        CreateAndLaunchBox();
+
+        // Move platform up
+        yield return MovePlatform(initialPlatformPosition, moveDuration);
+
+        isSpawning = false;
     }
 
     // Spawn and launch the box from the spawn point
@@ -49,14 +65,30 @@ public class BoxSpawner : MonoBehaviour
         {
             rb.AddForce(Vector3.up * launchForce, ForceMode.Impulse);
         }
-        isSpawning = false;
     }
 
-    // Delay spawning
-    private IEnumerator DelaySpawn(float delay)
+    // Move platform
+    private IEnumerator MovePlatform(Vector3 targetPosition, float duration)
     {
-        isSpawning = true;
-        yield return new WaitForSeconds(delay);
-        CreateAndLaunchBox();
+        Vector3 startPosition = platform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            platform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        platform.position = targetPosition;
+    }
+
+    // Check for box if not in scene or something idk
+    private void CheckAndCreateBox()
+    {
+        if (GameObject.FindGameObjectWithTag("ButtonBox") == null)
+        {
+            StartCoroutine(SpawnBoxProcess());
+        }
     }
 }
