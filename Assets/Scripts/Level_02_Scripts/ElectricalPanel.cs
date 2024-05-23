@@ -10,6 +10,7 @@ public class ElectricalPanel : Explodable
     [SerializeField] private Light secondDoorLight;
     [SerializeField] private LightFlicker lightFlicker;
     [SerializeField] private SequenceManager sequenceManager;
+    [SerializeField] private AutoBarrelMaker autoBarrelMaker;
 
     public override void Explode()
     {
@@ -20,6 +21,11 @@ public class ElectricalPanel : Explodable
         secondDoorLight.color = Color.green;
         lightFlicker.StartFlickering();
         sequenceManager.SetToDisabledMaterial();
+
+        if (autoBarrelMaker != null)
+        {
+            autoBarrelMaker.enabled = false;
+        }
 
         SoundManager.PlaySound(SoundManager.Sound.Breaker, transform.position);
         gameObject.SetActive(false);
