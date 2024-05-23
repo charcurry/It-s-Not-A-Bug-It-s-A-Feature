@@ -7,7 +7,6 @@ using static SoundManager;
 public class GameAssets : MonoBehaviour
 {
     public bool isInitialized = false;
-    public AudioSource backGroundMusic;
 
     private void Start()
     {
@@ -21,11 +20,6 @@ public class GameAssets : MonoBehaviour
         {
             InitializeSoundSettings();
             Initialize();
-            PlaySound(Sound.Back_Ground_Music);
-        }
-        if (backGroundMusic == null)
-        {
-            backGroundMusic = GameObject.Find("Back_Ground_Music_Sound").GetComponent<AudioSource>();
         }
     }
 

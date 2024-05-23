@@ -101,7 +101,7 @@ public class Shared_UXVariables : MonoBehaviour
     {
         //gameAssetsManager.GetComponent<GameAssets>().soundSettingsDictionary.Clear();
         //gameAssetsManager.GetComponent<GameAssets>().InitializeSoundSettings();
-        gameAssetsManager.GetComponent<GameAssets>().backGroundMusic.volume = musicVolume;
+        gameAssetsManager.GetComponent<GameAssets>().GetComponent<AudioSource>().volume = musicVolume;
         AirVent[] airVents = FindObjectsOfType<AirVent>();
         foreach (AirVent airVent in airVents)
         {
