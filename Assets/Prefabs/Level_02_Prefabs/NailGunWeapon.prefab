@@ -86,7 +86,7 @@ MonoBehaviour:
   swayAmount: 0.1
   swaySmoothness: 10
   playerCamera: {fileID: 0}
-  projectilePrefab: {fileID: 6112448994627611358, guid: 5ed71462794768a4492e7d1189f63b36, type: 3}
+  projectilePrefab: {fileID: 914870742601082267, guid: b7c1bd7bb90c7d9419f717a4eee588bc, type: 3}
   firePoint: {fileID: 5086957160333659364}
 --- !u!1 &7159298773241261114
 GameObject:
