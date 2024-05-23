@@ -31,7 +31,9 @@ public class UXCallbacks : MonoBehaviour
     public GameObject settingsBackToMenu;
     public GameObject settingsReturnToPaused;
 
-    public RectTransform creditsContent; 
+    public RectTransform creditsContent;
+    public RectTransform creditsHolder;
+    public RectTransform creditsEndGameObject;
     public float creditsScrollSpeed = 70f;
 
     private Vector3 vecCreditsOriginalLocalPosition;
@@ -237,8 +239,10 @@ public class UXCallbacks : MonoBehaviour
     // Update is called once per frame to check key presses and update UI based on game state
     void Update()
     {
-        if (uiState == UICurrentState.GameOver)
+        if (uiState == UICurrentState.GameOver) {
+            if (creditsHolder.position.y - creditsEndGameObject.position.y > 10)
             creditsContent.localPosition += new Vector3(0, creditsScrollSpeed * Time.unscaledDeltaTime, 0);
+        }
         else
             creditsContent.localPosition = vecCreditsOriginalLocalPosition;
         // Check for ESC key to toggle pause state
