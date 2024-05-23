@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInitialized: 0
-  canPlayBackgroundMusic: 0
+  backGroundMusic: {fileID: 0}
   masterVolumeSlider: {fileID: 0}
   soundAudioClipArray:
   - sound: 4
@@ -55,7 +55,7 @@ MonoBehaviour:
   - sound: 2
     audioClip: {fileID: 8300000, guid: b719eabf615e0e047aa9afc4e0f4fbc5, type: 3}
   - sound: 9
-    audioClip: {fileID: 8300000, guid: 16d7a20ba3c538e488cc97bf76079d17, type: 3}
+    audioClip: {fileID: 8300000, guid: 14a0b567c297f644ca270c61eb8f53ec, type: 3}
   - sound: 10
     audioClip: {fileID: 8300000, guid: 80e5e0a4927e80441a3a1305dd0f9fb9, type: 3}
   - sound: 11
