@@ -6881,6 +6881,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1433193269}
     m_Modifications:
+    - target: {fileID: 208395105863170450, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1369a5ff68513de459329c0ce1549fbb, type: 2}
     - target: {fileID: 439446702875183048, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
       propertyPath: m_Name
       value: AutoBarrels (1)
@@ -6937,6 +6941,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1445381762}
+    - target: {fileID: 3486306823117157151, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1369a5ff68513de459329c0ce1549fbb, type: 2}
     - target: {fileID: 6286663092594775400, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6949,6 +6957,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2098189339}
+    - target: {fileID: 7608967681628387457, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1369a5ff68513de459329c0ce1549fbb, type: 2}
     - target: {fileID: 7853211426206182651, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -13060,6 +13072,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1433193269}
     m_Modifications:
+    - target: {fileID: 208395105863170450, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1369a5ff68513de459329c0ce1549fbb, type: 2}
     - target: {fileID: 439446702875183048, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
       propertyPath: m_Name
       value: AutoBarrels (2)
@@ -13116,6 +13132,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2144968401}
+    - target: {fileID: 3486306823117157151, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1369a5ff68513de459329c0ce1549fbb, type: 2}
     - target: {fileID: 6286663092594775400, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -13128,6 +13148,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1563888488}
+    - target: {fileID: 7608967681628387457, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1369a5ff68513de459329c0ce1549fbb, type: 2}
     - target: {fileID: 7853211426206182651, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -26134,6 +26158,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1433193269}
     m_Modifications:
+    - target: {fileID: 208395105863170450, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1369a5ff68513de459329c0ce1549fbb, type: 2}
     - target: {fileID: 439446702875183048, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
       propertyPath: m_Name
       value: AutoBarrels
@@ -26190,6 +26218,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2132865097}
+    - target: {fileID: 3486306823117157151, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1369a5ff68513de459329c0ce1549fbb, type: 2}
     - target: {fileID: 6286663092594775400, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -26202,6 +26234,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 693464347}
+    - target: {fileID: 7608967681628387457, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1369a5ff68513de459329c0ce1549fbb, type: 2}
     - target: {fileID: 7853211426206182651, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -49657,6 +49693,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1433193269}
     m_Modifications:
+    - target: {fileID: 208395105863170450, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1369a5ff68513de459329c0ce1549fbb, type: 2}
     - target: {fileID: 439446702875183048, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
       propertyPath: m_Name
       value: AutoBarrels (3)
@@ -49713,6 +49753,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1726650987}
+    - target: {fileID: 3486306823117157151, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1369a5ff68513de459329c0ce1549fbb, type: 2}
     - target: {fileID: 6286663092594775400, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -49725,6 +49769,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1195104010}
+    - target: {fileID: 7608967681628387457, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1369a5ff68513de459329c0ce1549fbb, type: 2}
     - target: {fileID: 7853211426206182651, guid: cc93fbe3567a64a459e39c5d5f304459, type: 3}
       propertyPath: m_Mesh
       value: 
