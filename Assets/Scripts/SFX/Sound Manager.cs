@@ -120,6 +120,10 @@ public static class SoundManager
             if (settings.destroyAfterFinished)
             {
                 Destroy(soundGameObject, audioSource.clip.length);
+                if (sound == Sound.Air_Vent)
+                {
+                    Debug.Log("air vent destoryed");
+                }
             }
         }
     }

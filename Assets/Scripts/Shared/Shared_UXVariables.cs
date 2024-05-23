@@ -113,6 +113,11 @@ public class Shared_UXVariables : MonoBehaviour
         {
             movingPlatform.GetComponent<AudioSource>().volume = sfxVolume;
         }
+        GameObject[] conveyorSegments = GameObject.FindGameObjectsWithTag("Conveyor_Segment_Sound");
+        foreach (GameObject conveyorSegment in conveyorSegments)
+        {
+            conveyorSegment.GetComponent<AudioSource>().volume = sfxVolume * 0.1f;
+        }
 
         mouseSensitivity = sensitivitySliderObject.GetComponent<UISlider>().currentValue;
         masterVolume = masterVolumeObject.GetComponent<UISlider>().currentValue / 100.0f;

@@ -27,7 +27,7 @@ public class ConveyorBelt : MonoBehaviour
 
         foreach (Transform segment in conveyorSegments)
         {
-            SoundManager.PlaySound(SoundManager.Sound.Conveyor_Belt, segment.position, "Conveyor_Segment");
+            SoundManager.PlaySound(SoundManager.Sound.Conveyor_Belt, segment.position, "Conveyor_Segment_Sound");
         }
     }
 

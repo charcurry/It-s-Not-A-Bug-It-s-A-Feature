@@ -22,6 +22,7 @@ TagManager:
   - Air_Vent
   - Moving_Platform
   - Conveyor_Segment
+  - Conveyor_Segment_Sound
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AirVent : MonoBehaviour
@@ -7,7 +8,7 @@ public class AirVent : MonoBehaviour
     private Vector3 gustOrigin;
     private float playerCompensation;
     private bool isOn;
-    private AudioSource audioSource;
+    private Transform audioSource;
 
     [Header("References")]
     [SerializeField] private ParticleSystem gustParticle;
@@ -57,6 +58,7 @@ public class AirVent : MonoBehaviour
         {
             isOn = true;
             SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position, "Air_Vent", gameObject);
+            audioSource = transform.Find("Air_Vent_Sound");
             gustParticle.Play();
         }
     }
@@ -66,8 +68,8 @@ public class AirVent : MonoBehaviour
         if (!isOnAtStart)
         {
             isOn = false;
-            audioSource = GetComponentInChildren<AudioSource>();
-            audioSource.Stop();
+            Destroy(audioSource.gameObject);
+            audioSource = null;
             gustParticle.Stop();
         }
     }
