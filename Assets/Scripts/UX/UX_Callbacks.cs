@@ -84,7 +84,7 @@ public class UXCallbacks : MonoBehaviour
             return;
         }
 
-        if (UnityEngine.Random.value > 0.25f)
+        if (UnityEngine.Random.value > 0.75f)
         {
             titleText.GetComponent<TMP_Text>().text = "ITS NOT A BUG ITS A FEATURE";
             titleUpdateFinished = true;
