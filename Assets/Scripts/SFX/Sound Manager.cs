@@ -45,16 +45,6 @@ public static class SoundManager
     // The PlayerController script sets the playerMoveTimerMax to its value.
     public static float playerMoveTimerMax;
 
-    private static SoundSettings defaultSoundSettings = new SoundSettings
-    {
-        maxDistance = 100f,
-        dopplerLevel = 0f,
-        audioRolloffMode = AudioRolloffMode.Logarithmic,
-        isLooped = false,
-        isMoving = false,
-        destroyAfterFinished = true,
-    };
-
     // This dictionary is used to store the last time a sound was played.
     private static Dictionary<Sound, float> soundTimerDictionary;
 
@@ -66,13 +56,19 @@ public static class SoundManager
     }
 
     // This method is used to play a sound.
-    public static void PlaySound(Sound sound, Vector3? position = null, GameObject movingObject = null)
+    public static void PlaySound(Sound sound, Vector3? position = null, string tag = null, GameObject movingObject = null)
     {   
         // This checks if a sound can be played. (check below to see how it works)
         if (CanPlaySound(sound))
         {
             // This creates a new game object with an audio source and puts the correct audio clip in the audioSource.
             GameObject soundGameObject = new(sound + "_Sound");
+
+            if (tag != null)
+            {
+                soundGameObject.tag = tag;
+            }
+
             AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
             audioSource.clip = GetAudioClip(sound);
 

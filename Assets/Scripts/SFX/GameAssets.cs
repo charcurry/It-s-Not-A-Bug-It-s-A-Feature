@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using static SoundManager;
+using Unity.VisualScripting;
 
 public class GameAssets : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class GameAssets : MonoBehaviour
     {
         get
         {
-            if (_i == null) _i = (Instantiate(Resources.Load("GameAssets")) as GameObject).GetComponent<GameAssets>();
+            if (_i == null) _i = FindObjectOfType<GameAssets>();
             return _i;
         }
     }

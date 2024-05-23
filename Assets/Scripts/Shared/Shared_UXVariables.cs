@@ -102,11 +102,12 @@ public class Shared_UXVariables : MonoBehaviour
         //gameAssetsManager.GetComponent<GameAssets>().soundSettingsDictionary.Clear();
         //gameAssetsManager.GetComponent<GameAssets>().InitializeSoundSettings();
         gameAssetsManager.GetComponent<GameAssets>().GetComponent<AudioSource>().volume = musicVolume;
-        AirVent[] airVents = FindObjectsOfType<AirVent>();
-        foreach (AirVent airVent in airVents)
+        GameObject[] airVents = GameObject.FindGameObjectsWithTag("Air_Vent");
+        foreach (GameObject airVent in airVents)
         {
-            airVent.audioSource.volume = sfxVolume;
+            airVent.GetComponent<AudioSource>().volume = sfxVolume;
         }
+        NarratorManager.get.audioSource.volume = narratorVolume;
 
         mouseSensitivity = sensitivitySliderObject.GetComponent<UISlider>().currentValue;
         masterVolume = masterVolumeObject.GetComponent<UISlider>().currentValue / 100.0f;

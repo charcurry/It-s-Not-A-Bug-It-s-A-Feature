@@ -29,7 +29,8 @@ public class AirVent : MonoBehaviour
         if (isOn)
         {
             Debug.Log(audioSource);
-            audioSource.Play();
+            SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position, "Air_Vent");
+            //audioSource.Play();
             gustParticle.Play();
         }
 
@@ -62,7 +63,8 @@ public class AirVent : MonoBehaviour
         if (!isOnAtStart)
         {
             isOn = true;
-            audioSource.Play();
+            //audioSource.Play();
+            SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position);
             gustParticle.Play();
         }
     }
@@ -72,7 +74,8 @@ public class AirVent : MonoBehaviour
         if (!isOnAtStart)
         {
             isOn = false;
-            audioSource.Stop();
+            //audioSource.Stop();
+            SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position);
             gustParticle.Stop();
         }
     }

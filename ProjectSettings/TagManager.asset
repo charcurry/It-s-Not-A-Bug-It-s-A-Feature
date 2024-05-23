@@ -19,6 +19,7 @@ TagManager:
   - SecondDoorLight
   - ButtonBox
   - NailProjectile
+  - Air_Vent
   layers:
   - Default
   - TransparentFX
