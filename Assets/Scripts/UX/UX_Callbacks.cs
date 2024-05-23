@@ -239,10 +239,6 @@ public class UXCallbacks : MonoBehaviour
     // Update is called once per frame to check key presses and update UI based on game state
     void Update()
     {
-        uiState = UICurrentState.GameOver;
-
-        Debug.Log(creditsHolder.position.y - creditsEndGameObject.position.y);
-
         if (uiState == UICurrentState.GameOver) {
             if (creditsHolder.position.y - creditsEndGameObject.position.y > 10)
             creditsContent.localPosition += new Vector3(0, creditsScrollSpeed * Time.unscaledDeltaTime, 0);
