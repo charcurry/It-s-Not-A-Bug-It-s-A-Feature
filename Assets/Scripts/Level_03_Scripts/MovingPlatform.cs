@@ -21,7 +21,7 @@ public class MovingPlatform : MonoBehaviour
 
     void Start()
     {
-        //SoundManager.PlaySound(SoundManager.Sound.Moving_Platform, transform.position, gameObject);
+        SoundManager.PlaySound(SoundManager.Sound.Moving_Platform, transform.position, null, gameObject);
         startPoint = transform.parent.GetChild(1).transform.position;
         endPoint = transform.parent.GetChild(2).transform.position;
 
