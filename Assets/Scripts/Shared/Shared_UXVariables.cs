@@ -108,6 +108,11 @@ public class Shared_UXVariables : MonoBehaviour
             airVent.GetComponent<AudioSource>().volume = sfxVolume;
         }
         NarratorManager.get.audioSource.volume = narratorVolume;
+        GameObject[] movingPlatforms = GameObject.FindGameObjectsWithTag("Moving_Platform");
+        foreach (GameObject movingPlatform in movingPlatforms)
+        {
+            movingPlatform.GetComponent<AudioSource>().volume = sfxVolume;
+        }
 
         mouseSensitivity = sensitivitySliderObject.GetComponent<UISlider>().currentValue;
         masterVolume = masterVolumeObject.GetComponent<UISlider>().currentValue / 100.0f;
