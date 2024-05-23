@@ -38,6 +38,7 @@ public static class SoundManager
         Nail_Gun_Hit,
         Key_Card_Swipe,
         Back_Ground_Music,
+        Conveyor_Belt,
     }
 
     // This float is used to determine how frequently the player can play the playerMove sound.
@@ -103,7 +104,14 @@ public static class SoundManager
             audioSource.loop = settings.isLooped;
             audioSource.dopplerLevel = settings.dopplerLevel;
             audioSource.rolloffMode = settings.audioRolloffMode;
-            audioSource.volume = (settings.volume.currentValue / 100.0f) * (i.masterVolumeSlider.currentValue / 100.0f);
+            if (sound == Sound.Conveyor_Belt)
+            {
+                audioSource.volume = (settings.volume.currentValue / 100.0f) * (i.masterVolumeSlider.currentValue / 100.0f) * 0.1f;
+            }
+            else
+            {
+                audioSource.volume = (settings.volume.currentValue / 100.0f) * (i.masterVolumeSlider.currentValue / 100.0f);
+            }
 
             // Once everything is in place, the sound is played.
             audioSource.Play();

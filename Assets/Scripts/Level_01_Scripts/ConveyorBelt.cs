@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ConveyorBelt : MonoBehaviour
 {
     private float speed = 1f;
     [HideInInspector] public List<Rigidbody> objectsOnBelt = new List<Rigidbody>();
     [HideInInspector] public List<Renderer> beltRenderers = new List<Renderer>();
+
+    public Transform[] conveyorSegments;
 
     private void Start()
     {
@@ -17,6 +20,14 @@ public class ConveyorBelt : MonoBehaviour
             {
                 beltRenderers.Add(renderer);
             }
+        }
+
+        conveyorSegments = GetComponentsInChildren<Transform>();
+        conveyorSegments = conveyorSegments.Where(child => child.CompareTag("Conveyor_Segment")).ToArray();
+
+        foreach (Transform segment in conveyorSegments)
+        {
+            SoundManager.PlaySound(SoundManager.Sound.Conveyor_Belt, segment.position, "Conveyor_Segment");
         }
     }
 
