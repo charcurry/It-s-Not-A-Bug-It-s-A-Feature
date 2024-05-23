@@ -3176,7 +3176,7 @@ MonoBehaviour:
   creditsContent: {fileID: 887825260}
   creditsHolder: {fileID: 650381414}
   creditsEndGameObject: {fileID: 1957455106}
-  creditsScrollSpeed: 600
+  creditsScrollSpeed: 70
 --- !u!4 &934255906
 Transform:
   m_ObjectHideFlags: 0
