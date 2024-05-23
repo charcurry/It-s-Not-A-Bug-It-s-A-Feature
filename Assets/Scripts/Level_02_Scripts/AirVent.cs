@@ -7,7 +7,6 @@ public class AirVent : MonoBehaviour
     private Vector3 gustOrigin;
     private float playerCompensation;
     private bool isOn;
-    public AudioSource audioSource;
 
     [Header("References")]
     [SerializeField] private ParticleSystem gustParticle;
@@ -17,18 +16,12 @@ public class AirVent : MonoBehaviour
     [SerializeField] private float airHeight = 10;
     [SerializeField] private bool isOnAtStart = true;
 
-    private void Awake()
-    {
-        audioSource = GetComponentInChildren<AudioSource>();
-    }
-
     private void Start()
     {
         isOn = isOnAtStart;
 
         if (isOn)
         {
-            Debug.Log(audioSource);
             SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position, "Air_Vent");
             //audioSource.Play();
             gustParticle.Play();
@@ -63,7 +56,6 @@ public class AirVent : MonoBehaviour
         if (!isOnAtStart)
         {
             isOn = true;
-            //audioSource.Play();
             SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position);
             gustParticle.Play();
         }
@@ -74,7 +66,6 @@ public class AirVent : MonoBehaviour
         if (!isOnAtStart)
         {
             isOn = false;
-            //audioSource.Stop();
             SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position);
             gustParticle.Stop();
         }
