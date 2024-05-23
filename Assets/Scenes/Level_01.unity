@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 1.5
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -2596,6 +2596,7 @@ MonoBehaviour:
   interactionCooldown: 0
   oneTimeInteraction: 0
   isPickedUp: 0
+  wasInteracted: 0
 --- !u!54 &47595964
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3484,7 +3485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Type
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Range
@@ -3496,23 +3497,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_SpotAngle
-      value: 165
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 1
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3833,20 +3838,40 @@ PrefabInstance:
       value: Overhead light (2)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3907,7 +3932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Type
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Range
@@ -3919,23 +3944,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_SpotAngle
-      value: 165
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 1
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6815,20 +6844,40 @@ PrefabInstance:
       value: Overhead light (24)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7770,7 +7819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Type
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Range
@@ -7782,23 +7831,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_SpotAngle
-      value: 165
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 1
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13795,7 +13848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Type
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Range
@@ -13807,23 +13860,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_SpotAngle
-      value: 165
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 1
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14574,20 +14631,40 @@ PrefabInstance:
       value: Overhead light (7)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14833,20 +14910,40 @@ PrefabInstance:
       value: Overhead light (14)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15787,6 +15884,7 @@ MonoBehaviour:
   interactionCooldown: 0
   oneTimeInteraction: 0
   isPickedUp: 0
+  wasInteracted: 0
 --- !u!4 &396181678
 Transform:
   m_ObjectHideFlags: 0
@@ -18837,20 +18935,40 @@ PrefabInstance:
       value: Overhead light (28)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19886,20 +20004,40 @@ PrefabInstance:
       value: Overhead light (27)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20277,20 +20415,40 @@ PrefabInstance:
       value: Overhead light (21)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22702,7 +22860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Type
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Range
@@ -22714,23 +22872,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_SpotAngle
-      value: 165
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 1
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23589,20 +23751,40 @@ PrefabInstance:
       value: Overhead light (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27187,7 +27369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Type
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Range
@@ -27199,23 +27381,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_SpotAngle
-      value: 165
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 1
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29497,20 +29683,40 @@ PrefabInstance:
       value: Overhead light (26)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31253,6 +31459,7 @@ MonoBehaviour:
   interactionCooldown: 0
   oneTimeInteraction: 0
   isPickedUp: 0
+  wasInteracted: 0
 --- !u!114 &1027551156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32309,20 +32516,40 @@ PrefabInstance:
       value: Overhead light (10)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32607,20 +32834,40 @@ PrefabInstance:
       value: Overhead light (29)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34588,20 +34835,40 @@ PrefabInstance:
       value: Overhead light (9)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35188,20 +35455,40 @@ PrefabInstance:
       value: Overhead light (20)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -38849,20 +39136,40 @@ PrefabInstance:
       value: Overhead light (13)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -38922,20 +39229,40 @@ PrefabInstance:
       value: Overhead light (17)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39591,6 +39918,7 @@ MonoBehaviour:
   interactionCooldown: 0
   oneTimeInteraction: 0
   isPickedUp: 0
+  wasInteracted: 0
 --- !u!4 &1344480872
 Transform:
   m_ObjectHideFlags: 0
@@ -41910,20 +42238,40 @@ PrefabInstance:
       value: Overhead light (8)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -43336,20 +43684,40 @@ PrefabInstance:
       value: Overhead light (16)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46502,6 +46870,7 @@ MonoBehaviour:
   interactionCooldown: 0
   oneTimeInteraction: 0
   isPickedUp: 0
+  wasInteracted: 0
 --- !u!54 &1670919929
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -49026,6 +49395,7 @@ MonoBehaviour:
   interactionCooldown: 0
   oneTimeInteraction: 0
   isPickedUp: 0
+  wasInteracted: 0
 --- !u!4 &1740487734
 Transform:
   m_ObjectHideFlags: 0
@@ -53030,20 +53400,40 @@ PrefabInstance:
       value: Overhead light (11)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54306,7 +54696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Type
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Range
@@ -54318,23 +54708,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_SpotAngle
-      value: 165
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 1
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -55684,7 +56078,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -58058,7 +58452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Type
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Range
@@ -58070,23 +58464,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_SpotAngle
-      value: 165
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 1
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -59542,20 +59940,40 @@ PrefabInstance:
       value: Overhead light (30)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -60020,6 +60438,7 @@ MonoBehaviour:
   interactionCooldown: 0
   oneTimeInteraction: 0
   isPickedUp: 0
+  wasInteracted: 0
 --- !u!4 &2037437536
 Transform:
   m_ObjectHideFlags: 0
@@ -64813,20 +65232,40 @@ PrefabInstance:
       value: Overhead light (22)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_SpotAngle
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 21.80208
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

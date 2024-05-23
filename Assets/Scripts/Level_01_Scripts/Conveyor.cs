@@ -6,7 +6,7 @@ public class ConveyorBeltController : MonoBehaviour
     [Header("Properties")]
     public float conveyorSpeed;
     public float objectSpeed;
-    [HideInInspector] public List<ConveyorBelt> conveyorBelts = new List<ConveyorBelt>();
+    public List<ConveyorBelt> conveyorBelts = new List<ConveyorBelt>();
 
     private void FixedUpdate()
     {
