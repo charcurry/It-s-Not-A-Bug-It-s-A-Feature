@@ -7,6 +7,7 @@ public class HeartButton : MonoBehaviour
     [Header("References")]
     [SerializeField] private OpenDoor doorScript;
     [SerializeField] private AirVent airVentScript;
+    [SerializeField] private ConveyorKey conveyorScript;
     [SerializeField] private Material switchMaterial;
     [SerializeField] private Material defaultMaterial;
 
@@ -25,6 +26,9 @@ public class HeartButton : MonoBehaviour
 
             if (airVentScript != null)
                 airVentScript.TurnOn();
+
+            if (conveyorScript != null)
+                conveyorScript.isBeltOn = true;
         }
     }
 
@@ -41,6 +45,9 @@ public class HeartButton : MonoBehaviour
 
             if (airVentScript != null)
                 airVentScript.TurnOff();
+
+            if (conveyorScript != null)
+                conveyorScript.isBeltOn = false;
         }
     }
 }
