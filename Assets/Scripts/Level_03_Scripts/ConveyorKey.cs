@@ -6,6 +6,7 @@ public class ConveyorKey : MonoBehaviour
     private float speed = 1f;
     [HideInInspector] public List<Rigidbody> objectsOnBelt = new List<Rigidbody>();
     [HideInInspector] public List<Renderer> beltRenderers = new List<Renderer>();
+    [HideInInspector] public bool isBeltOn;
 
     [Header("Properties")]
     public float conveyorSpeed;
@@ -13,6 +14,8 @@ public class ConveyorKey : MonoBehaviour
 
     private void Start()
     {
+        isBeltOn = false;
+
         // Get all renderers in children and add them to beltRenderers list
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
         foreach (Renderer renderer in renderers)
@@ -28,8 +31,11 @@ public class ConveyorKey : MonoBehaviour
     private void FixedUpdate()
     {
         // Move the belt and its material texture based on specified speeds and fixed delta time
-        MoveBelt(objectSpeed * Time.fixedDeltaTime);
-        MoveMaterial(conveyorSpeed * Time.fixedDeltaTime);
+        if (isBeltOn)
+        {
+            MoveBelt(objectSpeed * Time.fixedDeltaTime);
+            MoveMaterial(conveyorSpeed * Time.fixedDeltaTime);
+        }
     }
 
     public void MoveBelt(float delta)

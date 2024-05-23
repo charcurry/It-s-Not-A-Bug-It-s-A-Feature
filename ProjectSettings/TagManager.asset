@@ -20,6 +20,7 @@ TagManager:
   - ButtonBox
   - NailProjectile
   - Air_Vent
+  - Moving_Platform
   layers:
   - Default
   - TransparentFX
