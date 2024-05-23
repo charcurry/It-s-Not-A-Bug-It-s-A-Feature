@@ -56,7 +56,7 @@ public class AirVent : MonoBehaviour
         if (!isOnAtStart)
         {
             isOn = true;
-            SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position);
+            SoundManager.PlaySound(SoundManager.Sound.Air_Vent, transform.position, "Air_Vent", gameObject);
             gustParticle.Play();
         }
     }
