@@ -3174,7 +3174,9 @@ MonoBehaviour:
   settingsBackToMenu: {fileID: 772419552}
   settingsReturnToPaused: {fileID: 801787041}
   creditsContent: {fileID: 887825260}
-  creditsScrollSpeed: 70
+  creditsHolder: {fileID: 650381414}
+  creditsEndGameObject: {fileID: 1957455106}
+  creditsScrollSpeed: 600
 --- !u!4 &934255906
 Transform:
   m_ObjectHideFlags: 0
@@ -3959,7 +3961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1083631886
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4982,7 +4984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1344552325
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7321,7 +7323,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -221, y: -3106}
+  m_AnchoredPosition: {x: -221, y: -3419}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1957455107
