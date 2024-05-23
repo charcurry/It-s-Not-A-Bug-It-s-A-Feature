@@ -7,6 +7,7 @@ using static SoundManager;
 public class GameAssets : MonoBehaviour
 {
     public bool isInitialized = false;
+    public AudioSource backGroundMusic;
 
     private void Start()
     {
@@ -22,12 +23,9 @@ public class GameAssets : MonoBehaviour
             Initialize();
             PlaySound(Sound.Back_Ground_Music);
         }
-
-        if (!soundSettingsDictionary.ContainsKey(Sound.Air_Vent))
+        if (backGroundMusic == null)
         {
-            Debug.Log("Air Vent Sound Settings Not Present");
-            soundSettingsDictionary.Add(Sound.Air_Vent, new SoundSettings
-            { maxDistance = 17.5f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Linear, isLooped = true, isMoving = false, destroyAfterFinished = false, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
+            backGroundMusic = GameObject.Find("Back_Ground_Music_Sound").GetComponent<AudioSource>();
         }
     }
 
@@ -123,7 +121,7 @@ public class GameAssets : MonoBehaviour
         soundSettingsDictionary.Add(Sound.Key_Card_Swipe, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
         soundSettingsDictionary.Add(Sound.Back_Ground_Music, new SoundSettings
-            { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = true, isMoving = false, destroyAfterFinished = false, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
+            { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = true, isMoving = false, destroyAfterFinished = false, volume = uxVariables.musicVolumeObject.GetComponent<UISlider>() });
         isInitialized = true;
     }
 }

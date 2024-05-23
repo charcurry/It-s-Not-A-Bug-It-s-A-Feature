@@ -7,7 +7,7 @@ public class AirVent : MonoBehaviour
     private Vector3 gustOrigin;
     private float playerCompensation;
     private bool isOn;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     [Header("References")]
     [SerializeField] private ParticleSystem gustParticle;
