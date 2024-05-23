@@ -172,6 +172,7 @@ public class UXCallbacks : MonoBehaviour
     // Handles button callbacks for various UI interactions
     public void OnUXCallback(int callback)
     {
+        SoundManager.PlaySound(SoundManager.Sound.Menu_Click);
         // Handling different callbacks based on the enum
         switch ((UXCallbacksNoParameter)callback)
         {

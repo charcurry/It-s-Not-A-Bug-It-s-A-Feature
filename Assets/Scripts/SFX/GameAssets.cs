@@ -119,6 +119,8 @@ public class GameAssets : MonoBehaviour
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = true, isMoving = false, destroyAfterFinished = false, volume = uxVariables.musicVolumeObject.GetComponent<UISlider>() });
         soundSettingsDictionary.Add(Sound.Conveyor_Belt, new SoundSettings
             { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = true, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
+        soundSettingsDictionary.Add(Sound.Menu_Click, new SoundSettings
+            { maxDistance = 100f, dopplerLevel = 0, audioRolloffMode = AudioRolloffMode.Logarithmic, isLooped = false, isMoving = false, destroyAfterFinished = true, volume = uxVariables.sfxVolumeObject.GetComponent<UISlider>() });
         isInitialized = true;
     }
 }

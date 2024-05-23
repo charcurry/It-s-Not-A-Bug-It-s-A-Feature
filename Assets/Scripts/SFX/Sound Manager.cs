@@ -39,6 +39,7 @@ public static class SoundManager
         Key_Card_Swipe,
         Back_Ground_Music,
         Conveyor_Belt,
+        Menu_Click,
     }
 
     // This float is used to determine how frequently the player can play the playerMove sound.
@@ -120,10 +121,6 @@ public static class SoundManager
             if (settings.destroyAfterFinished)
             {
                 Destroy(soundGameObject, audioSource.clip.length);
-                if (sound == Sound.Air_Vent)
-                {
-                    Debug.Log("air vent destoryed");
-                }
             }
         }
     }
