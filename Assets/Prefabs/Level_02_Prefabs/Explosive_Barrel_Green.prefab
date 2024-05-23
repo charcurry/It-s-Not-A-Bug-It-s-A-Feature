@@ -381,7 +381,7 @@ MonoBehaviour:
   playerExplosionRadius: 9
   maxLaunchForce: 125
   beginTimerOnStart: 0
-  timeToExplode: 2
+  timeToExplode: 2.5
   explosionEffect: {fileID: 5928917874525638761, guid: a199f88714b71c94e82271036ab36354, type: 3}
   ledMeshRender: {fileID: 4033892908314188797}
   ledLight: {fileID: 4919039795681742335}

@@ -4502,7 +4502,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Intensity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14946,7 +14954,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Intensity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33428,7 +33444,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.3
+  m_Intensity: 0.25
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -53911,7 +53927,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Intensity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -86849,7 +86873,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Intensity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -92384,7 +92416,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Intensity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
