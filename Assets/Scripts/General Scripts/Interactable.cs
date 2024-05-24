@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
@@ -12,15 +13,13 @@ public class Interactable : MonoBehaviour
     private float cooldownTimeStamp = 0;
     private bool hasBeenInteractedWith = false;
 
+    [HideInInspector] public bool isDeactivated;
     [HideInInspector] public bool isPickedUp;
-
-    public virtual void interaction()
-    {
-        
-    }
 
     private void Awake()
     {
+        isDeactivated = false;
+
         if (gameObject.GetComponent<Rigidbody>())
         {
             gameObject.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
@@ -40,6 +39,7 @@ public class Interactable : MonoBehaviour
             gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         pickupable = false;
+        isDeactivated = true;
     }
 
     protected bool canInteract()
@@ -53,5 +53,10 @@ public class Interactable : MonoBehaviour
         cooldownTimeStamp = Time.time;
 
         return true;
+    }
+
+    public virtual void interaction()
+    {
+        
     }
 }

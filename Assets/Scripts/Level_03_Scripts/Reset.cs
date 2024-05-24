@@ -55,8 +55,14 @@ public class Reset : MonoBehaviour
                 tempObjectsToResetList.Add(newObject.GetComponent<GetPosition>());
             }
 
+            // If obj is a used key, don't respawn
+            else if (obj != null && obj.GetComponent<Key>() && obj.GetComponent<Interactable>().isDeactivated)
+            {
+                tempObjectsToResetList.Add(obj.GetComponent<GetPosition>());
+            }
+
             // Reset without duplication
-            else 
+            else
             {
                 if (obj != null)
                     Destroy(obj.gameObject);
@@ -98,7 +104,6 @@ public class Reset : MonoBehaviour
                         break;
                 }
 
-                
                 tempObjectsToResetList.Add(tempObj.GetComponent<GetPosition>());
             }
 
