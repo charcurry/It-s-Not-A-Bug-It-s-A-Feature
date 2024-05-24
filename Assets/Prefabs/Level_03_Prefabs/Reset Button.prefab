@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4837566338230903084}
   - component: {fileID: 8303527444975990377}
   - component: {fileID: 5518383788572221166}
-  - component: {fileID: 9205895215283419651}
+  - component: {fileID: 6721095318223255864}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -212,7 +212,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8454082236278716262, guid: 063e9ac7b0f378b4dae6768f1a897aca, type: 3}
---- !u!114 &9205895215283419651
+--- !u!114 &6721095318223255864
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,22 +221,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1931849081169107012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6681cd16710c588419c329bb2be4d1f6, type: 3}
+  m_Script: {fileID: 11500000, guid: d65c5886ea770184fa6418014811159c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pickupable: 0
   interactionCooldown: 0.5
   oneTimeInteraction: 0
   isPickedUp: 0
-  hasDuplicated: 0
-  boxPrefab: {fileID: 2313764963271401090, guid: c13df061460ad064f8db2fed958f96a0, type: 3}
-  heartBoxPrefab: {fileID: 7409610708015702604, guid: 92a6566d4ffd5d94bb500db458e28fdf, type: 3}
-  barrelPrefab: {fileID: 6008616620558849255, guid: 0596916945d4cc84c81e369f7e925422, type: 3}
-  keycardPrefab: {fileID: 1813791175647973083, guid: 1db1f62ae8f57ff498e8621ef61bbfb0, type: 3}
-  keyCartoonPrefab: {fileID: 1582482439836088031, guid: 31226bedccb35a144b62c6e0166dfad9, type: 3}
-  keyOldPrefab: {fileID: 2192362029152794586, guid: 6688d2dca8c5b1f4a976251813ac9f93, type: 3}
-  keyEyePrefab: {fileID: 1767196042923669891, guid: d87adfd4a52f2b24cbed38ffbfb13e51, type: 3}
-  keySimplePrefab: {fileID: 4471777022236796516, guid: bfc2f00ba0aaafb468b1a064662eca86, type: 3}
+  resetScript: {fileID: 0}
 --- !u!1 &2206466561211282754
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +649,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1332
+  m_VersionIndex: 1335
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
