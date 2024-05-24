@@ -40,6 +40,7 @@ public static class SoundManager
         Back_Ground_Music,
         Conveyor_Belt,
         Menu_Click,
+        Key_Card_Collision,
     }
 
     // This float is used to determine how frequently the player can play the playerMove sound.
