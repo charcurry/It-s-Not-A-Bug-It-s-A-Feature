@@ -83,7 +83,7 @@ public class ConveyorKey : MonoBehaviour
             objectsOnBelt.Remove(rb);
 
         // Allow box to rotate after its removed from belt
-        if (collision.gameObject.CompareTag("Box"))
+        if (!collision.gameObject.CompareTag("Player"))
         {
             rb.freezeRotation = false;
         }
