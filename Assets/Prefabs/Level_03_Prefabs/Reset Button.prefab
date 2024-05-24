@@ -224,6 +224,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6681cd16710c588419c329bb2be4d1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupable: 0
+  interactionCooldown: 0.5
+  oneTimeInteraction: 0
+  isPickedUp: 0
   hasDuplicated: 0
   boxPrefab: {fileID: 2313764963271401090, guid: c13df061460ad064f8db2fed958f96a0, type: 3}
   heartBoxPrefab: {fileID: 7409610708015702604, guid: 92a6566d4ffd5d94bb500db458e28fdf, type: 3}

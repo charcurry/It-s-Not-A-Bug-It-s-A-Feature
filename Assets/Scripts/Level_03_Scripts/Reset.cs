@@ -5,14 +5,14 @@ using static UnityEngine.UI.Image;
 using UnityEngine.UIElements;
 
 
-public class Reset : MonoBehaviour
+public class Reset : Interactable
 {
     private List<GetPosition> objectsToResetList = new List<GetPosition>();
     private List<Vector3> objectsToResetPos = new List<Vector3>();
     private List<Quaternion> objectsToResetRot = new List<Quaternion>();
     private List<string> objectsToResetName = new List<string>();
     private GameObject heldObject;
-    public bool hasDuplicated;
+    [HideInInspector] public bool hasDuplicated;
 
     [Header("References")]
     [SerializeField] private GameObject boxPrefab;
@@ -120,5 +120,14 @@ public class Reset : MonoBehaviour
             ResetLevel();
             Debug.Log("Level Reset");
         }
+    }
+
+    public override void interaction()
+    {
+        if (!canInteract())
+            return;
+        
+        ResetLevel();
+        Debug.Log("Level Reset");
     }
 }
