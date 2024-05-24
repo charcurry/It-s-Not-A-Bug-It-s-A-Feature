@@ -5,7 +5,7 @@ using static UnityEngine.UI.Image;
 using UnityEngine.UIElements;
 
 
-public class Reset : Interactable
+public class Reset : MonoBehaviour
 {
     private List<GetPosition> objectsToResetList = new List<GetPosition>();
     private List<Vector3> objectsToResetPos = new List<Vector3>();
@@ -59,10 +59,7 @@ public class Reset : Interactable
             else 
             {
                 if (obj != null)
-                {
-                    Debug.Log(obj.name);
                     Destroy(obj.gameObject);
-                }
 
                 GameObject tempObj = null;
 
@@ -109,25 +106,5 @@ public class Reset : Interactable
         }
 
         objectsToResetList = tempObjectsToResetList;
-    }
-
-    // Player enters the reset
-    private void OnCollisionEnter(Collision collision)
-    {
-        GetPosition getPositionComponent = collision.gameObject.GetComponent<GetPosition>();
-        if (getPositionComponent != null || collision.gameObject.CompareTag("Player"))
-        {
-            ResetLevel();
-            Debug.Log("Level Reset");
-        }
-    }
-
-    public override void interaction()
-    {
-        if (!canInteract())
-            return;
-        
-        ResetLevel();
-        Debug.Log("Level Reset");
     }
 }
