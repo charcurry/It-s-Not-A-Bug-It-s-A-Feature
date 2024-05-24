@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Player Test.unity
     guid: 75d3cbab7c5cb0944b1a4040d2abcbea
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level_01.unity
     guid: abe281dcadfc47f4688c9b6dc6f55f52
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level_02.unity
     guid: ca1898f866e6ece4dba287be9599b739
   - enabled: 1

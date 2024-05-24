@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class GetPosition : MonoBehaviour
 {
-    public Vector3 initialPosition;
-    public Quaternion initialRotation;
+    [HideInInspector] public Vector3 initialPosition;
+    [HideInInspector] public Quaternion initialRotation;
+
+    [Header("References")]
+    public string prefabName;
 
     //Gets the initial position of any object with this script
-    void Start()
+    void Awake()
     {
         initialPosition = transform.position;
         initialRotation = transform.rotation;
