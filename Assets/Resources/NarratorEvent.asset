@@ -20,6 +20,6 @@ MonoBehaviour:
   TriggeredById: start
   TriggeredDelay: 0
   DiscardById: 
-  Interruptable: 1
-  IsRunning: 1
+  Interruptable: 0
+  IsRunning: 0
   current_audio_clip: 0
