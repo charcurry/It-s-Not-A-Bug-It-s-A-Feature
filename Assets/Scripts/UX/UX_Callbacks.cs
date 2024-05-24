@@ -74,6 +74,8 @@ public class UXCallbacks : MonoBehaviour
         ReturnToMenu,
         ReturnToPausedState,
         PreviousScene,
+        ReturnInGame,
+        RestartLevel,
         Max,
     }
 
@@ -184,6 +186,13 @@ public class UXCallbacks : MonoBehaviour
 
                 OnUIStateChange(UICurrentState.InGameOverlay);
                 break;
+            case UXCallbacksNoParameter.RestartLevel:
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                OnUIStateChange(UICurrentState.InGameOverlay);
+                break;
+            case UXCallbacksNoParameter.ReturnInGame:
+                OnUIStateChange(UICurrentState.InGameOverlay);
+                break;
             case UXCallbacksNoParameter.Exit:
                 Application.Quit();
                 break;
@@ -223,6 +232,7 @@ public class UXCallbacks : MonoBehaviour
 
         if (scene.buildIndex == lastSceneIndex)
         {
+            //If the scene being loaded is the last scene make it change to game credits screen
             OnUIStateChange(UICurrentState.GameOver);
         }
     }
