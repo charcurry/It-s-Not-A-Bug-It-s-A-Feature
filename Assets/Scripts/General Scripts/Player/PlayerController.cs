@@ -340,6 +340,8 @@ public class PlayerController : MonoBehaviour
 
                 if (!canJumpOnHeldObjects)
                     canJump = false;
+                    // The player can not scroll in to change the distance of the held object while standing on an object they are holding when the bug is disabled.
+                    heldObjectDistanceCurrent = heldObjectDistanceDefault;
             }
         }
 
