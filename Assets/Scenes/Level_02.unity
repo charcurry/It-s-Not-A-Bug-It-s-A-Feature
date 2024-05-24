@@ -4666,6 +4666,10 @@ PrefabInstance:
       value: Overhead light (3)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -14552,6 +14556,10 @@ PrefabInstance:
     - target: {fileID: 8594433447479893322, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Name
       value: Overhead light (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
@@ -34001,7 +34009,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.2
+  m_Intensity: 0.3
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -53358,6 +53366,10 @@ PrefabInstance:
     - target: {fileID: 8594433447479893322, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Name
       value: Overhead light (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
@@ -86663,6 +86675,10 @@ PrefabInstance:
       value: Overhead light (2)
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -92206,6 +92222,10 @@ PrefabInstance:
       value: Overhead light
       objectReference: {fileID: 0}
     - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
+      propertyPath: m_Range
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878154824597312048, guid: 85d22e108fa35ae4e8d8cf1d5447fc26, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -92320,6 +92340,10 @@ PrefabInstance:
     - target: {fileID: 7746575911887303161, guid: c32630fac6ce4c24db900f9ab35382d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823105919036724991, guid: c32630fac6ce4c24db900f9ab35382d5, type: 3}
+      propertyPath: launchForce
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

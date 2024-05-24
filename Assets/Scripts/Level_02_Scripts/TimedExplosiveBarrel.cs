@@ -36,11 +36,6 @@ public class TimedExplosiveBarrel : Explodable
             explosionTimeStamp = Time.time;
             effectTimeStamp = Time.time;
         }
-
-        // Trigger to detect player proximity
-        SphereCollider triggerCollider = gameObject.AddComponent<SphereCollider>();
-        triggerCollider.isTrigger = true;
-        triggerCollider.radius = playerExplosionRadius;
     }
 
     private void Update()
